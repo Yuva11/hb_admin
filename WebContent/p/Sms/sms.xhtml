@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/p/layout.xhtml">
+	<ui:define name="action_header"> 
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form id="form1" prependId="false" enctype="multipart/form-data">
+			<p:growl id="PDTMSG" rendered="false" /> 
+			<div id="main_container"> 
+				<div class="error_box">
+					<p:messages globalOnly="true" />
+				</div> 
+				<div id="container"> 
+					<div class="contant_table_box1">
+					
+						<div class="contant_text_table_box50">  
+							<div class="text_width_box25">
+								<span class="user_text">SMS Keys</span>
+								<p:spacer height="50px;" /> 
+								<h:inputText id="OrderDate" value="$OrderDate" class="mail_key_text_box" disabled="true" />
+								<h:inputText id="OrderReferenceNo" value="$OrderNo" class="mail_key_text_box" disabled="true" />
+								<h:inputText id="DeliveryType" value="$DeliveryType" class="mail_key_text_box" disabled="true" />
+								<h:inputText id="Quantity" value="$Quantity" class="mail_key_text_box" disabled="true" />
+								</div>
+								<div class="text_width_box25">
+								<span class="user_text"> </span>
+								<p:spacer height="50px;" />
+								<h:inputText id="CustomerName" value="$CustomerName" class="mail_key_text_box" disabled="true" />
+								<h:inputText id="CustomerMobileNo" value="$CustomerMobileNo" class="mail_key_text_box" disabled="true" />
+								<h:inputText id="DealName" value="$DealName" class="mail_key_text_box" disabled="true" />
+								<h:inputText id="TotalAmount" value="$Amount" class="mail_key_text_box" disabled="true" />
+								
+							</div> 
+							 
+						</div>
+
+						<div class="contant_text_table_box50"> 
+							<span class="user_text">SMS Template</span>
+								
+							<p:spacer height="50px;" />
+							<p:inputTextarea rows="5" cols="75"    id="mailtemplate" 
+								value="#{smsBean.smsTemplate.template}"  
+								required="true" 
+								requiredMessage="Please fill sms template"
+								validatorMessage="Sms Template must be between 5 to 100 characteres" 
+								counter="display" maxlength="140" counterTemplate="{0} characters remaining." tabindex="3" />
+   							<h:outputText id="display" /> 
+						</div>
+						 <div class="save_box">
+
+						<div class="cancel_button">
+							<h:commandLink  value="Submit"  validateClient="true" tabindex="3" 
+								action="#{smsBean.submitTemplate}" ></h:commandLink>
+		
+				          	<h:commandLink  value="Cancel" tabindex="4"
+								action="#{smsBean.showTemplate}" immediate="true"></h:commandLink>
+						</div>
+
+					</div>
+					</div>
+
+					
+
+							<p:spacer height="250px;" />
+
+				</div>
+			</div>
+
+
+		</h:form>
+
+
+
+
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+		<div class="contant_table_box1">
+				<div class="contant_text_table_box50">
+								
+							
+					<div class="text_width_box025">
+						<span class="tab_user_text">Device Name</span>
+					</div>
+					<div class="text_width_box025_right">
+						<!-- <h:inputText value="#{merchentCreationBean.merchantdto.name}"
+							class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}"  maxlength="45" onkeypress="return keyRestrict(event)" tabindex="1"/>* -->
+							
+							<h:inputText id="names" disabled="#{customerCreationBean.action eq 'VIEW'}" value="#{customerCreationBean.device.deviceName}" class="text_box" 
+          tabindex="1" >
+             </h:inputText>
+           
+           
+          <span class="star"> <p:outputPanel rendered="#{customerCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+          
+                  </div>
+                  <div class="text_width_box25">
+                  </div>
+					<div class="text_width_box25_right_error">
+					   <p:message for="names"/>
+					</div>
+					
+					
+					<div class="text_width_box025">
+						<span class="tab_user_text">Brand Name</span>
+					</div>
+					<div class="text_width_box025_right">
+						<!-- <h:inputText value="#{merchentCreationBean.merchantdto.name}"
+							class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}"  maxlength="45" onkeypress="return keyRestrict(event)" tabindex="1"/>* -->
+							
+							<h:inputText id="mnumbers" disabled="#{customerCreationBean.action eq 'VIEW'}" value="#{customerCreationBean.device.brand}" class="text_box" 
+          tabindex="1" >
+             </h:inputText>
+           
+           
+          <span class="star"> <p:outputPanel rendered="#{customerCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+          
+                  </div>
+                  <div class="text_width_box25">
+                  </div>
+					<div class="text_width_box25_right_error">
+					   <p:message for="mnumbers"/>
+					</div>
+					
+					<div class="text_width_box025">
+						<span class="tab_user_text">Board</span>
+					</div>
+					
+					<div class="text_width_box025_right">
+						<!-- <h:inputText value="#{merchentCreationBean.merchantdto.name}"
+							class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}"  maxlength="45" onkeypress="return keyRestrict(event)" tabindex="1"/>* -->
+							
+							<h:inputText id="board" disabled="#{customerCreationBean.action eq 'VIEW'}" value="#{customerCreationBean.device.board}" class="text_box" 
+          tabindex="1" >
+             </h:inputText>
+             </div>
+					<div class="text_width_box025">
+						<span class="tab_user_text">Cpu</span>
+					</div>
+						<div class="text_width_box025_right">
+						<!-- <h:inputText value="#{merchentCreationBean.merchantdto.name}"
+							class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}"  maxlength="45" onkeypress="return keyRestrict(event)" tabindex="1"/>* -->
+							
+							<h:inputText id="cpu" disabled="#{customerCreationBean.action eq 'VIEW'}" value="#{customerCreationBean.device.cpu}" class="text_box" 
+          tabindex="1" >
+             </h:inputText>
+             </div>
+					
+				</div>
+				<div class="contant_text_table_box50">
+					    
+					    
+					  <p:outputPanel rendered="true">
+						<div class="text_width_box025">
+							<span class="tab_user_text">Manufacture</span>
+						</div>
+						<div class="text_width_box025_right">
+						<h:inputText id="medias" disabled="#{customerCreationBean.action eq 'VIEW'}" value="#{customerCreationBean.device.manuFacturer}" class="text_box" 
+          tabindex="1" >
+             </h:inputText>
+							<span class="star"> <p:outputPanel rendered="#{customerCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+					           <h:outputText styleclass="text_box1" rendered="false" value="#{merchentCreationBean.device.manuFacturer}"/>
+					         
+					          
+
+						</div>
+						 </p:outputPanel>
+						<div class="text_width_box25">
+						</div>
+						<div class="text_width_box25_right_error">
+						   <p:message for="medias"/>
+						</div>
+					    
+					     <p:outputPanel rendered="true">
+						<div class="text_width_box025">
+							<span class="tab_user_text">Product</span>
+						</div>
+						<div class="text_width_box025_right">
+						<h:inputText id="genders" disabled="#{customerCreationBean.action eq 'VIEW'}" value="#{customerCreationBean.device.product}" class="text_box" 
+          tabindex="1" >
+             </h:inputText>
+							<span class="star"> <p:outputPanel rendered="#{customerCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+					           <h:outputText styleclass="text_box1" rendered="false" value="#{merchentCreationBean.merc.speciality.name}"/>
+					         
+					          
+
+						</div>
+						 </p:outputPanel>
+						<div class="text_width_box25">
+						</div>
+						<div class="text_width_box25_right_error">
+						   <p:message for="genders"/>
+						</div>
+					    
+					    <div class="text_width_box025">
+							<span class="tab_user_text">Hardware</span>
+						</div>
+					    
+					    <div class="text_width_box025_right">
+					    <h:inputText id="hard" disabled="#{customerCreationBean.action eq 'VIEW'}" value="#{customerCreationBean.device.hardware}" class="text_box" 
+          tabindex="1" />
+					    </div>
+					      <div class="text_width_box025">
+							<span class="tab_user_text">Display</span>
+						</div>
+					    
+					    <div class="text_width_box025_right">
+					    <h:inputText id="display" disabled="#{customerCreationBean.action eq 'VIEW'}" value="#{customerCreationBean.device.display}" class="text_box" 
+          tabindex="1" />
+					    </div>
+					 </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- 	<div class="link_button_box " >
+
+
+			
+
+		</div>
+
+	<div id="contant_table_box1" style="clear:both !important;">
+
+		actionListener="" update="" oncomplete="PF('DOCUMENTDIALOG').show()"
+
+	
+
+		<p:outputPanel id="datp">
+			<p:dataTable id="datatle123"
+				value="#{customerCreationBean.deviceList}" rowKey="it.id"
+				var="it" paginator="true" paginatorPosition="bottom" rows="21"
+				rowIndexVar="idx"
+				currentPageReportTemplate="{currentPage} / {totalPages}"
+				paginatorTemplate=" {PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="21,50,100,500,1000" styleClass="reference">
+
+				<p:column headerText="#">
+					<h:outputText value="#{idx+1}" />
+				</p:column>
+     
+                <p:column headerText="Merchant Name">
+					<h:outputText value="#{it.merchant.name}" /> 
+				</p:column>
+     
+     
+				<p:column headerText="Device Name">
+					<h:outputText value="#{it.deviceName}" /> 
+				</p:column>
+
+				<p:column headerText="Brand Name">
+					<h:outputText value="#{it.brand}" />
+				</p:column>
+                <p:column headerText="Manufacture">
+				<h:outputText value="#{it.manuFacturer}" />
+				</p:column>
+			    <p:column headerText="Product">
+					<h:outputText value="#{it.product}" />
+				</p:column>
+			   <p:column headerText="Serial">
+					<h:outputText value="#{it.serial}" />
+				</p:column>
+				 <p:column headerText="Android version">
+					<h:outputText value="#{it.androidVersion}" />
+				</p:column>
+				
+				<p:column headerText="Action"
+					rendered="false">
+
+					<p:spacer width="10px" />
+					
+					<p:spacer width="10px" />
+					<p:commandLink id="DOCDELETE" process="@this" rendered="false"
+						oncomplete="PF('BranchDelete').show()">
+						<f:setPropertyActionListener
+							target="#{merchentCreationBean.selectedbranch}" value="#{it}" />
+						<img src="#{request.contextPath}/images/view-small-icon.png" />
+					</p:commandLink>
+
+
+				</p:column>
+
+				<p:column headerText="Sel." selectionMode="single"/>
+			</p:dataTable>
+		</p:outputPanel>
+
+	</div> -->
+
+
+
+
+
+
+</ui:composition>

@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/p/layout.xhtml">
+	<ui:define name="action_header"> 
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form id="form1" prependId="false" enctype="multipart/form-data">
+			<div id="main_container"> 
+				<div class="error_box">
+					<p:messages globalOnly="true" />
+				</div> 
+				<div id="container"> 
+					<div class="contant_table_box1">
+						<p:outputPanel id="TEMPLATE_LIST" rendered="#{(mailBean.template eq 'NONE')}">
+						<div class="error_box">
+						<h3 style="color:#666; padding:10px;" >
+						Mail Templates </h3>
+						</div>
+						<div style="margin:0px 0px 250px 10px;">
+							<p:panelGrid columns="3" layout="grid"> 
+					            <p:column >#</p:column>
+					            <p:column >Template</p:column>
+					            <p:column >Link</p:column> 
+					  
+							    <h:outputText value="1" />
+							    <h:outputText value="OUTLET Order Receiving Mail Template" />
+							    <h:commandLink value="UPDATE" action="#{mailBean.showOutletOrderTemplate}" immediate="true" />
+							     
+							     <h:outputText value="2" />
+							    <h:outputText value="Customer Order Receiving Mail Template" />
+							    <h:commandLink value="UPDATE" action="#{mailBean.showCustomerOrderAckTemplate}" immediate="true" />
+							    
+							    <h:outputText value="3" />
+							    <h:outputText value="Customer Sign Up Mail Template" />
+							    <h:commandLink value="UPDATE" action="#{mailBean.showCustomerSignUpTemplate}" immediate="true" />
+							    
+							    <h:outputText value="4" />
+							    <h:outputText value="Customer Forgot password Mail Template" />
+							    <h:commandLink value="UPDATE" action="#{mailBean.showCustomerForgotPwdTemplate}" immediate="true" /> 
+							    
+							    
+							</p:panelGrid> 
+							</div>
+						</p:outputPanel>
+						
+						<!-- 
+								OUTLET ORDER RECEIVED
+								MAIL TEMPLATE
+						 -->
+						
+						<p:outputPanel id="TEMPLATE_OUTLET_ORDER" rendered="#{(mailBean.template eq 'OUTLET_ORDER_RX')}">
+						<div class="contant_text_table_box50"> 
+						<!-- Group E-Mail  Starts Here-->
+							<div class="text_width_box025">
+								<span class="tab_user_text">E-Mail</span>
+							</div>
+							<div class="text_width_box025_right">
+								<h:inputText id="eMail"  value="#{mailBean.mailTemplate.mailFrom}" class="text_box"
+									required="true" 
+									
+									requiredMessage="#{msg['1155']}"
+									validatorMessage="#{msg['validate.useremail']}" 
+									
+									tabindex="1">
+									<f:validateLength minimum="4" maximum="75" />
+									<f:validateRegex pattern="#{val['pattern.email']}"></f:validateRegex> 
+								</h:inputText>
+								<p:watermark for="eMail" value="Ex. admin@hungrybells.in"  /> 
+								<span class="star"> 
+									<p:outputPanel >*</p:outputPanel>
+								</span>
+					
+							</div>
+							<div class="text_width_box25"></div>
+							<div class="text_width_box25_right_error">
+								<p:message for="eMail" />
+							</div>
+							<div class="text_width_box025">
+								<span class="tab_user_text">Password</span>
+							</div>
+							<div class="text_width_box025_right">
+								<h:inputText id="eMail-password"  value="#{mailBean.mailTemplate.passWord}" class="text_box"
+									required="true"  
+									requiredMessage="#please fill password field"
+									validatorMessage="please fill password field"  
+									tabindex="2">
+									<f:validateLength minimum="3" maximum="75" /> 
+								</h:inputText> 
+								<span class="star"> 
+									<p:outputPanel >*</p:outputPanel>
+								</span>
+					
+							</div>
+							<div class="text_width_box25"></div>
+							<div class="text_width_box25_right_error">
+								<p:message for="eMail-password" />
+							</div>
+							<div class="text_width_box25">
+								<span class="user_text">Mail Keys</span>
+								<p:spacer height="50px;" />
+								<h:inputText id="BrandName" value="$Brand" class="mail_key_text_box" disabled="true" />
+								<h:inputText id="OutLetName" value="$OutLetName" class="mail_key_text_box" disabled="true" />
+								<h:inputText id="OrderDate" value="$OrderDate" class="mail_key_text_box" disabled="true" />
+								<h:inputText id="OrderReferenceNo" value="$OrderReferenceNo" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$OrderStatus" class="mail_key_text_box" disabled="true" />
+								<h:inputText id="CustomerName" value="$CustomerName" class="mail_key_text_box" disabled="true" />
+								<h:inputText id="CustomerMobileNo" value="$CustomerMobileNo" class="mail_key_text_box" disabled="true" />
+								</div>
+								<div class="text_width_box25">
+								<span class="user_text"> </span>
+								<p:spacer height="50px;" />
+								<h:inputText id="CustomerAddress" value="$CustomerAddress" class="mail_key_text_box" disabled="true" />
+								<h:inputText id="DealName" value="$DealName" class="mail_key_text_box" disabled="true" />
+								<h:inputText id="DealPrice" value="$DealPrice" class="mail_key_text_box" disabled="true" />
+								<h:inputText id="Quantity" value="$Quantity" class="mail_key_text_box" disabled="true" />
+								<h:inputText id="DeliveryType" value="$DeliveryType" class="mail_key_text_box" disabled="true" />
+								<h:inputText id="TotalAmount" value="$TotalAmount" class="mail_key_text_box" disabled="true" />
+								
+							</div> 
+							 
+
+						</div>
+
+						<div class="contant_text_table_box50"> 
+							<span class="user_text"> Order Receving Mail Template For OUTLET</span>
+								
+							<p:spacer height="50px;" />
+							<p:editor id="mailtemplate" widgetVar="xxx" value="#{mailBean.mailTemplate.template}" width="600"  height="400"
+						 			 required="true" requiredMessage="Mail template should not be empty" validatorMessage="Mail template must be of more than 3 characters" />
+						</div>
+						 <div class="save_box">
+
+						<div class="cancel_button">
+							<h:commandLink  value="Submit"  validateClient="true" tabindex="3" 
+								action="#{mailBean.submitTemplate}" ></h:commandLink>
+		
+				          	<h:commandLink  value="Cancel" tabindex="4"
+								action="#{mailBean.showTemplateList}" immediate="true"></h:commandLink>
+						</div>
+					</div>
+					</p:outputPanel>
+					
+						<!-- 
+								OUTLET ORDER CANCELLED
+								MAIL TEMPLATE
+						 -->
+						<p:outputPanel id="TEMPLATE_OUTLET_ORDERCANCELLED" rendered="#{(mailBean.template eq 'OUTLET_ORDER_CANCELLED')}">
+						<div class="contant_text_table_box50"> 
+						<!-- Group E-Mail  Starts Here-->
+							<div class="text_width_box025">
+								<span class="tab_user_text">E-Mail</span>
+							</div>
+							<div class="text_width_box025_right">
+								<h:inputText id="eMailCANCELLED"  value="#{mailBean.mailTemplate.mailFrom}" class="text_box"
+									required="true" requiredMessage="#{msg['1155']}"
+									validatorMessage="#{msg['validate.useremail']}" tabindex="1">
+									<f:validateLength minimum="4" maximum="75" />
+									<f:validateRegex pattern="#{val['pattern.email']}"></f:validateRegex> 
+								</h:inputText>
+								<p:watermark for="eMailCANCELLED" value="Ex. admin@hungrybells.in"  /> 
+								<span class="star"> 
+									<p:outputPanel >*</p:outputPanel>
+								</span>
+					
+							</div>
+							<div class="text_width_box25"></div>
+							<div class="text_width_box25_right_error">
+								<p:message for="eMailCANCELLED" />
+							</div>
+							<div class="text_width_box025">
+								<span class="tab_user_text">Password</span>
+							</div>
+							<div class="text_width_box025_right">
+								<h:inputText id="eMail-passwordCANCELLED"  value="#{mailBean.mailTemplate.passWord}" class="text_box"
+									required="true"  
+									requiredMessage="please fill password field"
+									validatorMessage="please fill password field"  
+									tabindex="2">
+									<f:validateLength minimum="3" maximum="75" /> 
+								</h:inputText> 
+								<span class="star"> 
+									<p:outputPanel >*</p:outputPanel>
+								</span>
+					
+							</div>
+							<div class="text_width_box25"></div>
+							<div class="text_width_box25_right_error">
+								<p:message for="eMail-passwordCANCELLED" />
+							</div>
+							<div class="text_width_box25">
+								<span class="user_text">Mail Keys</span>
+								<p:spacer height="50px;" />
+								<h:inputText  value="$Brand" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$OutLetName" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$OrderDate" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$OrderReferenceNo" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$OrderStatus" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$CustomerName" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$CustomerMobileNo" class="mail_key_text_box" disabled="true" />
+								</div>
+								<div class="text_width_box25">
+								<span class="user_text"> </span>
+								<p:spacer height="50px;" />
+								<h:inputText  value="$CustomerAddress" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$DealName" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$DealPrice" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$Quantity" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$DeliveryType" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$TotalAmount" class="mail_key_text_box" disabled="true" />
+								
+							</div> 
+							 
+
+						</div>
+
+						<div class="contant_text_table_box50"> 
+							<span class="user_text"> Order CANCELLED Mail Template For OUTLET</span>
+								
+							<p:spacer height="50px;" />
+							<p:editor id="mailtemplateCANCELLED" widgetVar="xxx" value="#{mailBean.mailTemplate.template}" width="600"  height="400"
+						 			 required="true" requiredMessage="Mail template should not be empty" validatorMessage="Mail template must be of more than 3 characters" />
+						</div>
+						 <div class="save_box">
+
+						<div class="cancel_button">
+							<h:commandLink  value="Submit"  validateClient="true" tabindex="3" 
+								action="#{mailBean.submitTemplate}" ></h:commandLink>
+		
+				          	<h:commandLink  value="Cancel" tabindex="4"
+								action="#{mailBean.showTemplateList}" immediate="true"></h:commandLink>
+						</div>
+					</div>
+					</p:outputPanel>
+					
+						<!-- 
+								OUTLET ORDER CANCELLED
+								MAIL TEMPLATE
+						 -->
+					
+					<p:outputPanel id="TEMPLATE_OUTLET_ORDERDELIVERED" rendered="#{(mailBean.template eq 'OUTLET_ORDER_DELIVERED')}">
+						<div class="contant_text_table_box50"> 
+						<!-- Group E-Mail  Starts Here-->
+							<div class="text_width_box025">
+								<span class="tab_user_text">E-Mail</span>
+							</div>
+							<div class="text_width_box025_right">
+								<h:inputText id="eMailDELIVERED"  value="#{mailBean.mailTemplate.mailFrom}" class="text_box"
+									required="true" requiredMessage="#{msg['1155']}"
+									validatorMessage="#{msg['validate.useremail']}" tabindex="1">
+									<f:validateLength minimum="4" maximum="75" />
+									<f:validateRegex pattern="#{val['pattern.email']}"></f:validateRegex> 
+								</h:inputText>
+								<p:watermark for="eMailDELIVERED" value="Ex. admin@hungrybells.in"  /> 
+								<span class="star"> 
+									<p:outputPanel >*</p:outputPanel>
+								</span>
+					
+							</div>
+							<div class="text_width_box25"></div>
+							<div class="text_width_box25_right_error">
+								<p:message for="eMailDELIVERED" />
+							</div>
+							<div class="text_width_box025">
+								<span class="tab_user_text">Password</span>
+							</div>
+							<div class="text_width_box025_right">
+								<h:inputText id="eMail-passwordDELIVERED"  value="#{mailBean.mailTemplate.passWord}" class="text_box"
+									required="true"  
+									requiredMessage="please fill password field"
+									validatorMessage="please fill password field"  
+									tabindex="2">
+									<f:validateLength minimum="3" maximum="75" /> 
+								</h:inputText> 
+								<span class="star"> 
+									<p:outputPanel >*</p:outputPanel>
+								</span>
+					
+							</div>
+							<div class="text_width_box25"></div>
+							<div class="text_width_box25_right_error">
+								<p:message for="eMail-passwordDELIVERED" />
+							</div>
+							<div class="text_width_box25">
+								<span class="user_text">Mail Keys</span>
+								<p:spacer height="50px;" />
+								<h:inputText value="$Brand" class="mail_key_text_box" disabled="true" />
+								<h:inputText value="$OutLetName" class="mail_key_text_box" disabled="true" />
+								<h:inputText value="$OrderDate" class="mail_key_text_box" disabled="true" />
+								<h:inputText value="$OrderReferenceNo" class="mail_key_text_box" disabled="true" />
+								<h:inputText class="mail_key_text_box" disabled="true" />
+								<h:inputText value="$CustomerName" class="mail_key_text_box" disabled="true" />
+								<h:inputText value="$CustomerMobileNo" class="mail_key_text_box" disabled="true" />
+								</div>
+								<div class="text_width_box25">
+								<span class="user_text"> </span>
+								<p:spacer height="50px;" />
+								<h:inputText value="$CustomerAddress" class="mail_key_text_box" disabled="true" />
+								<h:inputText value="$DealName" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$DealPrice" class="mail_key_text_box" disabled="true" />
+								<h:inputText value="$Quantity" class="mail_key_text_box" disabled="true" />
+								<h:inputText value="$DeliveryType" class="mail_key_text_box" disabled="true" />
+								<h:inputText value="$TotalAmount" class="mail_key_text_box" disabled="true" />
+								
+							</div> 
+							 
+
+						</div>
+
+						<div class="contant_text_table_box50"> 
+							<span class="user_text"> Order DELIVERED Mail Template For OUTLET</span>
+								
+							<p:spacer height="50px;" />
+							<p:editor id="mailtemplateDELIVERED" widgetVar="xxx" value="#{mailBean.mailTemplate.template}" width="600"  height="400"
+						 			 required="true" requiredMessage="Mail template should not be empty" validatorMessage="Mail template must be of more than 3 characters" />
+						</div>
+						 <div class="save_box">
+
+						<div class="cancel_button">
+							<h:commandLink  value="Submit"  validateClient="true" tabindex="3" 
+								action="#{mailBean.submitTemplate}" ></h:commandLink>
+		
+				          	<h:commandLink  value="Cancel" tabindex="4"
+								action="#{mailBean.showTemplateList}" immediate="true"></h:commandLink>
+						</div>
+					</div>
+					</p:outputPanel>
+					<!-- CUSTOMER_ORDER_ACK -->
+					<p:outputPanel id="TEMPLATE_CUSTOMER_ORDER_ACK" rendered="#{(mailBean.template eq 'CUSTOMER_ORDER_ACK')}">
+						<div class="contant_text_table_box50"> 
+						<!-- Group E-Mail  Starts Here-->
+							<div class="text_width_box025">
+								<span class="tab_user_text">E-Mail</span>
+							</div>
+							<div class="text_width_box025_right">
+								<h:inputText id="eMailACK"  value="#{mailBean.mailTemplate.mailFrom}" class="text_box"
+									required="true" 
+									
+									requiredMessage="#{msg['1155']}"
+									validatorMessage="#{msg['validate.useremail']}" 
+									
+									tabindex="1">
+									<f:validateLength minimum="4" maximum="75" />
+									<f:validateRegex pattern="#{val['pattern.email']}"></f:validateRegex> 
+								</h:inputText>
+								<p:watermark for="eMailACK" value="Ex. admin@hungrybells.in" id="eMail-watermarkACK" /> 
+								<span class="star"> 
+									<p:outputPanel >*</p:outputPanel>
+								</span>
+					
+							</div>
+							<div class="text_width_box25"></div>
+							<div class="text_width_box25_right_error">
+								<p:message for="eMailACK" />
+							</div>
+							<div class="text_width_box025">
+								<span class="tab_user_text">Password</span>
+							</div>
+							<div class="text_width_box025_right">
+								<h:inputText id="eMail-passwordACK"  value="#{mailBean.mailTemplate.passWord}" class="text_box"
+									required="true"  
+									requiredMessage="#please fill password field"
+									validatorMessage="please fill password field"  
+									tabindex="2">
+									<f:validateLength minimum="3" maximum="75" /> 
+								</h:inputText> 
+								<span class="star"> 
+									<p:outputPanel >*</p:outputPanel>
+								</span>
+					
+							</div>
+							<div class="text_width_box25"></div>
+							<div class="text_width_box25_right_error">
+								<p:message for="eMail-passwordACK" />
+							</div>
+							<div class="text_width_box25">
+								<span class="user_text">Mail Keys</span>
+								<p:spacer height="50px;" />
+								<h:inputText   value="$Brand" class="mail_key_text_box" disabled="true" />
+								<h:inputText value="$OutLetName" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$OrderDate" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$OrderReferenceNo" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$OrderStatus" class="mail_key_text_box" disabled="true" />
+								<h:inputText   value="$CustomerName" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$CustomerMobileNo" class="mail_key_text_box" disabled="true" />
+								</div>
+								<div class="text_width_box25">
+								<span class="user_text"> </span>
+								<p:spacer height="50px;" />
+								<h:inputText value="$CustomerAddress" class="mail_key_text_box" disabled="true" />
+								<h:inputText value="$DealName" class="mail_key_text_box" disabled="true" />
+								<h:inputText value="$DealPrice" class="mail_key_text_box" disabled="true" />
+								<h:inputText  value="$Quantity" class="mail_key_text_box" disabled="true" />
+								<h:inputText value="$DeliveryType" class="mail_key_text_box" disabled="true" />
+								<h:inputText value="$TotalAmount" class="mail_key_text_box" disabled="true" />
+								
+							</div> 
+	 
+						</div>
+
+						<div class="contant_text_table_box50"> 
+							<span class="user_text">Customer Order Acknowledgement Mail Template</span>
+								
+							<p:spacer height="50px;" />
+							<p:editor id="mailtemplateACK" widgetVar="xxxACK" value="#{mailBean.mailTemplate.template}" width="600"  height="400"
+						 			 required="true" requiredMessage="Mail template should not be empty" validatorMessage="Mail template must be of more than 3 characters" />
+						</div>
+						 <div class="save_box">
+
+						<div class="cancel_button">
+							<h:commandLink  value="Submit"  validateClient="true" tabindex="3" 
+								action="#{mailBean.submitTemplate}" ></h:commandLink>
+		
+				          	<h:commandLink  value="Cancel" tabindex="4"
+								action="#{mailBean.showTemplateList}" immediate="true"></h:commandLink>
+						</div>
+					</div>
+					</p:outputPanel>
+					
+					
+					<!-- CUSTOMER_SIGNUP -->
+					<p:outputPanel id="TEMPLATE_CUSTOMER_SIGNUP" rendered="#{(mailBean.template eq 'CUSTOMER_SIGNUP')}">
+						<div class="contant_text_table_box50"> 
+						<!-- Group E-Mail  Starts Here-->
+							<div class="text_width_box025">
+								<span class="tab_user_text">E-Mail</span>
+							</div>
+							<div class="text_width_box025_right">
+								<h:inputText id="eMailSIGNUP"  value="#{mailBean.mailTemplate.mailFrom}" class="text_box"
+									required="true" 
+									
+									requiredMessage="#{msg['1155']}"
+									validatorMessage="#{msg['validate.useremail']}" 
+									
+									tabindex="1">
+									<f:validateLength minimum="4" maximum="75" />
+									<f:validateRegex pattern="#{val['pattern.email']}"></f:validateRegex> 
+								</h:inputText>
+								<p:watermark for="eMailSIGNUP" value="Ex. admin@hungrybells.in" id="eMail-watermarkSIGNUP" /> 
+								<span class="star"> 
+									<p:outputPanel >*</p:outputPanel>
+								</span>
+					
+							</div>
+							<div class="text_width_box25"></div>
+							<div class="text_width_box25_right_error">
+								<p:message for="eMailSIGNUP" />
+							</div>
+							<div class="text_width_box025">
+								<span class="tab_user_text">Password</span>
+							</div>
+							<div class="text_width_box025_right">
+								<h:inputText id="eMail-passwordSIGNUP"  value="#{mailBean.mailTemplate.passWord}" class="text_box"
+									required="true"  
+									requiredMessage="#please fill password field"
+									validatorMessage="please fill password field"  
+									tabindex="2">
+									<f:validateLength minimum="3" maximum="75" /> 
+								</h:inputText> 
+								<span class="star"> 
+									<p:outputPanel >*</p:outputPanel>
+								</span>
+					
+							</div>
+							<div class="text_width_box25"></div>
+							<div class="text_width_box25_right_error">
+								<p:message for="eMail-passwordSIGNUP" />
+							</div>
+							<div class="text_width_box25">
+								<span class="user_text">Mail Keys</span>
+								<p:spacer height="50px;" />
+								<h:inputText value="$CustomerName" class="mail_key_text_box" disabled="true" />
+								<h:inputText value="$CustomerMobileNo" class="mail_key_text_box" disabled="true" />
+								</div>
+								<div class="text_width_box25">
+								<span class="user_text"> </span>
+								<p:spacer height="50px;" />
+								<h:inputText value="$CustomerEmail" class="mail_key_text_box" disabled="true" />
+								
+							</div> 
+							 
+
+						</div>
+
+						<div class="contant_text_table_box50"> 
+							<span class="user_text">Customer SignUp Completion Welcome Mail Template</span>
+								
+							<p:spacer height="50px;" />
+							<p:editor id="mailtemplateSIGNUP" widgetVar="xxxSIGNUP" value="#{mailBean.mailTemplate.template}" width="600"  height="400"
+						 			 required="true" requiredMessage="Mail template should not be empty" validatorMessage="Mail template must be of more than 3 characters" />
+						</div>
+						 <div class="save_box">
+
+						<div class="cancel_button">
+							<h:commandLink  value="Submit"  validateClient="true" tabindex="3" 
+								action="#{mailBean.submitTemplate}" ></h:commandLink>
+		
+				          	<h:commandLink  value="Cancel" tabindex="4"
+								action="#{mailBean.showTemplateList}" immediate="true"></h:commandLink>
+						</div>
+					</div>
+					</p:outputPanel>
+					
+					<!-- CUSTOMER_FORGET_PWD-->
+					<p:outputPanel id="CUSTOMER_FORGET_PWD" rendered="#{(mailBean.template eq 'CUSTOMER_FORGET_PWD')}">
+						<div class="contant_text_table_box50"> 
+						<!-- Group E-Mail  Starts Here-->
+							<div class="text_width_box025">
+								<span class="tab_user_text">E-Mail</span>
+							</div>
+							<div class="text_width_box025_right">
+								<h:inputText id="eMailPWD"  value="#{mailBean.mailTemplate.mailFrom}" class="text_box"
+									required="true" 
+									requiredMessage="#{msg['1155']}"
+									validatorMessage="#{msg['validate.useremail']}" 
+									tabindex="1">
+									<f:validateLength minimum="4" maximum="75" />
+									<f:validateRegex pattern="#{val['pattern.email']}"></f:validateRegex> 
+								</h:inputText>
+								<p:watermark for="eMailPWD" value="Ex. admin@hungrybells.in" id="eMail-watermarkPWD" /> 
+								<span class="star"> 
+									<p:outputPanel >*</p:outputPanel>
+								</span>
+					
+							</div>
+							<div class="text_width_box25"></div>
+							<div class="text_width_box25_right_error">
+								<p:message for="eMailPWD" />
+							</div>
+							<div class="text_width_box025">
+								<span class="tab_user_text">Password</span>
+							</div>
+							<div class="text_width_box025_right">
+								<h:inputText id="eMail-passwordPWD"  value="#{mailBean.mailTemplate.passWord}" class="text_box"
+									required="true"  
+									requiredMessage="#please fill password field"
+									validatorMessage="please fill password field"  
+									tabindex="2">
+									<f:validateLength minimum="3" maximum="75" /> 
+								</h:inputText> 
+								<span class="star"> 
+									<p:outputPanel >*</p:outputPanel>
+								</span>
+					
+							</div>
+							<div class="text_width_box25"></div>
+							<div class="text_width_box25_right_error">
+								<p:message for="eMail-passwordPWD" />
+							</div>
+							<div class="text_width_box25">
+								<span class="user_text">Mail Keys</span>
+								<p:spacer height="50px;" />
+								<h:inputText value="$CustomerName" class="mail_key_text_box" disabled="true" />
+								<h:inputText value="$Password" class="mail_key_text_box" disabled="true" />  
+								</div>
+								<div class="text_width_box25">
+								<span class="user_text"> </span>
+								<p:spacer height="50px;" />
+								<h:inputText value="$CustomerEmail" class="mail_key_text_box" disabled="true" />
+								
+							</div> 
+							 
+
+						</div>
+
+						<div class="contant_text_table_box50"> 
+							<span class="user_text">Customer Forgot Password Mail Template</span>
+								
+							<p:spacer height="50px;" />
+							<p:editor id="mailtemplatePWD" widgetVar="xxxPWD" value="#{mailBean.mailTemplate.template}" width="600"  height="400"
+						 			 required="true" requiredMessage="Mail template should not be empty" validatorMessage="Mail template must be of more than 3 characters" />
+						</div>
+						 <div class="save_box">
+
+						<div class="cancel_button">
+							<h:commandLink  value="Submit"  validateClient="true" tabindex="3" 
+								action="#{mailBean.submitTemplate}" ></h:commandLink>
+		
+				          	<h:commandLink  value="Cancel" tabindex="4"
+								action="#{mailBean.showTemplateList}" immediate="true"></h:commandLink>
+						</div>
+					</div>
+					</p:outputPanel>
+					
+					
+					
+					
+					</div>
+
+					
+
+							<p:spacer height="250px;" />
+
+				</div>
+			</div>
+
+
+		</h:form>
+
+
+
+
+
+	</ui:define>
+</ui:composition>

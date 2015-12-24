@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+	
+				
+				
+				<div class="contant_text_table_box50">
+								
+					<div class="upload_box">
+					<p:outputPanel id="TEMPIMAGE_MAIN">
+ 
+									<img src="data:image/jpeg;base64,#{merchentCreationBean.imageString}" width="100%" height="300" /> 
+							</p:outputPanel>
+					</div>
+					<div class="upload_button">
+					
+						<p:fileUpload id="fupload" label="" value="#{merchentCreationBean.file}" styleClass="upload_button" requiredMessage="Please upload Logo"
+												required="true" auto="true" multiple="false" immediate="false"
+												fileUploadListener="#{merchentCreationBean.myFileUpload}"
+												update="TEMPIMAGE_MAIN" rendered="#{merchentCreationBean.action ne 'VIEW'}">
+												<!-- <img  src="#{request.contextPath}/images/upload_image.png" /> -->
+												</p:fileUpload>
+					
+					<!-- <img src="../images/upload_image.png"/> -->
+					</div>
+					
+							
+					<div class="text_width_box025">
+						<!-- <span class="tab_user_text">Logo Upload</span> -->
+					</div>
+					<div class="text_width_box025_right">
+						<!-- <h:inputText value="#{merchentCreationBean.merchantdto.name}"
+							class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}"  maxlength="45" onkeypress="return keyRestrict(event)" tabindex="1"/>* -->
+			
+					 </div>
+                 <div class="text_width_box25">
+						</div>
+						<div class="text_width_box25_right_error">
+						   <p:message for="fupload"/>
+						</div>
+						
+					
+					
+					
+					
+					
+					
+					  
+					    
+						  
+					   </div>
+				<div class="contant_text_table_box50">
+				
+				
+				
+			    </div>
+                
+					
+				
+				
+	
+	
+	
+	</ui:composition>

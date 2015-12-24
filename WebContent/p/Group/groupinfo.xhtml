@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"  >
+	
+									<h:form id="groupinfo_form"  prependId="false"> 
+          							 	<p:growl globalOnly="true" id="groupinfogwl1" rendered="true"/> 
+	<div class="contant_text_table_box50">
+		<!-- Group Entity Name  Starts Here-->
+		<div class="text_width_box025">
+			<span class="tab_user_text">Group Entity Name </span>
+		</div>
+		<div class="text_width_box025_right">
+			<h:inputText id="name" disabled="#{groupEntityBean.action eq 'VIEW'}"
+				value="#{groupEntityBean.groupEntity.entityName}" class="text_box"
+				required="true" requiredMessage="#{msg['1151']}"
+				validatorMessage="#{msg['1159']}" tabindex="1">
+				<f:validateLength minimum="4" maximum="75" />
+				<f:validateRegex pattern="#{val['pattern.groupname']}"></f:validateRegex> 
+			</h:inputText>
+			<p:watermark for="name" value="Group Entity Name must be between 4 to 75 characters" id="deal-detail-watermark" />
+			<h:outputText styleclass="text_box" rendered="false" value="#{groupEntityBean.groupEntity.entityName}" />
+			<span class="star"> 
+				<p:outputPanel rendered="#{groupEntityBean.action ne 'VIEW'}">*</p:outputPanel>
+			</span>
+
+		</div>
+		<div class="text_width_box25"></div>
+		<div class="text_width_box25_right_error">
+			<p:message for="name" />
+		</div>
+		<!-- Group Entity Name  Ends Here-->
+		
+		<!-- Group Contact Person  Starts Here-->
+		<div class="text_width_box025">
+			<span class="tab_user_text">Contact Person  </span>
+		</div>
+		<div class="text_width_box025_right">
+			<h:inputText id="contactPerson" disabled="#{groupEntityBean.action eq 'VIEW'}"
+				value="#{groupEntityBean.groupEntity.contactPerson}" class="text_box"
+				required="true" 
+				
+				requiredMessage="#{msg['1153']}"
+				validatorMessage="#{msg['1160']}" 
+				
+				tabindex="2">
+				<f:validateLength minimum="4" maximum="75" />
+				<f:validateRegex pattern="#{val['pattern.groupname']}"></f:validateRegex> 
+			</h:inputText>
+			<p:watermark for="contactPerson" value="Contact Person must be between 4 to 75 characters" id="contactPerson-watermark" />
+			<h:outputText styleclass="text_box" rendered="false" value="#{groupEntityBean.groupEntity.contactPerson}" />
+			<span class="star"> 
+				<p:outputPanel rendered="#{groupEntityBean.action ne 'VIEW'}">*</p:outputPanel>
+			</span>
+
+		</div>
+		<div class="text_width_box25"></div>
+		<div class="text_width_box25_right_error">
+			<p:message for="contactPerson" />
+		</div>
+		<!-- Group Contact Person  Ends Here-->
+		
+		<!-- Group E-Mail  Starts Here-->
+		<div class="text_width_box025">
+			<span class="tab_user_text">HO Address </span>
+		</div>
+		<div class="text_width_box025_right">
+			<h:inputTextarea rows="2" cols="20"   styleClass="fixed_test_area" id="headOfficeAddress" disabled="#{groupEntityBean.action eq 'VIEW'}"
+				value="#{groupEntityBean.groupEntity.headOfficeAddress}"  
+				required="true" 
+				
+				requiredMessage="#{msg['1154']}"
+				validatorMessage="#{msg['1161']}" 
+				maxlength="250" tabindex="3">
+				<f:validateLength minimum="5" maximum="250" /> 
+			</h:inputTextarea>
+			<p:watermark for="headOfficeAddress" value="Office Address must be between 5 to 150 characters" id="headOfficeAddress-watermark" />
+			<h:outputText styleclass="text_box" rendered="false" value="#{groupEntityBean.groupEntity.headOfficeAddress}" />
+			<span class="star"> 
+				<p:outputPanel rendered="#{groupEntityBean.action ne 'VIEW'}">*</p:outputPanel>
+			</span>
+
+		</div>
+		<div class="text_width_box25"></div>
+		<div class="text_width_box25_right_error">
+			<p:message for="headOfficeAddress" />
+		</div>
+		<!-- Group E-Mail  Ends Here-->
+		
+		
+		<!-- Group E-Mail  Starts Here-->
+		<div class="text_width_box025">
+			<span class="tab_user_text">E-Mail</span>
+		</div>
+		<div class="text_width_box025_right">
+			<h:inputText id="eMail" disabled="#{groupEntityBean.action eq 'VIEW'}"
+				value="#{groupEntityBean.groupEntity.eMail}" class="text_box"
+				required="true" 
+				
+				requiredMessage="#{msg['1155']}"
+				validatorMessage="#{msg['validate.useremail']}" 
+				
+				tabindex="4">
+				<f:validateLength minimum="4" maximum="75" />
+				<f:validateRegex pattern="#{val['pattern.email']}"></f:validateRegex> 
+			</h:inputText>
+			<p:watermark for="eMail" value="Ex. group@hungrybellsPrasad22" id="eMail-watermark" />
+			<h:outputText styleclass="text_box" rendered="false" value="#{groupEntityBean.groupEntity.eMail}" />
+			<span class="star"> 
+				<p:outputPanel rendered="#{groupEntityBean.action ne 'VIEW'}">*</p:outputPanel>
+			</span>
+
+		</div>
+		<div class="text_width_box25"></div>
+		<div class="text_width_box25_right_error">
+			<p:message for="eMail" />
+		</div>
+		<!-- Group E-Mail  Ends Here-->
+  
+	</div>
+	<div class="contant_text_table_box50">
+	
+		<!-- Group Mobile Number starts Here-->
+	 		<div class="text_width_box025">
+				<span class="tab_user_text">Contact Mobile No</span>
+			</div>
+			<div class="text_width_box025_right">
+				<h:inputText id="mobileNumber" disabled="#{groupEntityBean.action eq 'VIEW'}"
+					value="#{groupEntityBean.groupEntity.mobileNumber}" class="text_box"
+					required="true" 
+					 minlength="10" maxlength="10"
+					onkeydown=" return checkNum(event);"
+					onkeyup="phoneCheck(this);"
+					requiredMessage="#{msg['1152']}"
+					validatorMessage="#{msg['1162']}" 
+					
+					tabindex="5">
+					<f:validateLength minimum="10" maximum="10" />
+					<f:validateRegex pattern="#{val['mobilenumber']}"></f:validateRegex> 
+				</h:inputText>
+				<p:watermark for="mobileNumber" value="Mobile Number must be 10 digit"
+					id="mobileNumber-watermark" />
+				<h:outputText styleclass="text_box" rendered="false" value="#{groupEntityBean.groupEntity.mobileNumber}" />
+				<span class="star"> <p:outputPanel rendered="#{groupEntityBean.action ne 'VIEW'}">*</p:outputPanel></span>
+	
+			</div>
+			<div class="text_width_box25"></div>
+			<div class="text_width_box25_right_error">
+				<p:message for="mobileNumber" />
+			</div>
+			
+			<!-- Group Mobile Number Ends Here-->
+			
+			<!-- Group Office Telephone starts Here-->
+	 		<div class="text_width_box025">
+				<span class="tab_user_text">Office Telephone </span>
+			</div>
+			<div class="text_width_box025_right">
+				<h:inputText id="officeTelephoneNumber" disabled="#{groupEntityBean.action eq 'VIEW'}"
+				 minlength="6" maxlength="13"
+					onkeydown=" return checkNum(event);"
+					onkeyup="phoneCheck(this);"
+					value="#{groupEntityBean.groupEntity.officeTelephoneNumber}" class="text_box" 
+					tabindex="6">  
+				</h:inputText>
+				<p:watermark for="officeTelephoneNumber" value="Mobile Number must be 10 digit"
+					id="officeTelephoneNumber-watermark" />
+				<h:outputText styleclass="text_box" rendered="false"
+					value="#{groupEntityBean.groupEntity.officeTelephoneNumber}" /> 
+	
+			</div>
+			<div class="text_width_box25"></div>
+			<div class="text_width_box25_right_error">
+				<p:message for="officeTelephoneNumber" />
+			</div>
+			
+			<!-- Group Office Telephone Ends Here-->
+			<!-- Group Office Telephone starts Here-->
+	 		<div class="text_width_box025">
+				<span class="tab_user_text">Group Entity URL </span>
+			</div>
+			<div class="text_width_box025_right">
+				<h:inputText id="groupEntityUrl" disabled="#{groupEntityBean.action eq 'VIEW'}"
+					value="#{groupEntityBean.groupEntity.groupEntityUrl}" class="text_box"
+					tabindex="7"> 
+				</h:inputText>
+				<p:watermark for="officeTelephoneNumber" value="Mobile Number must be 10 digit"
+					id="groupEntityUrl-watermark" />
+				<h:outputText styleclass="text_box" rendered="false"
+					value="#{groupEntityBean.groupEntity.groupEntityUrl}" /> 
+	
+			</div>
+			<div class="text_width_box25"></div>
+			<div class="text_width_box25_right_error">
+				<p:message for="groupEntityUrl" />
+			</div>
+			<div class="text_width_box025">
+				<span class="tab_user_text">Group Status </span>
+			</div>
+			<div class="text_width_box025_right">
+				<h:selectOneMenu value="#{groupEntityBean.groupEntity.status}"
+						class="brand_drodown_box" tabindex="6"
+						disabled="#{groupEntityBean.action eq 'VIEW'}">
+						<f:selectItem itemLabel="Active" itemValue="ACTIVE" />
+						<f:selectItem itemLabel="Blocked" itemValue="BLOCKED" />
+					</h:selectOneMenu>
+			</div>
+			 
+				<!-- Group Office Telephone Ends Here-->
+	
+			<div class="save_box">
+				<div class="cancel_button">
+					<h:commandLink value="Submit" tabindex="8" rendered="#{groupEntityBean.action ne 'VIEW'}"
+						validateClient="true" action="#{groupEntityBean.submit}" />
+						
+					<h:commandLink value="Cancel" tabindex="9" immediate="true" 
+						action="#{groupEntityBean.showList}" />
+				</div> 
+			</div>
+	</div>
+	</h:form>
+</ui:composition>

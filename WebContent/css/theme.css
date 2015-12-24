@@ -1,0 +1,264 @@
+.ui-state-default {
+	/* background:#fff !important; */box-shadow:none !important;
+}
+.ui-state-active {
+	background: #564911 !important;
+}
+.ui-state-hover {
+	background-color:none !important;
+	
+}
+
+.ui-datatable thead th{
+	background:#5b0100 !important;height:35px;text-shadow:none !important;font:bold 15px arial;border:solid 1px #5b0100 !important;  
+}
+
+.ui-datatable .ui-radiobutton .ui-state-default {
+	background: none !important;
+}
+
+.ui-radiobutton .ui-state-active {
+	background: #564911 !important;
+}
+
+.ui-tabs {
+    float: left;
+    
+    margin-top: 27px !important;
+    width: 100%;
+}
+
+
+.ui-messages-error, .ui-message-error {
+    background:none !important;
+    border-color:#fff;
+    color:#ca1617 !important;
+    margin-bottom:-5px;
+    font-size:13px !important; 
+   
+}
+
+.ui-messages-info-detail, .ui-messages-warn-detail, .ui-messages-error-detail, .ui-messages-fatal-detail, .ui-message-info-detail, .ui-message-warn-detail, .ui-message-error-detail, .ui-message-fatal-detail {
+    color: red;
+    margin-left: 5px;
+}
+
+
+.ui-message-error-icon {
+    background-image: none !important;
+    background-position: 0 -96px;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight{background:#8d8d8d !important; text-shadow:none !important;border:solid 1px #8d8d8d !important; }
+
+.ui-widget-content .ui-datatable-odd .ui-datatable-selectable .ui-state-highlight{
+	color: #fff !important;
+	background:#5b0100;
+}
+.ui-datatable .ui-paginator, .ui-datatable .ui-paginator{ margin-top:1px !important; padding:8px !important;margin:auto;border-radius:0px !important;border-top:none !important;border:solid 1px #ccc; }
+
+
+.ui-tabs-nav .ui-helper-reset .ui-helper-clearfix .ui-widget-header .ui-corner-all{
+	background-color: #666!important;
+}
+
+.ui-widget-header{background:#fff ; }
+.ui-paginator-current{color:#545454 !important;  }
+
+/* .ui-widget{font-size:12px !important; } */
+
+.ui-dialog .ui-dialog-titlebar {
+    background: none repeat scroll 0 0 #af0b14 !important;}
+    
+    .ui-dialog-title{
+    
+    text-shadow: none!important;
+    }
+/* .ui-widget-content .ui-state-default {
+    background:#636262; margin-left:0px !important;text-shadow:none !important;   
+}  */  	
+.ui-button {
+	border: none !important;
+}
+
+
+
+
+.ui-icon-closethick {
+    background-position: -93px -128px;}
+    
+  .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+    color: #fff !important;
+    text-decoration: none;
+    text-shadow: none !important;
+}
+
+.ui-state-active {
+    background: none repeat scroll 0 0 #c81617 !important;border:none !important; 
+}
+
+
+.ui-state-highlight .ui-icon {
+    background: none repeat scroll 0 0 red;
+    height: 10px;
+    margin: 3px;
+    width: 10px;
+}
+
+/* .ui-radiobutton-icon {
+    margin-left:0px !important;
+}
+ */
+/* .ui-icon{width:auto!important; } */
+
+
+
+
+.ui-radiobutton .ui-state-active {
+    background: none repeat scroll 0 0 #564911 !important;
+    border: 1px solid #fff !important;
+}
+
+
+.ui-messages-warn-summary {color: red;
+    font-weight: bold;
+    margin-left: 10px;}
+    
+    
+.ui-messages-info-summary{color: red;
+    font-weight: bold;
+    margin-left: 10px;} 
+    
+    .ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td {
+   
+    font-size: 15px;
+   
+    
+}
+    
+.ui-column-title{font-weight:bold !important;color:#fff;  }
+
+.ui-datatable tbody td {
+    border-color: inherit;
+    font-size: 13px !important;
+}
+
+ .ui-datatable-odd {
+    background: none repeat scroll 0 0 #f9f9f9 !important;
+}
+
+
+.ui-messages-info, .ui-message-info {
+    background: #f9f9f9 ;
+    border-color: #ccc;
+    color: #3a87ad;
+}
+
+
+.ui-inputfield {
+    background: none repeat scroll 0 0 #fff !important;
+    font-weight: normal;
+    margin: 0;
+    outline: medium none;
+    padding: 4px;
+    margin-bottom: 0px !important;margin-left:0px !important; width: 100% !important; height:27px !important; 
+}
+
+.ui-datepicker-title {
+   color:#fff !important;
+    line-height: 1.8em;
+    margin: 0px !important;
+    text-align: center;
+    background:#5b0100 !important; text-shadow:none !important; 
+}
+.ui-messages-warn-icon {
+	background:none !important; 
+}
+.ui-datatable table {
+    border-collapse: collapse;
+    table-layout:auto !important;
+    width: 100%;
+}
+
+
+
+.ui-fileupload .ui-fileupload-content {
+ border: none !important;
+ height:0px !important;
+ width:0px !important;
+}
+
+.ui-fileupload .ui-button-icon-left, .ui-fileupload .ui-icon,.ui-fileupload .ui-c,.ui-fileupload .ui-icon-plusthick {
+ background:none !important;
+}
+
+
+ .ui-fileupload .ui-button
+{
+ width:97px;
+ height:34px;
+ background: url("../images/upload_image.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+}
+
+ .ui-fileupload .ui-widget-header {
+  border:none !important;
+  background:none !important;  
+ }
+ 
+  .ui-fileupload  .ui-fileupload-buttonbar {
+   padding:0px !important;
+   width:97px;
+  } 
+ .ui-state-default {
+    box-shadow:none !important;
+}
+
+  .ui-slider .ui-slider-handle {
+background: #85b2cb!important;
+
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4)) repeat scroll 0 0 #85b2cb;
+    border: 1px solid #7096ab;
+    color: #fff !important;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.ui-paginator-current, .ui-paginator .ui-paginator-rpp-options {
+    background: none repeat scroll 0 0 #fff !important;
+    margin-left: 1em;
+    margin-right: 1em;text-shadow:none !important; 
+}
+
+
+ .ui-widget-content {
+    background: none repeat scroll 0 0 #ffffff;
+    border: 1px solid #ccc;
+    color: #4f4f4f;
+}
+
+.ui-tabs .ui-tabs-nav li {
+    background: none repeat scroll 0 0 #666;
+    float: left;
+    list-style: outside none none;
+    margin: 0 0.2em 1px 0;
+    padding: 0;
+    position: relative;
+    white-space: nowrap;
+}
+
+.ui-dialog .ui-dialog-title {
+    color: #fff;
+    float: left;
+    margin: 0.3em 16px 0.1em 0;
+}
+.ui-button-text-only .ui-button-text {
+    background: none repeat scroll 0 0 #666 !important;
+    border-radius: 3px;
+    color: #fff;
+ 
+    padding: 0.3em 1em;
+    text-shadow: none !important;
+}

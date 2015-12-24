@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" >
+
+	<h:form id="brank_form" prependId="false" enctype="multipart/form-data">
+	<p:outputPanel id="BankPanelForm" rendered="true"> 
+	<div class="brand_content_box">
+			<!-- Brand Name Starts Here -->
+			<div class="text_width_box025">
+				<span class="tab_user_text">Brand Name</span>
+			</div>
+			<div class="text_width_box025_right">
+				<h:inputText id="bankBrandName" 
+					disabled="true"
+					value="#{groupEntityBean.brandEntity.name}" class="brand_text_box"
+					required="true" requiredMessage="#{msg['validate.brandname']}"
+					validatorMessage="#{msg['validate.brandname']}" tabindex="1">
+					<f:validateLength minimum="4" maximum="75" />
+				</h:inputText>
+				<p:watermark for="bankBrandName" value="4 to 75 characters"
+					id="bankBrandName-watermark" />
+				<h:outputText styleclass="brand_text_box" rendered="false"
+					value="#{groupEntityBean.brandEntity.name}" />
+				<span class="star"> <p:outputPanel
+						rendered="#{groupEntityBean.action ne 'VIEW'}">*</p:outputPanel>
+				</span>
+			</div>
+			<div class="text_width_box25"></div>
+			<div class="text_width_box25_right_error">
+				<p:message for="bankBrandName" />
+			</div>
+			<!-- Brand Name Ends Here -->
+			     
+				
+				<!-- Status eNDS-->
+				 
+		</div>
+		
+		<div class="brand_content_box">
+		  
+			<div class="text_width_box25">
+				<span class="user_text">Bank Name</span>
+			</div>
+			<div class="text_width_box25_right">
+				<h:selectOneMenu id="bank1"
+					value="#{groupEntityBean.brandEntity.bank}"
+					disabled="#{groupEntityBean.action eq 'VIEW'}" tabindex="7"
+					class="brand_text_box" converter="gec" required="true"
+					requiredMessage="#{msg['validate.bank']}">
+					<f:selectItem itemLabel="Select" itemValue="#{null}" />
+					<f:selectItems value="#{groupEntityBean.bankList}" var="it"
+						itemLabel="#{it.name}" itemValue="#{it}" />
+				</h:selectOneMenu>
+				<h:outputText styleclass="brand_text_box" rendered="false"
+					value="#{groupEntityBean.brandEntity.bank.name}" />
+				<span class="star"><p:outputPanel
+						rendered="#{groupEntityBean.action ne 'VIEW'}">*</p:outputPanel></span>
+			</div>
+			<div class="text_width_box25"></div>
+			<div class="text_width_box25_right_error">
+				<p:message for="bank1" />
+			</div>
+		
+			<div class="text_width_box25">
+				<span class="user_text">Merchant Bank IFSC</span>
+			</div>
+			<div class="text_width_box25_right">
+				<h:inputText id="bankifsc"
+					value="#{groupEntityBean.brandEntity.bankIFSC}"
+					disabled="#{groupEntityBean.action eq 'VIEW'}" tabindex="8"
+					class="brand_text_box"  maxlength="11" />
+				<h:outputText styleclass="brand_text_box" rendered="false"
+					value="#{groupEntityBean.brandEntity.bankIFSC}" /> 
+			</div>
+		
+			<div class="text_width_box25"></div>
+			<div class="text_width_box25_right_error">
+				<p:message for="bankifsc" />
+			</div>
+		
+			<div class="text_width_box25">
+					<span class="user_text">Bank Branch</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="branch"
+						value="#{groupEntityBean.brandEntity.bankBranch}" tabindex="9"
+						class="brand_text_box" 
+						disabled="#{groupEntityBean.action eq 'VIEW'}" maxlength="75">
+						<f:validateLength minimum="4" maximum="75" />
+						<f:validateRegex pattern="#{val['pattern.brandname']}"></f:validateRegex>
+					</h:inputText>
+					<h:outputText styleclass="text_box" rendered="false"
+						value="#{groupEntityBean.brandEntity.bankBranch}" /> 
+					<p:watermark for="branch" value="Bank Branch" />
+				</div> 
+			<div class="text_width_box25"></div>
+			<div class="text_width_box25_right_error">
+				<p:message for="branch" />
+			</div>
+		
+		
+			<div class="text_width_box25">
+					<span class="user_text">Bank AccNO</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="BankAccNO" value="#{groupEntityBean.brandEntity.bankAccno}"
+						tabindex="10" class="brand_text_box"
+						disabled="#{groupEntityBean.action eq 'VIEW'}" maxlength="20" />
+				</div>
+		 
+		</div>
+		
+		 
+	<div class="brand_content_box_right">
+			 
+			 
+		</div>
+		<div class="brand_action_box">
+		<div class="cancel_button"> 
+			<h:commandLink value="Submit" tabindex="13" update="BrandListPanel"  immediate="false" 
+				validateClient="true" action="#{groupEntityBean.submitBank}" />
+				
+					<h:commandLink value="Cancel" tabindex="14" immediate="true" 
+						action="#{groupEntityBean.showList}" />
+		</div>
+		</div>
+			</p:outputPanel>
+			 
+	</h:form>
+</ui:composition>

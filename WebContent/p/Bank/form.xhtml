@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+	template="/p/layout.xhtml">
+	<ui:define name="action_header">
+		<script>
+			function showSettingDlg(xhr, status, args) {
+				if (args.validate)
+					PRODUCTSETTDLG.show();
+				else
+					$("#PDTMSG").show();
+			}
+		</script>
+<script type="text/javascript">
+			function keyRestrict(evt) {
+				var theEvent = evt || window.event;
+				var key = theEvent.keyCode || theEvent.which;
+
+				var keychar = String.fromCharCode(key);
+				var keycheck = /[0-9]|\./;
+
+				if (!(key == 8 || key == 27 || key == 46 || key == 9)) // backspace delete  escape arrows
+				{
+					if (keycheck.test(keychar)) {
+						theEvent.returnValue = false;//for IE
+						if (theEvent.preventDefault)
+							theEvent.preventDefault();//Firefox
+
+					}
+				}
+			}
+		</script>
+
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form  id="form1" prependId="false" enctype="multipart/form-data">
+			<p:growl id="PDTMSG" rendered="false"/>
+			
+    <!--   <div id="main_container">
+     
+     
+     <div id="container">
+<div  class="contant_table_box">
+
+
+	
+
+		<div id="container"> -->
+     
+     
+     
+     
+     
+          <div id="main_container">
+    
+    <div class="error_box" >
+	 <p:messages globalOnly="true"/>
+   </div>
+    
+     <div id="container">
+    
+    
+     <div class="contant_table_box1">
+     <div class="contant_text_table_box50">
+   
+			<div class="text_width_box25">
+						<span class="user_text">Bank Name</span>
+					</div>
+					<div class="text_width_box25_right">
+						<h:inputText id="city" value="#{bankBean.bankdto.name}" tabindex="1" maxlength="75" onkeypress="return keyRestricted(event)" required="true" requiredMessage="#{msg['validate.bankmaster']}"
+							class="text_box" disabled="#{bankBean.action eq 'VIEW'}" validatorMessage="#{msg['validate.bankmaster']}">
+							<f:validateLength minimum="1" maximum="75" />
+                                       
+							</h:inputText><span class="star"><p:outputPanel rendered="#{bankBean.action ne 'VIEW'}">*</p:outputPanel></span>
+						<p:watermark for="city" value="Bank name should be 1 to 75 characters"/>
+						<p:tooltip for="city" value="Bank name should be 1 to 75 characters"/>	
+							
+					</div>
+					<div class="text_width_box25">
+					</div>
+					<div class="text_width_box25_right_errorbox">
+					  <p:message for="city"/>
+					</div>
+					
+		</div>
+		
+		<div class="contant_text_table_box50">
+					<p:outputPanel rendered="false">
+						<div class="text_width_box25">
+							<span class="user_text">Description</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{roleCreationBean.roledto.description}" tabindex="2"
+								class="text_box" disabled="#{roleCreationBean.action eq 'VIEW'}"/>
+						
+						 <p:fileUpload  rendered="false" mode="simple" value="#{roleCreationBean.uploadfile}"/>
+						</div>
+					</p:outputPanel>
+					<p:outputPanel rendered="false">
+						<div class="text_width_box25">
+							<span class="user_text">Features</span>
+						</div>
+						<div class="text_width_box25_right">
+							<!-- <p:tree value="#{roleCreationBean.root}" var="node"
+												id="checkboxTree1" disabled="#{roleCreationBean.action eq 'VIEW'}"
+												selectionMode="checkbox"
+												selection="#{roleCreationBean.selectedNodes}">
+												<p:treeNode>
+													<h:outputText value="#{node}" />
+												</p:treeNode>
+											</p:tree> -->
+						</div>
+					</p:outputPanel>					
+								
+
+
+
+
+
+							
+								
+    
+	 
+							
+					    
+					       
+    </div>
+
+     </div>
+     
+              <div class="save_box">
+			 
+			 <div class="cancel_button">
+				
+					<h:commandLink  value="Submit"  validateClient="true" tabindex="3" rendered="#{bankBean.action ne 'VIEW'}"
+						action="#{bankBean.submit}" ></h:commandLink>
+		
+                 
+					
+					<h:commandLink  value="Cancel" tabindex="4"
+						action="#{bankBean.showList}" immediate="true"></h:commandLink>
+				</div>
+			
+					</div>
+     
+     
+     </div>
+</div>
+
+
+		</h:form>
+
+
+		
+		
+	
+
+	</ui:define>
+</ui:composition>

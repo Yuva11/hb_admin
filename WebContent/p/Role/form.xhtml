@@ -1,0 +1,417 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html" >
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Hungry Bells</title>
+
+<link href="#{request.contextPath}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="#{request.contextPath}/css/font-awesome.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+
+</style>
+</h:head>
+
+<h:body>
+<f:view>
+<div id="head_top">
+<div   id="container">
+<span class="hide-sm" >
+<span>Logged in Admin</span>
+<i class="fa fa-user f"></i><span class="head-top-navi"><a href="#">My Profile</a></span>
+<i class="fa fa-question-circle"></i><span class="head-top-navi"><a href="#">Help</a></span>
+<i class="fa fa-cog"></i><span class="head-top-navi"><a href="#">Settings</a></span>
+<i class="fa fa-power-off"></i><span class="head-top-navi"><h:form><p:commandLink oncomplete="PF('LogoutConfirm').show()"  immediate="true" update=":DLGG"  value="Logout"></p:commandLink></h:form></span>
+
+</span>
+</div>
+</div>
+
+<h:form>
+<script type="text/javascript">
+	 function keyRestricted(evt) {
+		    var theEvent = evt || window.event;
+		    var key = theEvent.keyCode || theEvent.which;
+
+		  var keychar = String.fromCharCode(key);
+		  var keycheck = /[0-9]|\./;
+
+		    if (!(key == 8  ||  key == 27  || key == 46 ||  key == 9) ) // backspace delete  escape arrows
+		   {
+		      if ( !keycheck.test(keychar) ){       
+		          theEvent.returnValue = false;//for IE
+		      if (theEvent.preventDefault) theEvent.preventDefault();//Firefox
+
+		      }   
+		    }  
+		  }
+	
+	</script>
+	
+	<script type="text/javascript">
+	 function keyRestrict(evt) {
+		    var theEvent = evt || window.event;
+		    var key = theEvent.keyCode || theEvent.which;
+
+		  var keychar = String.fromCharCode(key);
+		  var keycheck = /[0-9]|\./;
+
+		    if (!(key == 8  ||  key == 27  || key == 46 ||  key == 9) ) // backspace delete  escape arrows
+		   {
+		      if ( keycheck.test(keychar) ){       
+		          theEvent.returnValue = false;//for IE
+		      if (theEvent.preventDefault) theEvent.preventDefault();//Firefox
+
+		      }   
+		    }  
+		  }
+	
+	</script>	
+
+<p:growl id="gwl" rendered="false"/>
+ <div  id="header">
+ <div id="container">
+ <div  class="logo"><a href="#"><img src="#{request.contextPath}/images/logo.png" border="0" /></a></div>
+ 
+ <div id="navi_box">
+  <nav>
+    <ul>
+       <li><a href="#" class="active"><i class="fa fa-home fa-2x"></i><br />Home</a></li>
+       <li><a href="#"><i class="fa fa-users fa-2x"></i><br />Customer</a></li>
+       <li><a href="#"><i class="fa fa-user fa-2x"></i><br />Merchant</a>
+         <ul><li><h:commandLink value="Merchant Creation" action="#{merchentCreationBean.showList}" immediate="true"></h:commandLink></li></ul>
+        </li>      
+  
+        
+        
+        
+       <li><a href="#"><i class="fa fa-file-text fa-2x"></i><br />Order</a></li>
+       <li><a href="#"><i class="fa fa-thumbs-up fa-2x"></i><br />Deal</a></li>
+       <li><a href="#"><i class="fa fa-bullhorn fa-2x"></i><br />Reward </a></li>
+       <li><a href="#"><i class="fa fa-female fa-2x"></i><br />Admin</a>
+       
+       
+             <ul>
+           <li><h:commandLink value="User Management" action="#{userCreationBean.showList}" immediate="true"></h:commandLink></li>
+            <li><h:commandLink value="Role Management" action="#{roleCreationBean.showList}" immediate="true"></h:commandLink></li>
+           
+
+           
+        </ul>
+       
+       
+       </li>
+        <li><a href="#"><i class="fa fa-sort-amount-asc fa-2x"></i><br />Report</a></li>
+    </ul>
+</nav>
+ </div>
+ 
+ </div>
+ </div>
+
+
+
+
+
+ 
+
+
+
+
+<div id="container">
+<div  id="contant_table_box">
+
+
+	
+
+		<div id="container">
+			<div class="admin_account_bg">
+				<h2>Role Creation</h2>
+			</div>
+			<div id="contant_table_box1">
+				<div class="contant_text_table_box50">
+					<div class="text_width_box25">
+						<span class="user_text">Role Name</span>
+					</div>
+					<div class="text_width_box25_right">
+						<h:inputText id="role" value="#{roleCreationBean.roledto.rolename}" required="true" requiredMessage="RoleName must be between 4 and 75 characters"
+							class="text_box" disabled="#{roleCreationBean.action eq 'VIEW'}" validatorMessage="#{msg['validate.role']}">*
+							<f:validateLength minimum="4" maximum="15" />
+                                        <f:validateRegex pattern="#{val['pattern.rolename']}"></f:validateRegex>
+							</h:inputText>
+					</div>
+					<div class="text_width_box25">
+					</div>
+					<div class="text_width_box25_right">
+					  <p:message for="role"/>
+					</div>
+					<p:outputPanel rendered="true">
+						<div class="text_width_box25">
+							<span class="user_text">Description</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{roleCreationBean.roledto.description}"
+								class="text_box" disabled="#{roleCreationBean.action eq 'VIEW'}"/>
+						</div>
+					</p:outputPanel>
+					<p:outputPanel rendered="false">
+						<div class="text_width_box25">
+							<span class="user_text">Features</span>
+						</div>
+						<div class="text_width_box25_right">
+							<!-- <p:tree value="#{roleCreationBean.root}" var="node"
+												id="checkboxTree1" disabled="#{roleCreationBean.action eq 'VIEW'}"
+												selectionMode="checkbox"
+												selection="#{roleCreationBean.selectedNodes}">
+												<p:treeNode>
+													<h:outputText value="#{node}" />
+												</p:treeNode>
+											</p:tree> -->
+						</div>
+					</p:outputPanel>
+
+
+
+
+					
+					
+						
+					
+					
+						<!-- <h:selectOneMenu value="#{userCreationBean.userdto.userType}">
+							<f:selectItem itemLabel="ADMIN" itemValue="ADMIN" />
+							<f:selectItem itemLabel="MERCHENT" itemValue="MERCHENT" />
+							<f:selectItem itemLabel="USER" itemValue="USER" />
+						</h:selectOneMenu> -->
+					</div>
+					
+						<!-- <div class="text_width_box25">
+							<span class="user_text">Status</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:selectOneMenu value="#{userCreationBean.userdto.status}">
+								<f:selectItem itemLabel="ACTIVE" itemValue="ACTIVE" />
+								<f:selectItem itemLabel="INACTIVE" itemValue="INACTIVE" />
+							</h:selectOneMenu>
+						</div> -->
+				
+                   
+
+				</div>
+
+             <div class="register_button">
+					<!-- <a href="#">Register</a> -->
+					<h:commandLink value="Submit" 
+						action="#{roleCreationBean.submit}"  validateClient="true"></h:commandLink>
+				</div>
+				<div class="register_button">
+					<!-- <a href="#">Register</a> -->
+					<h:commandLink value="Cancel" 
+						action="#{roleCreationBean.showList}" immediate="true"></h:commandLink>
+				</div>
+
+
+
+				
+			</div>
+	
+<!-- <table class="reference">
+  <thead>
+    <tr>
+    <th>#</th>
+      <th>Restaurant Name<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Customer Code<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>State<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Mobile No.<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Email Id<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Status<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Created Date<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Sel.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <td>1</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+      <td>2</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+      <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>3</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>4</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    					
+    <tr>
+    <td>5</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>6</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>7</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>8</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>9</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+  </tbody>
+</table> -->
+
+</div>
+
+ <!-- <div id="pagination_box">
+  <div id="pagination_box1">
+  <div class="pages_box">
+  <div class="left_arrow"><a href="#"><img src="#{request.contextPath}/images/arow-right1.png" border="0" /></a></div>
+  <div class="left_arrow1"><a href="#"><img src="#{request.contextPath}/images/arrow-right.png" border="0" /></a></div>
+  <div class="page1">
+  <a href="#" class="active">1</a>
+   <a href="#">2</a>
+    <a href="#">3</a>
+     <a href="#">4</a>
+      <a href="#">5</a>
+  </div>
+  <div class="right_arrow"><a href="#"><img  src="#{request.contextPath}/images/arrow-right02.png" border="0" /></a></div>
+  <div class="right_arrow1"><a href="#"><img src="#{request.contextPath}/images/arow-right01.png" border="0" /></a></div>
+  </div>
+  </div>
+ 
+ </div> -->
+
+</div>
+</h:form>
+<div id="footer">
+<div id="container">
+<div class="footer_text_box">
+<div class="footer_text"><span class="policy"><a href="#">Privacy Policy</a></span> |<span class="policy"><a href="#">Terms of Service</a></span> | © 2014 Hungry Bells. All Rights Reserved.</div>
+</div>
+</div>
+</div>
+
+
+<p:dialog header="Logout Confirmation" draggable="false" modal="true"
+			closable="false" width="390" widgetVar="LogoutConfirm"
+			showEffect="slide" hideEffect="slide" closeOnEscape="true"
+			resizable="false">
+			<h:form id="DLGG">
+				
+				<h:outputText value="Do you want to Logout ?"  />
+			
+				
+				
+				<p:spacer width="5px" />
+				<input type="button" value="Logout" onClick="javascript:location.href = '#{request.contextPath}/j_spring_security_logout';" />
+				<p:commandButton value="No" oncomplete="PF('LogoutConfirm').hide()" />
+			</h:form>
+		</p:dialog>
+		<p:dialog header="Confirm Delete" draggable="false" modal="true"
+					closable="true" width="350" widgetVar="ConformDelete"
+					showEffect="slide" hideEffect="slide" closeOnEscape="true"
+					resizable="false">
+	        <h:form>
+	              	
+			<div class="ft-spacer-1"/>
+			<div class="ft-spacer-1" />
+			<center>
+				 <h:outputText value="Do you want to delete this User?"/>
+			</center>
+			<div class="ft-spacer-1" />
+			<div class="ft-spacer-1" />
+			
+				<div class="ft-dialog-footer">
+					<div class="ft-dialog-footer-btn">
+					          <p:commandButton ajax="false" styleClass="bt-yes" value="Yes" action="#{userCreationBean.deleteUser}">
+					          </p:commandButton>
+					          <p:spacer width="5px" />
+						       <p:commandButton value="No" styleClass="bt-no" oncomplete="PF('ConformDelete').hide()"/>
+					</div>
+				</div>
+
+			       </h:form>
+  		      </p:dialog>
+		</f:view>
+</h:body>
+</html>

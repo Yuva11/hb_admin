@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+	<div id="contant_table_box1">
+		<div class="contant_text_table_box50">
+			<div class="text_width_box25">
+				<span class="user_text">Contact Person</span>
+			</div>
+			<div class="text_width_box25_right">
+				<h:inputText id="cperson" 
+					value="#{merchentCreationBean.merchantdto.contactPerson}"
+					required="true" requiredMessage="#{msg['validate.contactperson']}"
+					validatorMessage="#{msg['validate.contactperson']}"
+					class="text_box"
+					disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="45"
+					tabindex="1">
+					<f:validateLength minimum="4" maximum="45" />
+					<f:validateRegex pattern="#{val['pattern.contactperson']}"></f:validateRegex>
+				</h:inputText>
+				<p:watermark for="cperson" value="Contact Person"/>
+				<h:outputText styleclass="text_box" rendered="false" value="#{merchentCreationBean.merchantdto.contactPerson}"/><span class="star"><p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+			</div>
+			<div class="text_width_box25">
+				
+			</div>
+			<div class="text_width_box25_right_error">
+            <p:message for="cperson" />
+            </div>
+			<p:outputPanel rendered="true" id="locationPnl">
+				<div class="text_width_box25">
+					<span class="user_text">HO Location</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:selectOneMenu id="locate"
+						 disabled="#{merchentCreationBean.action eq 'VIEW'}"
+						value="#{merchentCreationBean.merchantdto.location}"
+						class="text_box" converter="gec" tabindex="3" required="true" requiredMessage="#{msg['validate.location']}">
+						 <f:selectItem itemLabel="Select" itemValue="#{null}" />
+						<f:selectItems value="#{merchentCreationBean.locationList}"
+							var="it" itemLabel="#{it.name}" itemValue="#{it}" />
+					</h:selectOneMenu><span class="star"><p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+					<h:outputText value="#{merchentCreationBean.merchantdto.location.name}" styleclass="text_box" rendered="false"/>
+				</div>
+			</p:outputPanel>
+			
+			<div class="text_width_box25"></div>
+			<div class="text_width_box25_right_error">
+				<p:message for="locate" />
+			</div>
+			
+			
+			
+
+			<p:outputPanel rendered="true">
+				<div class="text_width_box25">
+					<span class="user_text">Telephone Number</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="telepno"
+						value="#{merchentCreationBean.merchantdto.telephoneNumber}" onkeypress="return keyRestricted(event)"
+						class="text_box" 
+						disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="11"
+						tabindex="5" />
+						<p:watermark for="telepno" value="Telephone Number"/>
+						<h:outputText value="#{merchentCreationBean.merchantdto.telephoneNumber}" styleclass="text_box" rendered="false"/>
+				</div>
+			</p:outputPanel>
+
+			<p:outputPanel rendered="true">
+				<div class="text_width_box25">
+					<span class="user_text">HO Pincode</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="pcode"
+						value="#{merchentCreationBean.merchantdto.pincode}" disabled="#{merchentCreationBean.action eq 'VIEW'}"
+						class="text_box" required="true" onkeypress="return keyRestricted(event)"
+						requiredMessage="#{msg['validate.pincode']}"
+						 maxlength="6"
+						tabindex="7">
+							
+					</h:inputText><span class="star"><p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span><h:outputText value="#{merchentCreationBean.merchantdto.pincode}" styleclass="text_box" rendered="false"/>
+					<p:watermark for="pcode" value="Pincode"/>
+				</div>
+			</p:outputPanel>
+			<div class="text_width_box25"></div>
+			<div class="text_width_box25_right_error">
+				<p:message for="pcode" />
+			</div>
+			
+					<p:outputPanel rendered="true">
+				<div class="text_width_box25">
+					<span class="user_text">Communication Address</span>
+				</div>
+				<div class="text_width_box25_right">
+
+					<h:inputTextarea styleClass="test_area" id="caddress" disabled="#{merchentCreationBean.action eq 'VIEW'}"
+						value="#{merchentCreationBean.merchantdto.communicationAddress}" maxlength="150"
+						rows="2" cols="20"  tabindex="9" required="true"
+
+						requiredMessage="#{msg['validate.communicationaddress']}">
+							<f:validateLength minimum="4" maximum="150" />
+					
+					</h:inputTextarea><span class="star"><p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span><h:outputText value="#{merchentCreationBean.merchantdto.communicationAddress}" styleclass="text_box" rendered="false"/>
+				</div>
+			</p:outputPanel>
+			<div class="text_width_box25"></div>
+			<div class="text_width_box25_right_error">
+				<p:message for="caddress" />
+			</div>
+
+		</div>
+		<div class="contant_text_table_box50">
+	<!-- 		<p:outputPanel rendered="true">
+				<div class="text_width_box25">
+					<span class="user_text">Communication Address</span>
+				</div>
+				<div class="text_width_box25_right">
+
+					<h:inputTextarea styleClass="test_area" id="caddress" disabled="#{merchentCreationBean.action eq 'VIEW'}"
+						value="#{merchentCreationBean.merchantdto.communicationAddress}" maxlength="150"
+						rows="2" cols="20"  tabindex="2" required="true"
+
+						requiredMessage="#{msg['validate.communicationaddress']}">
+							<f:validateLength minimum="4" maximum="150" />
+					
+					</h:inputTextarea><span class="star"><p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span><h:outputText value="#{merchentCreationBean.merchantdto.communicationAddress}" styleclass="text_box" rendered="false"/>
+				</div>
+			</p:outputPanel>
+			<div class="text_width_box25"></div>
+			<div class="text_width_box25_right_error">
+				<p:message for="caddress" />
+			</div> -->
+			<p:outputPanel rendered="true">
+				<div class="text_width_box25">
+					<span class="user_text">HO City</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:selectOneMenu id="city" class="text_box"
+						disabled="#{merchentCreationBean.action eq 'VIEW'}" required="true" requiredMessage="#{msg['validate.city']}"
+						value="#{merchentCreationBean.merchantdto.city}" tabindex="2"
+						converter="gec" >
+						<f:selectItem itemLabel="Select" itemValue="#{null}" /> 
+						<f:selectItems value="#{merchentCreationBean.cityList}" var="it"
+							itemLabel="#{it.name}" itemValue="#{it}" />
+						
+						<p:ajax event="change" process="@this"
+									listener="#{merchentCreationBean.UpdateMerchantLocation}" update="locationPnl" />
+						
+					</h:selectOneMenu><span class="star"><p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span><h:outputText value="#{merchentCreationBean.merchantdto.city.name}" styleclass="text_box" rendered="false"/>
+				</div>
+			</p:outputPanel>
+			<div class="text_width_box25"></div>
+			<div class="text_width_box25_right_error">
+				<p:message for="city" />
+			</div>
+			<p:outputPanel rendered="true">
+				<div class="text_width_box25">
+					<span class="user_text">Mobile Number</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="mobno"
+						value="#{merchentCreationBean.merchantdto.mobileNumber}" onkeypress="return keyRestricted(event)"
+						class="text_box" 
+						disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="10" required="true" requiredMessage="#{msg['validate.mobilenumber']}"  validatorMessage="#{msg['validate.mobilenumber']}"
+						tabindex="4">
+						<f:validateLength minimum="10" />
+						</h:inputText>
+					<span class="star">
+					
+					
+					<p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span><h:outputText value="#{merchentCreationBean.merchantdto.city.name}" styleclass="text_box" rendered="false"/>	
+						
+					<h:outputText value="#{merchentCreationBean.merchantdto.mobileNumber}" styleclass="text_box" rendered="false"/>
+					<p:watermark for="mobno" value="Mobile Number"/>
+					
+				</div>
+			</p:outputPanel>
+            <div class="text_width_box25"></div>
+			<div class="text_width_box25_right_error">
+				<p:message for="mobno" />
+			</div>
+
+			<p:outputPanel rendered="true">
+				<div class="text_width_box25">
+					<span class="user_text">Email Address</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="add" 
+						value="#{merchentCreationBean.merchantdto.emailAddress}" maxlength="255"
+						disabled="#{merchentCreationBean.action eq 'VIEW'}"
+						class="text_box" tabindex="6" required="true"
+						requiredMessage="#{msg['validate.email']}" validatorMessage="#{msg['validate.email']}">
+						<f:validateRegex pattern="#{val['pattern.email']}"></f:validateRegex>
+					</h:inputText><span class="star"><p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span><h:outputText value="#{merchentCreationBean.merchantdto.mobileNumber}" styleclass="text_box" rendered="false"/>
+					<p:watermark for="add" value="Email Address"/>
+				</div>
+			</p:outputPanel>
+			<div class="text_width_box25"></div>
+			<div class="text_width_box25_right_error">
+				<p:message for="add" />
+			</div>
+			<p:outputPanel rendered="true">
+				<div class="text_width_box25">
+					<span class="user_text">Website URL</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="weburl" value="#{merchentCreationBean.merchantdto.webUrl}" disabled="#{merchentCreationBean.action eq 'VIEW'}"
+						class="text_box" tabindex="8"
+						
+						maxlength="255" />
+						<p:watermark for="weburl" value="Website URL"/>
+						<h:outputText value="#{merchentCreationBean.merchantdto.webUrl}" styleclass="text_box" rendered="false"/>
+						
+						
+				</div>
+			</p:outputPanel>
+
+			
+
+
+
+
+
+		</div>
+	</div>
+
+
+
+
+
+
+</ui:composition>

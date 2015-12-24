@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/p/layout.xhtml">
+	<ui:define name="action_header">
+	
+	<script>
+			function showSettingDlg(xhr, status, args) {
+				if (args.validate)
+					PRODUCTSETTDLG.show();
+				else
+					$("#PDTMSG").show();
+			}
+		</script>
+
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form id="form1" enctype="multipart/form-data" prependId="false">
+		
+		
+		<script type="text/javascript">
+	 function keyRestricted(evt) {
+		    var theEvent = evt || window.event;
+		    var key = theEvent.keyCode || theEvent.which;
+
+		  var keychar = String.fromCharCode(key);
+		  var keycheck = /[0-9]|\./;
+
+		    if (!(key == 8  ||  key == 27  || key == 46 ||  key == 9) ) // backspace delete  escape arrows
+		   {
+		      if ( !keycheck.test(keychar) ){       
+		          theEvent.returnValue = false;//for IE
+		      if (theEvent.preventDefault) theEvent.preventDefault();//Firefox
+
+		      }   
+		    }  
+		  }
+	
+	</script>
+		
+		
+		
+		
+		
+		<script> 
+		   $(document).ready(function(){
+			 var x = document.getElementById("CHECKBOXINDEX").value;  
+			 var id="grid\\:"+x
+			 if($("#"+id).is(":checked")){
+	            	$("#DELIVERY_DIV").show();
+	                
+	            }
+			 $('input[name="grid"]').click(function(){
+		            if($("#"+id).is(":checked")){
+		            	$("#DELIVERY_DIV").show();
+		                //alert("Checkbox is checked.");
+		            }else{
+		            	$("#DELIVERY_DIV").hide();
+		            	//alert("Checkbox is unchecked.");
+			            } 
+		        });
+			}); 
+	 </script>
+
+    
+	 
+<script>	 
+	 function phoneCheck(elt){
+	var id=elt.id;
+	var l=elt.value.length;
+	console.log(l);
+	if (l>=10) {
+		$("#"+id).last().removeClass("ui-state-error");
+	} else {
+		$("#"+id).last().addClass("ui-state-error");
+	}
+}
+	 </script>	 
+	 
+		<h:inputHidden value="#{dealBean.deliverySize}" id="PANDIAN"/>
+			 <h:inputHidden value="#{dealBean.checkBoxIndex}" id="CHECKBOXINDEX"/>
+			<p:growl id="PDTMSG" globalOnly="true"/>
+			<ui:param name="t" value="#{dealBean.viewDeal}" />
+			<div id="main_container">
+				<div class="head_bottom_listbg">
+					<div id="container">
+						<div class="head_list_box">
+							<h3>Deal</h3>
+						</div>
+						<div class="head_list_box1">
+							<div class="left_arrow_smal"></div>
+							<h3>
+								<span>Edit Deal</span>
+							</h3>
+						</div>
+					</div>
+				</div>
+				<div class="contant_table_box">
+				<div class="contant_main">
+					<div class="text_box_main">
+						<!-- 1 -->
+
+						<div class="label_box">
+							<label class="text">#{t.contentType eq 'BUYOUT' ?'Deal Name':'Promo Name' }</label>
+						</div>
+						<div class="input_box_incress">
+							<!-- <p:inputText id="DealName" styleClass="input_text_box" value="#{t.name}" tabindex="3"  minlength="4"  maxlength="45"  disabled="false">   
+							</p:inputText> -->
+
+
+							<p:inputText id="Dealname" styleClass="input_text_box"
+								value="#{t.name}" tabindex="1" required="true" minlength="4"
+								maxlength="45" requiredMessage="#{msg['validate.dealname']}"
+								validatorMessage="#{msg['validate.dealname']}">
+								<p:watermark for="Dealname" value="4 to 45 characters"
+									id="Dealname-watermark" />
+								<f:validateRegex pattern="#{val['pattern.dealname']}"></f:validateRegex>
+							</p:inputText>
+
+						</div>
+                        
+                        
+                      <p:message for="Dealname" />
+                        
+                        <div class="label_box">
+							<label class="text">#{t.contentType eq 'BUYOUT' ?'Deal Details':'Promo Details' }</label>
+						</div>
+						<div class="input_box_incress">
+							<!-- <p:inputText id="DealName" styleClass="input_text_box" value="#{t.name}" tabindex="3"  minlength="4"  maxlength="45"  disabled="false">   
+							</p:inputText> -->
+
+
+							<p:inputTextarea styleClass="input_text_box" id="deal-detail"
+									value="#{t.details}" onkeydown=" return deal(event)"
+									onkeyup="dealDetailLengthChk(this)" minlength="4"
+									maxlength="150" requiredMessage="#{msg['validate.dealdetail']}"
+									validatorMessage="#{msg['validate.dealdetail']}" tabindex="2"
+									required="true">
+									<f:validateLength minimum="4" maximum="150" />
+									<f:validateRegex pattern="#{val['pattern.dealdetail']}"></f:validateRegex>
+									<p:watermark for="deal-detail" value="4 to 150 characters"
+										id="deal-detail-watermark" />
+								</p:inputTextarea>
+
+						</div>
+                        
+                        <p:message for="deal-detail" />
+							<!-- Details Text -->
+							<div class="label_box">
+								<label class="text">Detail Text</label>
+							</div>
+							<div class="input_box_incress">
+								<p:inputTextarea styleClass="input_text_box" id="deal-detail1"
+									value="#{t.detailText}" minlength="4" maxlength="150"
+									requiredMessage="#{msg['validate.dealdetail']}"
+									validatorMessage="#{msg['validate.dealdetail']}" tabindex="2"
+									required="true">
+									<f:validateLength minimum="4" maximum="150" />
+									<f:validateRegex pattern="#{val['pattern.dealdetail']}"></f:validateRegex>
+									<p:watermark for="deal-detail1" value="4 to 150 characters"
+										id="deal-detail-watermark1" />
+								</p:inputTextarea>
+							</div>
+							<p:message for="deal-detail" />
+							<p:outputPanel id="buyoutId"
+								rendered="#{(t.contentType eq 'BUYOUT')}">
+                        
+						<div class="label_box">
+							<label class="text">Deal Template</label>
+						</div>
+						<div class="input_box">
+							<h:selectOneMenu styleClass="input_text_box"
+								value="#{t.dealTemplate}" tabindex="6" disabled="false">
+								<f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+								<f:selectItem itemLabel="FULL_IMAGE" itemValue="FULL_IMAGE" />
+							</h:selectOneMenu>
+						</div>
+
+                        </p:outputPanel>
+                        
+                        
+                        
+                        <p:outputPanel id="promotionId"
+								rendered="#{(t.contentType eq 'PROMOTION')}">
+								<div class="label_box">
+							<label class="text">Coupon
+										Code</label>
+						</div>
+						<div class="input_box_incress">
+							<p:inputText styleClass="input_text_box" id="coupon-code"
+											value="#{t.couponcode}" tabindex="5" minlength="4"
+											maxlength="45"
+											requiredMessage="#{msg['validate.couponcode']}"
+											validatorMessage="#{msg['validate.couponcode']}"
+											required="true">
+											<p:watermark for="coupon-code" value="coupon code"
+												id="coupon-watermark" />
+											<f:validateRegex pattern="#{val['pattern.couponCode']}"></f:validateRegex>
+										</p:inputText>
+						</div>
+						<p:message for="coupon-code" />
+							</p:outputPanel>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+						<div class="label_box">
+							<label class="text">Food Category</label>
+						</div>
+						<div class="input_box">
+							<h:selectOneMenu id="foodcategory" styleClass="input_text_box" converter="gec" 
+								value="#{dealBean.selectedFCAT}" tabindex="9" disabled="false">
+								<f:selectItems value="#{dealBean.foodCATS}" var="it"
+									itemLabel="#{it.name}" itemValue="#{it}" />
+							</h:selectOneMenu>
+						</div>
+
+						<div class="label_box">
+							<label class="text">Validity Start Date</label>
+						</div>
+						<div class="input_box_incress">
+							<p:calendar id="startDate" value="#{dealBean.startDate}" requiredMessage="#{msg['validate.dealDate']}" required="true" disabled="#{dealBean.mindate>dealBean.startDate}"
+								pattern="dd-MM-yyyy HH:mm" showOn="button" tabindex="9"
+								mindate="#{dealBean.startDate}"  />
+						</div>
+
+					<!-- 	<div class="label_box">
+							<label class="text">Available Time From</label>
+						</div>
+						<div class="input_box">
+							<p:calendar id="timeFrom" value="#{dealBean.fromTime}"
+								pattern="HH:mm a" timeOnly="true" tabindex="11" disabled="false" />
+						</div>
+ -->
+
+                      <p:outputPanel id="DealType-l-panel"
+							rendered="#{(t.contentType eq 'BUYOUT')}">
+						<div class="label_box">
+							<label class="text">Opening Qty</label>
+						</div>
+						<div class="input_box_incress">
+							<p:inputText id="openingQty" styleClass="input_text_box"
+								value="#{t.openingQuantity}" tabindex="13" maxlength="10"
+										 onkeypress="return keyRestricted(event)"
+								requiredMessage="#{msg['validate.openingQuantity']}"
+										validatorMessage="#{msg['validate.openingQuantity']}"
+										required="true"
+								disabled="false">
+							</p:inputText>
+						</div>
+                         <p:message for="openingQty" />
+						<div class="label_box">
+							<label class="text">Deal Price</label>
+						</div>
+						<div class="input_box_incress">
+							<p:inputText styleClass="input_text_box" id="deal-price"
+								value="#{t.dealPrice}" tabindex="15" requiredMessage="#{msg['validate.dealprice']}" validatorMessage="#{msg['validate.dealprice']}"
+										required="true" onkeypress="return keyRestricted(event)" 
+								maxlength="8" disabled="#{t.originalPrice  == null}">
+									<p:ajax event="keyup" update="discount PDTMSG" listener="#{dealBean.discountEvent}" />
+							</p:inputText>
+						</div>
+                        <p:message for="deal-price" />
+						<p:outputPanel id="DeliveryMtd" rendered="true">
+							<div class="label_box">
+								<label class="text">Delivery Method</label>
+							</div>
+							<div class="input_box_incress">
+							<p:selectManyCheckbox id="grid" value="#{dealBean.selectedDeliveryType}" layout="grid" columns="1" converter="gec" tabindex="17">
+								            <f:selectItems value="#{dealBean.dealDeliveryType}" var="it" itemLabel="#{it.type}" itemValue="#{it}" />
+								           
+								         </p:selectManyCheckbox>
+								
+							</div>
+							<div id="DELIVERY_DIV" style="display:none;">
+							<p:outputPanel id="dealdeliveryTime"
+								rendered="true">
+								<div class="label_box">
+									<label class="text">Delivery Time</label>
+								</div>
+								<div class="input_box_incress">
+									<h:selectOneMenu id="deliveryTime" styleClass="input_text_box"  value="#{t.deliveryTime}" tabindex="18">
+										 			<f:selectItem itemLabel="15 Minutes" itemValue="15 Minutes" />
+											            <f:selectItem itemLabel="30 Minutes" itemValue="30 Minutes" />
+											            <f:selectItem itemLabel="45 Minutes" itemValue="45 Minutes" />
+											            <f:selectItem itemLabel="1 Hour" itemValue="1 Hour" />
+											            <f:selectItem itemLabel="2 Hours" itemValue="2 Hours" />
+											            <f:selectItem itemLabel="3 Hours" itemValue="3 Hours" />
+											            <f:selectItem itemLabel="4 Hours" itemValue="4 Hours" />
+											            <f:selectItem itemLabel="5 Hours" itemValue="5 Hours" />
+												</h:selectOneMenu>
+								</div>
+								<div class="label_box">
+									<label class="text">Delivery Charge</label>
+								</div>
+								<div class="input_box_incress">
+									<p:inputText styleClass="input_text_box" id="deliveryCharge"
+										value="#{t.deliveryCharge}" maxlength="8" tabindex="19"
+										disabled="false" />
+								</div>
+											
+
+							</p:outputPanel>
+							</div>
+						</p:outputPanel>
+</p:outputPanel>
+						<!-- <div class="label_box">
+							<label class="text">Deal Details</label>
+						</div>
+						<div class="input_box_incress">
+							<p:inputText id="DealDetail" styleClass="input_text_box"
+								value="#{t.details}" tabindex="4" minlength="4" maxlength="45"
+								disabled="false">
+							</p:inputText>
+						</div> -->
+					</div>
+					<!-- End Of 1st Part -->
+
+
+					<div class="text_box_main1">
+						<!-- 2 -->
+
+						<div class="label_box">
+							<label class="text">Food Type</label>
+						</div>
+						<div class="input_box_incress">
+							<p:selectOneRadio id="food-type" value="#{t.foodType}" requiredMessage="#{msg['validate.foodtype']}"
+									validatorMessage="#{msg['validate.foodtype']}" required="true"
+								tabindex="8" disabled="false">
+								<f:selectItem itemLabel="Veg" itemValue="VEG" />
+								<f:selectItem itemLabel="Non-Veg" itemValue="NON_VEG" />
+							</p:selectOneRadio>
+						</div>
+                        <p:message for="food-type" />
+
+						<div class="label_box">
+							<label class="text">Cusine</label>
+						</div>
+						<div class="input_box_incress">
+							<h:selectOneMenu styleClass="input_text_box"
+								value="#{dealBean.selectedCUISINE}" converter="gec"   tabindex="8"> 
+								<f:selectItems value="#{dealBean.cusines}" var="it"
+									itemLabel="#{it.name}" itemValue="#{it}" />
+							</h:selectOneMenu>
+						</div>
+
+
+						<div class="label_box">
+							<label class="text">Validity End Date</label>
+						</div>
+						<div class="input_box_incress">
+							<p:calendar id="endDate" value="#{dealBean.endDate}"
+								pattern="dd-MM-yyyy HH:mm" showOn="button" tabindex="9"
+								mindate="#{dealBean.startDate}" disabled="false" requiredMessage="#{msg['validate.dealDate']}"
+									validatorMessage="#{msg['validate.dealDate']}" required="true"/>
+						</div>
+						<p:message for="endDate" />
+						<!-- <div class="label_box">
+							<label class="text">Available Time To</label>
+						</div>
+						<div class="input_box">
+							<p:calendar id="timeTo" value="#{dealBean.toTime}"
+								pattern="HH:mm a" timeOnly="true" tabindex="11" disabled="false" />
+						</div> -->
+						<div class="label_box">
+							<label class="text">Original Price</label>
+						</div>
+						<div class="input_box_incress">
+							<p:inputText id="OriginalPrice" styleClass="input_text_box"
+								value="#{t.originalPrice}" tabindex="2" minlength="4" requiredMessage="#{msg['validate.originalprice']}"
+									validatorMessage="#{msg['validate.originalprice']}"
+									required="true" onkeypress="return keyRestricted(event)"
+								maxlength="8" disabled="false">
+								<p:ajax event="keyup" update="deal-price" listener="#{dealBean.originalPriceEvent}" />
+							</p:inputText>
+						</div>
+						<p:message for="OriginalPrice" />
+						
+						<p:outputPanel id="DealType-r-panel"
+							rendered="#{(t.contentType eq 'BUYOUT')}">
+						<div class="label_box">
+							<label class="text">Deal Discount</label>
+						</div>
+						<div class="input_box_incress">
+							<p:inputText id="discount" styleClass="input_text_box" disabled="true"
+								value="#{t.dealDiscountPercent}" tabindex="2" minlength="4"
+								maxlength="45" >
+							</p:inputText>
+						</div>
+
+						<div class="label_box">
+							<label class="text">Redeem Allowed</label>
+						</div>
+						<div class="input_box_incress">
+							<h:selectOneMenu styleClass="input_text_box" id="reedem"
+								value="#{t.reedem}" tabindex="21" disabled="false">
+								<f:selectItem itemLabel="Loyality Points"
+									itemValue="LOYALTY" />
+								<f:selectItem itemLabel="Other Payments"
+									itemValue="PAYMENTS" />
+							</h:selectOneMenu>
+						</div>
+						</p:outputPanel>
+						<div class="label_box">
+							<label class="text">Status</label>
+						</div>
+
+						<div class="input_box_incress">
+							<h:selectOneMenu styleClass="input_text_box" id="Status"
+								value="#{t.status}" tabindex="20">
+								<f:selectItem itemLabel="Active" itemValue="ACTIVE" />
+							
+								<f:selectItem itemLabel="Blocked" itemValue="BLOCKED" />
+							</h:selectOneMenu>
+						</div>
+
+
+						<!-- 3 -->
+
+						<p:outputPanel id="branchMerchent">
+							<div class="label_box">
+								<label class="text">Merchant Branches</label>
+							</div>
+							<div class="input_box_incress">
+								<!-- <p:inputText id="branchs" styleClass="input_text_box" value="#{t.merchantbranch.merchant.name}" tabindex="1"  minlength="4"  maxlength="45"  disabled="true">   
+							</p:inputText> -->
+
+								<h:selectOneMenu styleClass="input_text_box" disabled="true"
+									value="#{t.merchantbranch}" tabindex="8" converter="gec">
+									  <f:selectItem itemLabel="Select" itemValue="#{null}" /> 
+									<f:selectItems value="#{dealBean.merchantBranches}" var="it" 
+										itemLabel="#{it.branchName}" itemValue="#{it}" />
+								</h:selectOneMenu>
+							</div>
+
+						</p:outputPanel>
+						</div>
+					<div class="text_box_main2">
+						<div class="upload_box">
+							<p:outputPanel id="TEMPIMAGE_MAIN">
+								<img src="data:image/jpeg;base64,#{dealBean.imageString}"
+									width="100%" height="349px;" />
+							</p:outputPanel>
+						</div>
+
+						<div class="upload_button">
+
+							<p:fileUpload id="fupload" label="" value="#{dealBean.file}"
+								styleClass="upload_button" requiredMessage="Please upload Logo"
+								required="true" auto="true" multiple="false" 
+								fileUploadListener="#{dealBean.myFileUpload}"
+								update="TEMPIMAGE_MAIN,:form1:PDTMSG">
+								<!-- <img  src="#{request.contextPath}/images/upload_image.png" /> -->
+							</p:fileUpload>
+
+							<!-- <img src="../images/upload_image.png"/> -->
+						</div>
+
+
+
+					</div>
+
+					<div class="save_box">
+
+						<div class="cancel_button">
+							<h:commandLink value="Submit" action="#{dealBean.submitEdit}"
+								     ></h:commandLink>
+							<h:commandLink value="Cancel" rendered="true"
+								action="#{dealBean.showBuyoutList}" immediate="true"></h:commandLink>
+						</div>
+
+					</div>
+				</div>
+</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

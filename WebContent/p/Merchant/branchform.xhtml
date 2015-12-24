@@ -1,0 +1,584 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html" >
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Hungry Bells</title>
+
+<link href="#{request.contextPath}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="#{request.contextPath}/css/font-awesome.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+
+</style>
+</h:head>
+
+<h:body>
+<f:view>
+<div id="head_top">
+<div   id="container">
+<span class="hide-sm" >
+<span>Logged in Admin</span>
+<i class="fa fa-user f"></i><span class="head-top-navi"><a href="#">My Profile</a></span>
+<i class="fa fa-question-circle"></i><span class="head-top-navi"><a href="#">Help</a></span>
+<i class="fa fa-cog"></i><span class="head-top-navi"><a href="#">Settings</a></span>
+<i class="fa fa-power-off"></i><span class="head-top-navi"><h:form><p:commandLink oncomplete="PF('LogoutConfirm').show()"  immediate="true" update=":DLGG"  value="Logout"></p:commandLink></h:form></span>
+
+</span>
+</div>
+</div>
+
+<h:form id="frm1">
+<p:growl id="gwl1"/>
+				
+	<script type="text/javascript">
+	 function keyRestricted(evt) {
+		    var theEvent = evt || window.event;
+		    var key = theEvent.keyCode || theEvent.which;
+
+		  var keychar = String.fromCharCode(key);
+		  var keycheck = /[0-9]|\./;
+
+		    if (!(key == 8  ||  key == 27  || key == 46 ||  key == 9) ) // backspace delete  escape arrows
+		   {
+		      if ( !keycheck.test(keychar) ){       
+		          theEvent.returnValue = false;//for IE
+		      if (theEvent.preventDefault) theEvent.preventDefault();//Firefox
+
+		      }   
+		    }  
+		  }
+	
+	</script>
+	
+	<script type="text/javascript">
+	 function keyRestrict(evt) {
+		    var theEvent = evt || window.event;
+		    var key = theEvent.keyCode || theEvent.which;
+
+		  var keychar = String.fromCharCode(key);
+		  var keycheck = /[0-9]|\./;
+
+		    if (!(key == 8  ||  key == 27  || key == 46 ||  key == 9) ) // backspace delete  escape arrows
+		   {
+		      if ( keycheck.test(keychar) ){       
+		          theEvent.returnValue = false;//for IE
+		      if (theEvent.preventDefault) theEvent.preventDefault();//Firefox
+
+		      }   
+		    }  
+		  }
+	
+	</script>	
+<p:growl id="gwl" />
+ <div  id="header">
+ <div id="container">
+ <div  class="logo"><a href="#"><img src="#{request.contextPath}/images/logo.png" border="0" /></a></div>
+ 
+ <div id="navi_box">
+ <nav>
+    <ul>
+       <li><a href="#" class="active"><i class="fa fa-home fa-2x"></i><br />Home</a></li>
+       <li><a href="#"><i class="fa fa-users fa-2x"></i><br />Customer</a></li>
+       <li><a href="#"><i class="fa fa-user fa-2x"></i><br />Merchant</a>
+       <ul>
+         <li><h:commandLink value="Merchant Creation" action="#{merchentCreationBean.showList}"></h:commandLink></li>
+       
+       </ul>
+       
+        </li>      
+  
+        
+        
+        
+       <li><a href="#"><i class="fa fa-file-text fa-2x"></i><br />Order</a></li>
+       <li><a href="#"><i class="fa fa-thumbs-up fa-2x"></i><br />Deal</a></li>
+       <li><a href="#"><i class="fa fa-bullhorn fa-2x"></i><br />Reward </a></li>
+       <li><a href="#"><i class="fa fa-female fa-2x"></i><br />Admin</a>
+       
+       
+             <ul>
+           <li><h:commandLink value="User Management" action="#{userCreationBean.showList}"></h:commandLink></li>
+           <li><h:commandLink value="Role Management" action="#{roleCreationBean.showList}"></h:commandLink></li>
+          
+            
+
+           
+        </ul>
+       
+       
+       </li>
+        <li><a href="#"><i class="fa fa-sort-amount-asc fa-2x"></i><br />Report</a></li>
+    </ul>
+</nav>
+ 
+ </div>
+ 
+ </div>
+ </div>
+
+
+
+
+
+ 
+
+
+
+
+<div id="container">
+<div  id="contant_table_box">
+
+
+	
+
+		<div id="container">
+			<div class="admin_account_bg">
+				<h2>Merchant Branch Creation</h2>
+			</div>
+			<div id="contant_table_box1">
+				<div class="contant_text_table_box50">
+					<div class="text_width_box25">
+						<span class="user_text">Branch Name</span>
+					</div>
+					<div class="text_width_box25_right">
+						<h:inputText value="#{merchentCreationBean.branchDto.branchName}"
+							class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="45" onkeypress="return keyRestrict(event)"/>
+					</div>
+					
+					<p:outputPanel rendered="true">
+						<div class="text_width_box25">
+							<span class="user_text">Service Tax</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.branchDto.serviceTax}"
+								class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}"/>
+						</div>
+					</p:outputPanel>
+					 <p:outputPanel rendered="true">
+						<div class="text_width_box25">
+							<span class="user_text">Tin</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.branchDto.tin}" class="text_box"    
+								  disabled="#{merchentCreationBean.action eq 'VIEW'}"/>
+						</div>
+						</p:outputPanel>
+					
+					    <p:outputPanel rendered="true">
+                        <div class="text_width_box25">
+							<span class="user_text">Bank Name</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.branchDto.bankName}"
+								class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}" />
+						</div>
+                        </p:outputPanel>
+                        
+                        <p:outputPanel rendered="true">
+						 <div class="text_width_box25">
+							<span class="user_text">Account Number</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.branchDto.accountNumber}"
+								class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}" />
+						</div>
+						</p:outputPanel>
+						<p:outputPanel rendered="true">
+						 <div class="text_width_box25">
+							<span class="user_text">Address</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.branchDto.address}"
+								class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}" />
+						</div>
+						</p:outputPanel>
+						<p:outputPanel rendered="true">
+						<div class="text_width_box25">
+							<span class="user_text">City</span>
+						</div>
+						<div class="text_width_box25_right">
+						<h:inputText value="#{merchentCreationBean.branchDto.city}"
+								class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}" />
+						</div>
+						</p:outputPanel>
+						
+						<p:outputPanel rendered="true">
+						<div class="text_width_box25">
+							<span class="user_text">Pin Code</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.branchDto.pincode}"
+								class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}" />
+						</div>
+						 </p:outputPanel>
+						 <p:outputPanel rendered="false">
+						<div class="text_width_box25">
+							<span class="user_text">Status</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:selectOneMenu 
+								 value="#{merchentCreationBean.branchDto.status}">
+							  
+							  <f:selectItem itemLabel="Active" itemValue="Active"></f:selectItem>
+							  <f:selectItem itemLabel="Blocked" itemValue="Blocked"></f:selectItem>
+							</h:selectOneMenu>
+						</div>
+						 </p:outputPanel>
+						
+						 
+						 
+						 
+					</div>
+					
+					<div class="contant_text_table_box50">
+					
+					
+					<p:outputPanel rendered="true">
+					<div class="text_width_box25">
+						<span class="user_text">Land Line</span>
+					</div>
+					<div class="text_width_box25_right">
+						<h:inputText value="#{merchentCreationBean.branchDto.landline}"
+							class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}" />
+					</div>
+					</p:outputPanel>
+					<p:outputPanel rendered="true">
+						<div class="text_width_box25">
+							<span class="user_text">Mobile</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.branchDto.mobile}"
+								class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}" />
+						</div>
+					</p:outputPanel>
+					<p:outputPanel rendered="false">
+						<div class="text_width_box25">
+							<span class="user_text">Web Site</span>
+						</div>
+						<div class="text_width_box25_right">
+							<p:fileUpload  value="#{merchentCreationBean.uploadfile}" mode="simple"/>
+						</div>
+					</p:outputPanel>
+	                    <p:outputPanel rendered="true">				
+						<div class="text_width_box25">
+							<span class="user_text">Website URL</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.branchDto.url}"
+								class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}" />
+						</div>
+					</p:outputPanel>
+					
+                        <p:outputPanel rendered="true">
+                        <div class="text_width_box25">
+							<span class="user_text">Lattitude</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.branchDto.lattitue}"
+								class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}"/>
+						</div>
+						</p:outputPanel>
+						 
+						 <div class="text_width_box25">
+							<span class="user_text">Longitude</span>
+						</div>
+						<div class="text_width_box25_right">
+							 <h:inputText value="#{merchentCreationBean.branchDto.longitude}"
+								class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}"/>      
+						</div>
+						
+						<p:outputPanel rendered="true">
+                        <div class="text_width_box25">
+							<span class="user_text">Merchant Categoy</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:selectOneMenu  class="text_box" value="#{merchentCreationBean.branchDto.category}" converter="gec">
+	                          
+				              <f:selectItems value="#{merchentCreationBean.categoryList}" var="it" itemValue="#{it}" itemLabel="#{it.name}"/>	                   
+	                      </h:selectOneMenu>    
+						</div>
+                     </p:outputPanel>
+                     <div class="text_width_box25">
+						<span class="user_text">Cusine</span>
+					</div>
+					<div class="text_width_box25_right">
+					<!-- <h:selectOneMenu  class="text_box" value="#{merchentCreationBean.branchDto.category}" converter="gec">
+	                          
+				              <f:selectItems value="#{merchentCreationBean.categoryList}" var="it" itemValue="#{it}" itemLabel="#{it.name}"/>	                   
+	                      </h:selectOneMenu>  -->
+					 <p:selectCheckboxMenu styleclass="text_box" label="Cosine"  value="#{merchentCreationBean.byCusines}" converter="gec">
+										<f:selectItems value="#{merchentCreationBean.cusineList}" var="it" itemValue="#{it}" itemLabel="#{it.name}"  />
+											
+										</p:selectCheckboxMenu> 
+					</div>
+						
+                      </div>
+					
+					  
+					<!-- <a href="#">Register</a> -->
+					
+				
+					
+					<div id="container">
+                    <div  id="contant_table_box">
+                    <h:commandLink value="Add" action="#{merchentCreationBean.confirmoperateTime}"
+						></h:commandLink>
+					 <p:dataTable value="#{merchentCreationBean.branchDto.timeSlots}" rowKey="#{it.id}" var="it" widgetVar="roletable" paginator="true" paginatorPosition="bottom" rows="20"  rowIndexVar="idx"
+								currentPageReportTemplate="{currentPage} / {totalPages}" selection="#{merchentCreationBean.selectedoperatetime}"
+								paginatorTemplate=" {PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="20,50,100,500,1000"  styleClass="reference">
+							
+								<p:column headerText="#">
+								 <h:outputText value="#{idx+1}"/>
+								</p:column>
+								<p:column headerText="Start Hour">
+								 <h:outputText value="#{it.startHour}"/>
+								</p:column>
+								<p:column headerText="End Hour">
+								  <h:outputText value="#{it.endHour}"/>
+								</p:column>
+								<p:column headerText="Start Minute">
+								 <h:outputText value="#{it.startMinute}"/>
+								</p:column>
+								<p:column headerText="End Minute">
+								  <h:outputText value="#{it.endMinute}"/>
+								</p:column>
+							     <p:column headerText="Sel." selectionMode="single"/>
+							</p:dataTable>
+							</div>
+							</div> 
+					
+					
+						<!-- <h:selectOneMenu value="#{userCreationBean.userdto.userType}">
+							<f:selectItem itemLabel="ADMIN" itemValue="ADMIN" />
+							<f:selectItem itemLabel="MERCHENT" itemValue="MERCHENT" />
+							<f:selectItem itemLabel="USER" itemValue="USER" />
+						</h:selectOneMenu> -->
+				
+					
+						<!-- <div class="text_width_box25">
+							<span class="user_text">Status</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:selectOneMenu value="#{userCreationBean.userdto.status}">
+								<f:selectItem itemLabel="ACTIVE" itemValue="ACTIVE" />
+								<f:selectItem itemLabel="INACTIVE" itemValue="INACTIVE" />
+							</h:selectOneMenu>
+						</div> -->
+				
+
+
+				</div>
+
+
+                <div class="register_button">
+					<!-- <a href="#">Register</a> -->
+					<h:commandLink value="Submit" 
+						action="#{merchentCreationBean.submitBranch}"></h:commandLink>
+				</div>
+                 <div class="register_button">
+					<!-- <a href="#">Register</a> -->
+					<h:commandLink value="Cancel" 
+						action="#{merchentCreationBean.showList}"></h:commandLink>
+				</div>
+			</div>
+	
+<!-- <table class="reference">
+  <thead>
+    <tr>
+    <th>#</th>
+      <th>Restaurant Name<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Customer Code<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>State<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Mobile No.<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Email Id<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Status<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Created Date<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Sel.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <td>1</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+      <td>2</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+      <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>3</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>4</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    					
+    <tr>
+    <td>5</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>6</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>7</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>8</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>9</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+  </tbody>
+</table> -->
+
+</div>
+
+ <!-- <div id="pagination_box">
+  <div id="pagination_box1">
+  <div class="pages_box">
+  <div class="left_arrow"><a href="#"><img src="#{request.contextPath}/images/arow-right1.png" border="0" /></a></div>
+  <div class="left_arrow1"><a href="#"><img src="#{request.contextPath}/images/arrow-right.png" border="0" /></a></div>
+  <div class="page1">
+  <a href="#" class="active">1</a>
+   <a href="#">2</a>
+    <a href="#">3</a>
+     <a href="#">4</a>
+      <a href="#">5</a>
+  </div>
+  <div class="right_arrow"><a href="#"><img  src="#{request.contextPath}/images/arrow-right02.png" border="0" /></a></div>
+  <div class="right_arrow1"><a href="#"><img src="#{request.contextPath}/images/arow-right01.png" border="0" /></a></div>
+  </div>
+  </div>
+ 
+ </div> -->
+
+</div>
+</h:form>
+<p:dialog header="Time Slots" draggable="false" modal="true"
+			closable="false" width="390" widgetVar="TimeConfirm"
+			showEffect="slide" hideEffect="slide" closeOnEscape="true"
+			resizable="false">
+			<h:form id="DLGG">
+				
+					<script type="text/javascript">
+				function handleResponse(xhr, status, args) {
+					if (args.validation) {
+						PF('TimeConfirm').hide();
+					} else
+						jQuery('#FORGOTDLG').effect("shake", {
+							times : 3
+						}, 50);
+				}
+			</script>
+<div class="contant_text_table_box50">
+                   <div class="text_width_box25"><span class="user_text">Start Hour</span></div>
+ <div class="text_width_box25_right"><h:inputText  value="#{merchentCreationBean.startHour}" class="text_box" /></div> 
+                   
+                   <div class="text_width_box25"><span class="user_text">Start Minute</span></div>
+                   <div class="text_width_box25_right"><h:inputText  value="#{merchentCreationBean.startMin}" class="text_box" /></div>
+                   
+                   <div class="text_width_box25"><span class="user_text">End Hour</span></div>
+                   <div class="text_width_box25_right"><h:inputText  value="#{merchentCreationBean.endHour}" class="text_box" /></div>
+                   
+                   <div class="text_width_box25"><span class="user_text">End Minute</span></div>
+                   <div class="text_width_box25_right"><h:inputText  value="#{merchentCreationBean.endMin}" class="text_box" /></div>
+                   
+                   
+                   <div class="text_width_box25"><p:commandButton action="#{merchentCreationBean.submittime}"  value="Submit" oncomplete="handleResponse(xhr, status, args)"  update=":frm1:gwl1,:frm1"/></div>
+                   <div class="text_width_box25_right"><p:commandButton value="Cancel" 
+						oncomplete="PF('TimeConfirm').hide()" /></div>
+                   </div>
+                   
+
+			</h:form>
+		</p:dialog>
+<div id="footer">
+<div id="container">
+<div class="footer_text_box">
+<div class="footer_text"><span class="policy"><a href="#">Privacy Policy</a></span> |<span class="policy"><a href="#">Terms of Service</a></span> | © 2014 Hungry Bells. All Rights Reserved.</div>
+</div>
+</div>
+</div>
+
+
+
+</f:view>
+</h:body>
+</html>

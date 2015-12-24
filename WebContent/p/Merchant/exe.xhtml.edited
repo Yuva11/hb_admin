@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+	template="/p/layout.xhtml">
+	<ui:define name="action_header">
+		<script>
+			function showSettingDlg(xhr, status, args) {
+				if (args.validate)
+					PRODUCTSETTDLG.show();
+				else
+					$("#PDTMSG").show();
+			}
+		</script>
+
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form  id="form1" prependId="false">
+			<p:growl id="PDTMSG" rendered="false"/>
+			
+     <div id="main_container">
+     <div id="container">
+     <div id="contant_table_box1">
+     
+     
+<<<<<<< .mine
+     <div id="container">
+<div  class="contant_table_box">
+
+
+	
+
+		<div id="container">
+=======
+ 
+>>>>>>> .r649
+			<!-- <div class="admin_account_bg">
+				<h2>Merchant Creation</h2>
+			</div> -->
+			
+			 <p:tabView  id="BasicInfo" activeIndex="#{merchentCreationBean.activeIndex}" cache="true" >
+		      <p:tab title="Personal" id="Personal" >
+		       		<ui:include src="basicinfo.xhtml"/>
+	          </p:tab>
+	      
+	           <p:tab title="Contact" id="Contact" rendered="#{merchentCreationBean.activeIndex eq 1}">
+		       		<ui:include src="contact.xhtml"/>
+	          </p:tab>
+	          
+	           <p:tab title="Bank" id="bank" rendered="#{merchentCreationBean.activeIndex eq 1}">
+		       		<ui:include src="bank.xhtml"/>
+	          </p:tab>
+	      
+	          </p:tabView>
+<<<<<<< .mine
+			
+			
+			<div class="save_box">
+			 
+			 <div class="cancel_button">
+				
+					<h:commandLink  value="Submit"  validateClient="true"  
+						action="#{merchentCreationBean.submit}" ></h:commandLink>
+		
+                 
+					
+					<h:commandLink  value="Cancel" 
+						action="#{merchentCreationBean.showList}" immediate="true"></h:commandLink>
+				</div>
+			
+					</div>
+						
+					
+					
+
+
+				</div>
+
+
+=======
+		      </div></div></div>
+>>>>>>> .r649
+               
+
+
+
+		</h:form>
+
+<p:dialog header="Logout Confirmation" draggable="false" modal="true"
+			closable="false" width="390" widgetVar="LogoutConfirm"
+			showEffect="slide" hideEffect="slide" closeOnEscape="true"
+			resizable="false">
+			<h:form id="DLGG">
+				
+				<h:outputText value="Do you want to Logout ?"  />
+			
+				
+				
+				<p:spacer width="5px" />
+				<input type="button" value="Logout" onClick="javascript:location.href = '#{request.contextPath}/j_spring_security_logout';" />
+				<p:commandButton value="No" oncomplete="PF('LogoutConfirm').hide()" />
+			</h:form>
+		</p:dialog>
+		<p:dialog header="Confirm Delete" draggable="false" modal="true"
+					closable="true" width="350" widgetVar="ConformDelete"
+					showEffect="slide" hideEffect="slide" closeOnEscape="true"
+					resizable="false">
+	        <h:form>
+	              	
+			<div class="ft-spacer-1"/>
+			<div class="ft-spacer-1" />
+			<center>
+				 <h:outputText value="Do you want to delete this Role?"/>
+			</center>
+			<div class="ft-spacer-1" />
+			<div class="ft-spacer-1" />
+			
+				<div class="ft-dialog-footer">
+					<div class="ft-dialog-footer-btn">
+					          <p:commandButton ajax="false" styleClass="bt-yes" value="Yes" action="#{roleCreationBean.deleteRole}">
+					          </p:commandButton>
+					          <p:spacer width="5px" />
+						       <p:commandButton value="No" styleClass="bt-no" oncomplete="PF('ConformDelete').hide()"/>
+					</div>
+				</div>
+
+			       </h:form>
+  		      </p:dialog>
+		
+	
+
+	</ui:define>
+</ui:composition>

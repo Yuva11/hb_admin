@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/p/layout.xhtml">
+	<ui:define name="action_header">
+		<script>
+			function showSettingDlg(xhr, status, args) {
+				if (args.validate)
+					PRODUCTSETTDLG.show();
+				else
+					$("#PDTMSG").show();
+			}
+		</script>  
+	</ui:define>
+	<ui:define name="content">
+
+		
+			<div id="main_container"> 
+				<div id="container"> 
+					<div class="contant_table_box"> 
+						<div class="error_box"> 
+						<span class="star">	<p:messages globalOnly="true"/></span>
+						</div>
+						<div id="container"> 
+							<p:tabView id="BasicInfo" activeIndex="#{groupEntityBean.activeIndex}" cache="true">
+								<p:tab title="Group Entity" id="Personal">
+										<ui:include src="groupinfo.xhtml" rendered="true"/> 
+								</p:tab>
+								<!-- disabled="#{groupEntityBean.actionLbl eq 'ADD' and groupEntityBean.activeIndex lt 1}" -->
+                                <p:tab title="Brands" id="Brand"  rendered="true" disabled="#{groupEntityBean.action eq 'ADD'}"> 
+										<ui:include src="brand.xhtml"  rendered="true"/> 
+								</p:tab>
+								<p:tab title="Bank" id="Bank"  rendered="true" disabled="#{groupEntityBean.bankAction ne 'ADD'}"> 
+										<ui:include src="bank.xhtml"  rendered="true"/> 
+								</p:tab>
+                                 <p:tab title="Outlets" id="BranchID" rendered="true"  disabled="#{groupEntityBean.branchAction ne 'ADD' and groupEntityBean.branchAction ne 'EDIT'}"> 
+										<ui:include src="branch.xhtml"  rendered="true"/> 
+								</p:tab>
+								<p:tab title="Users" id="groupUserTab" rendered="true" disabled="#{groupEntityBean.action eq 'ADD'}">
+										<ui:include src="groupuser.xhtml" rendered="true"/>
+								</p:tab>
+							</p:tabView>   
+						</div> 
+					</div> 
+				</div> 
+			</div>  
+ 
+	</ui:define>
+</ui:composition>

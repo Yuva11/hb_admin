@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/p/layout.xhtml">
+	<ui:define name="action_header">
+		<script>
+			function showSettingDlg(xhr, status, args) {
+				if (args.validate)
+					PRODUCTSETTDLG.show();
+				else
+					$("#PDTMSG").show();
+			}
+		</script>
+
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="form1" prependId="false">
+			<p:growl id="PDTMSG" /> 
+			<div id="main_container">
+				<div class="head_bottom_listbg">
+					<div id="container"> 
+						<div class="head_list_box">
+							<h3>Masters</h3>
+						</div>
+						<div class="head_list_box1">
+							<div class="left_arrow_smal"></div>
+							<h3>
+								<span>Mobile Management</span>
+							</h3>
+						</div> 
+						<div class="menu_list_button_box">
+							<p:outputPanel rendered="true">
+								<div class="button_list"> 
+									<h:commandLink id="btnadd" rendered="#{((userCreationBean.url ne userCreationBean.userName) and (userCreationBean.userFeatures['Add Version']))}"
+										action="#{mobileBean.showForm}">
+										<i class="fa fa-plus"></i>
+										<f:setPropertyActionListener target="#{mobileBean.action}" value="ADD" />
+									</h:commandLink>
+									<p:tooltip for="btnadd" value="Add" showEffect="fade" hideEffect="fade" /> 
+								</div>
+							</p:outputPanel>
+						</div> 
+					</div>
+				</div>
+ 
+				<div class="contant_main"> 
+					<div class="contant_box"> 
+						<div class="dropdons_box">  </div>
+ 
+						<div class="contant_table_box"> 
+							<p:dataTable value="#{mobileBean.versionDataList}"  var="it" paginator="true"
+								paginatorPosition="bottom" rows="20" rowIndexVar="idx"
+								currentPageReportTemplate="{currentPage} / {totalPages}" 
+								paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="20,50,100,500,1000" styleClass="reference">
+
+								<p:column headerText="#">
+									<h:outputText value="#{idx+1}" />
+								</p:column>
+								<p:column headerText="Version Name">
+									<h:outputText value="#{it.versionName}" />
+								</p:column> 
+								<p:column headerText="Version Code">
+									<h:outputText value="#{it.versionCode}" />
+								</p:column>
+								<p:column headerText="Upgrade Type">
+									<h:outputText value="#{it.upgrade eq 'true' ? 'Force Upgrade' : 'Recommended Upgrade' }" />
+								</p:column>
+								<p:column headerText="Apk URL">
+									<h:outputText value="#{it.apkURL}" />
+								</p:column>
+								<p:column headerText="Release Date">
+									<h:outputText value="#{it.releaseDate}" converter="CDC" />
+								</p:column>
+ 
+							</p:dataTable> 
+						</div> 
+					</div> 
+				</div> 
+				
+			</div> 
+		</h:form>
+ 
+		<p:dialog rendered="true" header="City Delete Confirmation"
+			draggable="false" modal="true" closable="true" width="390"
+			widgetVar="ConformDelete" showEffect="slide" hideEffect="slide"
+			closeOnEscape="true" resizable="false">
+			<h:form>
+
+				<h:outputText value="Do you want to delete the City?" />
+				<p:spacer width="5px" />
+
+
+
+				<p:commandButton ajax="false" value="Yes"
+					action="#{mobileBean.deleteCity}">
+				</p:commandButton>
+
+				<p:commandButton value="No" oncomplete="PF('ConformDelete').hide()" />
+
+			</h:form>
+		</p:dialog>
+
+
+
+	</ui:define>
+</ui:composition>

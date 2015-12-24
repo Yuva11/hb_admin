@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+<h:head>
+
+<script type="text/javascript">
+	var uname, password;
+	$(document).ready(function() {
+		$('#SubmitButton').click(function() {
+			uname = document.getElementById("username").value;
+			password = document.getElementById("password").value;
+			alert(uname);
+			testService();
+		});
+	});
+
+	function testService() {
+		alert("testService");
+		$.ajax({
+			type : "POST",
+			url : "http://localhost:8091/hbserviceV2/admin/postSignin/",
+			contentType : "application/json",
+			dataType : "JSON",
+			data : {
+				"j_username" : uname,
+				"j_password" : password,
+			},
+			success : function(msg) {
+				alert(msg.status);
+			},
+			error : function(msg) {
+				alert("Error :: "+JSON.stringify(msg));
+			}
+		});
+	}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Admin-Login</title>
+<link href="#{request.contextPath}/css/style.css" rel="stylesheet"
+	type="text/css" />
+<link href="#{request.contextPath}/css/theme.css" rel="stylesheet"
+		type="text/css" />
+<link href="#{request.contextPath}/css/font-awesome.css"
+	rel="stylesheet" type="text/css" />
+<style type="text/css">
+body {
+	background-image: url(images/bg.gif);
+	background-repeat: repeat;
+}
+</style>
+</h:head>
+<h:body>
+<f:phaseListener type="com.finateltechhbm.servlet.LoginErrorPhaseListener"></f:phaseListener>
+<f:view>
+<h:form id="frm">
+<p:growl id="gwl"/>
+</h:form> 
+	<div id="admmin_login_box">
+		<div class="login_bg">
+			<div class="login-logo-bg">
+				<div class="login_logo">
+					<img src="#{request.contextPath}/images/login_logo.png" border="0" />
+				</div>
+			</div>
+			<div class="right_login_bg">
+				<p>
+					<span class="login-admin_icon"><img
+						src="#{request.contextPath}/images/login-admin-icon.png"
+						border="0" /></span>
+					<h2>Admin Login</h2>
+				</p>
+				<div id="login">
+
+					<form name="loginForm" method="post"
+						action="http://localhost:8091/hbserviceV2/admin/postSignin">
+						<fieldset class="clearfix" style="border: none;">
+
+							<p>
+								<span class="fontawesome-user"><i
+									class="fa fa-user fa-2x" style="color: #666;"></i></span><input
+									type="text" name='username' placeholder="Email"/>
+							</p>
+							<!-- JS because of IE support; better: placeholder="Username" -->
+
+
+							<p>
+								<span class="fontawesome-lock"><i
+									class="fa fa-lock fa-2x" style="color: #666;"></i></span><input 
+									type="password" name='password' placeholder="Password"/>
+									
+							</p>
+							<!-- JS because of IE support; better: placeholder="Password" -->
+							<p>
+								<input name="submit" type="submit" value="Sign In" />
+								   
+							</p>
+
+						</fieldset>
+ 
+					</form>
+
+                   <p>
+					
+						<span class="sign-up"><p:commandLink action="#{loginBean.showDislog}" update=":dlgfrm:dlgpnl"
+								value="Forgot Password"  oncomplete="PF('ForgetDlg').show()" /></span>
+						<span class="fontawesome-arrow-right"></span>
+					</p>
+				 
+				
+				
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	
+
+	<p:dialog  header="Reset Password" draggable="false" modal="true"
+		style="border-radius:10px;" 
+		closable="true" width="600" widgetVar="ForgetDlg" showEffect="slide"
+		hideEffect="slide" closeOnEscape="true" resizable="false" 
+		id="FORGOTDLG">
+		<h:form id="dlgfrm">
+
+			<script type="text/javascript">
+				function handleResponse(xhr, status, args) {
+					if (args.validation) {
+						PF('ForgetDlg').hide();
+					} else
+						jQuery('#FORGOTDLG').effect("shake", {
+							times : 3
+						}, 50);
+				}
+			</script>
+                   
+                   	<div id="main_container1">
+
+						<div id="container">
+
+						
+								
+							
+									<p:outputPanel rendered="true" id="dlgpnl">
+										
+										<h:outputText value="Do you want to reset new password?"  />
+										<br/>
+										<br/>
+										<div class="text_width_box25">
+											<span class="user_text">Email Address</span>
+										</div>
+										<div class="text_width_box25_right">
+											<h:inputText  value="#{loginBean.email}" class="text_box" />
+											<span class="star">*</span>
+											
+			
+											
+											
+										</div>
+									</p:outputPanel>
+								
+							
+								
+									</div>
+						<div class="save_box">
+
+							<div class="cancel_button">
+
+								<p:commandButton  value="Submit" oncomplete="handleResponse(xhr, status, args)" action="#{loginBean.passwordReset}" update=":frm:gwl"/>
+							
+		                 		<p:commandButton value="Cancel" 
+						         oncomplete="PF('ForgetDlg').hide()" />
+							</div>
+
+						</div>			
+					</div>
+                   
+          </h:form>
+	</p:dialog>
+</f:view>
+</h:body>
+
+</html>

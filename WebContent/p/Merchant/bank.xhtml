@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+				
+				<div id="contant_table_box1">
+				<div class="contant_text_table_box50">
+					<div class="text_width_box25">
+						<span class="user_text">Bank Name</span>
+					</div>
+					<div class="text_width_box25_right">
+						<h:selectOneMenu id="bank1" value="#{merchentCreationBean.merchantdto.bank}" disabled="#{merchentCreationBean.action eq 'VIEW'}"  tabindex="1"  class="text_box"  converter="gec" required="true" requiredMessage="#{msg['validate.bank']}">        
+					               <f:selectItem itemLabel="Select" itemValue="#{null}"/> 
+					        	  <f:selectItems value="#{merchentCreationBean.bankList}" var="it" itemLabel="#{it.name}" itemValue="#{it}" />            
+					          </h:selectOneMenu>
+					          <h:outputText styleclass="text_box" rendered="false" value="#{merchentCreationBean.merchantdto.bank.name}"/><span class="star"><p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+					</div>
+					<div class="text_width_box25">
+						 
+					</div>
+					<div class="text_width_box25_right_error">
+						<p:message for="bank1"/>
+					</div>
+					 <p:outputPanel rendered="true">
+						<div class="text_width_box25">
+							<span class="user_text">Merchant Bank IFSC</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText id="bankifsc" value="#{merchentCreationBean.merchantdto.bankIFSC}" disabled="#{merchentCreationBean.action eq 'VIEW'}" tabindex="3" class="text_box" required="true" requiredMessage="#{msg['validate.ifsccode']}" 
+								   maxlength="11" />
+								  <h:outputText styleclass="text_box" rendered="false" value="#{merchentCreationBean.merchantdto.bankIFSC}"/><span class="star"><p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+						</div>
+						</p:outputPanel>
+						
+						<div class="text_width_box25">
+						 
+					</div>
+					<div class="text_width_box25_right_error">
+						<p:message for="bankifsc"/>
+					</div>
+					
+					</div>
+					<div class="contant_text_table_box50">
+					
+					<p:outputPanel rendered="true">
+						<div class="text_width_box25">
+							<span class="user_text">Bank Branch</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText id="branch" value="#{merchentCreationBean.merchantdto.bankBranch}"  tabindex="2" class="text_box" required="true" requiredMessage="#{msg['validate.bankbranch']}" 
+								  disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="75">
+								  <f:validateLength minimum="4" maximum="75" />
+                                   <f:validateRegex pattern="#{val['pattern.brandname']}"></f:validateRegex>
+								  </h:inputText><h:outputText styleclass="text_box" rendered="false" value="#{merchentCreationBean.merchantdto.bankBranch}"/><span class="star"><p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+                             <p:watermark for="branch" value="Bank Branch"/>								  
+						</div>
+					</p:outputPanel>
+						<div class="text_width_box25">
+							
+						</div>
+					    	<div class="text_width_box25_right_error">
+							 <p:message for="branch"/>
+						</div>
+					    <p:outputPanel rendered="true">
+						<div class="text_width_box25">
+							<span class="user_text">Bank AccNO</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.merchantdto.bankAccno}" tabindex="4" class="text_box" 
+								  disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="20" />
+						</div>
+						</p:outputPanel>
+					    
+					    <p:outputPanel rendered="false">
+						<div class="text_width_box25">
+							<span class="user_text">HO Pincode*</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.merchantdto.pincode}" class="text_box"   
+								  disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="6"/>
+						</div>
+						</p:outputPanel>
+					    
+					    <p:outputPanel rendered="false">
+						<div class="text_width_box25">
+							<span class="user_text">Mobile Number</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.merchantdto.mobileNumber}" class="text_box" 
+								  disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="10"/>
+						</div>
+						</p:outputPanel>
+					     <p:outputPanel rendered="false">
+						<div class="text_width_box25">
+							<span class="user_text">Telephone Number</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.merchantdto.telephoneNumber}" class="text_box"   
+								  disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="10"/>
+						</div>
+						</p:outputPanel>
+					    
+					    <p:outputPanel rendered="false">
+						<div class="text_width_box25">
+							<span class="user_text">Email Address*</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.merchantdto.emailAddress}" class="text_box"  
+								  disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="255"/>
+						</div>
+						</p:outputPanel>
+					    
+					    <p:outputPanel rendered="false">
+						<div class="text_width_box25">
+							<span class="user_text">Website URL</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.merchantdto.websiteUrl}" class="text_box"   
+								  disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="255"/>
+						</div>
+						</p:outputPanel>
+					    
+					    <p:outputPanel rendered="false">
+                        <div class="text_width_box25">
+							<span class="user_text">Merchant Location</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.merchantdto.merchantLocation}"
+								class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="45"/>
+						</div>
+                        </p:outputPanel>
+                        
+                        <p:outputPanel rendered="false">
+						 <div class="text_width_box25">
+							<span class="user_text">Merchant Pin Code*</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.merchantdto.pincode}"
+								class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="6" onkeypress="return keyRestricted(event)"/>
+						</div>
+						</p:outputPanel>
+						<p:outputPanel rendered="false">
+						 <div class="text_width_box25">
+							<span class="user_text">Mobile Number</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.merchantdto.mobileNumber}"
+								class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="10" onkeypress="return keyRestricted(event)"/>
+						</div>
+						</p:outputPanel>
+						<p:outputPanel rendered="false">
+						<div class="text_width_box25">
+							<span class="user_text">Merchant City*</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:selectOneMenu  value="#{merchentCreationBean.merchantdto.citydto}" converter="gec">        
+					              <f:selectItem itemLabel="Select" itemValue="#{null}"/>
+					        	  <f:selectItems value="#{merchentCreationBean.cityList}" var="it" itemLabel="#{it.name}" itemValue="#{it}" />             
+					          </h:selectOneMenu>
+						</div>
+						</p:outputPanel>
+						
+						<p:outputPanel rendered="false">
+						<div class="text_width_box25">
+							<span class="user_text">Merchant Category*</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:selectOneMenu  value="#{merchentCreationBean.merchantdto.categoryDto}" converter="gec">        
+					              <f:selectItem itemLabel="Select" itemValue="#{null}"/>
+					        	               
+					          </h:selectOneMenu>
+						</div>
+						 </p:outputPanel>
+						
+						
+						
+						
+						
+						
+                      </div>
+                      </div>
+					
+				
+				
+	
+	
+	
+	</ui:composition>

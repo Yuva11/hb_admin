@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/p/layout.xhtml">
+	<ui:define name="action_header">
+		<script>
+			function showSettingDlg(xhr, status, args) {
+				if (args.validate)
+					PRODUCTSETTDLG.show();
+				else
+					$("#PDTMSG").show();
+			}
+		</script>
+		
+		<script type="text/javascript">
+    var currentMarker = null;
+ 
+    function handlePointClick(event) {
+        if(currentMarker === null) {
+            document.getElementById('lat').value = event.latLng.lat();
+            document.getElementById('langi').value = event.latLng.lng();
+            alert("hai");
+            currentMarker = new google.maps.Marker({
+                position:new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())
+            });
+ 
+            PF('map').addOverlay(currentMarker);
+ 
+           
+        }  
+    }
+    </script>
+		
+
+		<script type="text/javascript">
+			function keyRestrict(evt) {
+				var theEvent = evt || window.event;
+				var key = theEvent.keyCode || theEvent.which;
+
+				var keychar = String.fromCharCode(key);
+				var keycheck = /[0-9]|\./;
+
+				if (!(key == 8 || key == 27 || key == 46 || key == 9)) // backspace delete  escape arrows
+				{
+					if (keycheck.test(keychar)) {
+						theEvent.returnValue = false;//for IE
+						if (theEvent.preventDefault)
+							theEvent.preventDefault();//Firefox
+
+					}
+				}
+			}
+		</script>
+
+
+
+
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form id="form1" enctype="multipart/form-data" prependId="false">
+
+           <p:growl globalOnly="true" id="gwl1" rendered="true"/>
+
+			<div id="main_container">
+
+
+				<div id="container">
+
+					<div class="contant_table_box">
+
+						<div class="error_box">
+							<!-- <p:messages rendered="#{merchentCreationBean.flag}" /> -->
+						<span class="star">	<p:messages globalOnly="true"/></span>
+						</div>
+						<div id="container">
+							<!-- <div class="admin_account_bg">
+				<h2>Merchant Creation</h2>
+			</div> -->
+
+							<p:tabView id="BasicInfo"
+								activeIndex="#{merchentCreationBean.activeIndex}" cache="true">
+								<p:tab title="General" id="Personal">
+									<ui:include src="basicinfo.xhtml" />
+								</p:tab>
+                                
+                                <p:tab title="Contact" id="Contact"
+									rendered="#{merchentCreationBean.actionLbl ne 'ADD' or merchentCreationBean.activeIndex gt 1 or merchentCreationBean.activeIndex eq 1}">
+									<ui:include src="contact.xhtml" />
+								</p:tab>
+
+								<p:tab title="Bank" id="bank"
+									rendered="#{merchentCreationBean.actionLbl ne 'ADD' or merchentCreationBean.activeIndex gt 2 or merchentCreationBean.activeIndex eq 2}">
+									<ui:include src="bank.xhtml" />
+								</p:tab>
+								
+								 <p:tab title="Logo" id="Logo" rendered="#{merchentCreationBean.actionLbl ne 'ADD' or merchentCreationBean.activeIndex gt 3 or merchentCreationBean.activeIndex eq 3}">
+									<ui:include src="Logo.xhtml" />
+								</p:tab>
+                                
+								
+								<p:tab title="Branchs(#{merchentCreationBean.branchSize})" id="mbranch"
+									rendered="#{merchentCreationBean.actionLbl ne 'ADD' or merchentCreationBean.activeIndex gt 4 or merchentCreationBean.activeIndex eq 4}">
+									<ui:include src="branch.xhtml" />
+								</p:tab>
+
+							</p:tabView>
+
+
+							<div class="save_box">
+
+								<div class="cancel_button">
+
+									<h:commandLink value="Submit" tabindex="12" rendered="#{merchentCreationBean.action ne 'VIEW'}" validateClient="true"
+										action="#{merchentCreationBean.submit}"></h:commandLink>
+
+                                    <h:commandLink value="SubmitBranch" validateClient="true" rendered="false"
+										action="#{merchentCreationBean.submitMerchantBranch}"></h:commandLink>
+                                    
+
+									<h:commandLink value="Cancel" tabindex="13"
+										action="#{merchentCreationBean.showList}" immediate="true"></h:commandLink>
+								</div>
+
+							</div>
+
+
+
+
+
+						</div>
+
+
+
+					</div>
+
+
+
+				</div>
+
+
+
+
+
+			</div>
+
+
+		</h:form>
+
+
+
+		<p:dialog  rendered="true" header="#{merchentCreationBean.branchAction eq 'ADD'?'Add':'Edit'} Merchant Branch"
+			draggable="false" modal="true" closable="true" width="1250" height="500"
+			widgetVar="MerchentBranch" id="branch" showEffect="slide"
+			hideEffect="slide" closeOnEscape="true" resizable="false">
+			<h:form id="dlgfrm">
+
+				
+				<script type="text/javascript">
+					function keyRestricted(evt) {
+						var theEvent = evt || window.event;
+						var key = theEvent.keyCode || theEvent.which;
+
+						var keychar = String.fromCharCode(key);
+						var keycheck = /[0-9]|\./;
+
+						if (!(key == 8 || key == 27 || key == 46 || key == 9)) // backspace delete  escape arrows
+						{
+							if (!keycheck.test(keychar)) {
+								theEvent.returnValue = false;//for IE
+								if (theEvent.preventDefault)
+									theEvent.preventDefault();//Firefox
+
+							}
+						}
+					}
+				</script>
+                <script type="text/javascript">
+					function handleResponse(xhr, status, args) {
+						if (args.validation) {
+							
+							PF('MerchentBranch').hide();
+						} else
+							jQuery('#branch').effect("shake", {
+								times : 3
+							}, 50);
+					}
+				</script>
+
+				<p:outputPanel id="dlgpnl">
+
+					<div id="main_container1">
+
+						<div id="container">
+
+							<div class="contant_table_box1">
+								<div class="contant_text_table_box50">
+									<p:outputPanel rendered="true">
+										<div class="text_width_box25">
+											<span class="user_text">Merchant Brand Name</span>
+										</div>
+										<div class="text_width_box25_right">
+											<h:inputText class="text_box" disabled="true"
+												value="#{merchentCreationBean.merchantdto.name}" />
+											 
+										</div>
+									</p:outputPanel>
+										
+												<p:outputPanel rendered="true">
+										<div class="text_width_box25">
+											<span class="user_text">Branch Name</span>
+										</div>
+										<div class="text_width_box25_right">
+											<h:inputText id="branchname"
+												value="#{merchentCreationBean.branchdto.branchName}"
+												class="text_box"
+												
+												maxlength="50" tabindex="1" required="true"
+												requiredMessage="#{msg['validate.branch']}" />
+												
+											 <span class="star">*</span>
+											 <p:watermark for="branchname" value="1 to 50 characters"/>
+										</div>
+									</p:outputPanel>
+									<div class="text_width_box25"></div>
+									<div class="text_width_box25_right_errorbox">
+										<p:message id="mbranch" for="branchname" />
+									</div>
+										
+										
+										
+										
+									<p:outputPanel rendered="true">
+										<div class="text_width_box25">
+											<span class="user_text">Merchant Branch Address</span>
+										</div>
+										<div class="text_width_box25_right">
+											<h:inputTextarea id="badd"
+												value="#{merchentCreationBean.branchdto.address}"
+												required="true"
+												requiredMessage="Branch Address should entered 1 and 150 characters"
+												tabindex="2" class="text_box"
+												
+												maxlength="150">
+												<f:validateLength minimum="4" maximum="150" />
+											</h:inputTextarea>
+											<p:watermark for="badd" value="4 to 150 characters"/>
+											 <span class="star">*</span>
+										</div>
+									</p:outputPanel>
+									<div class="text_width_box25"></div>
+									<div class="text_width_box25_right_errorbox">
+										<p:message id="maddress" for="badd" />
+									</div>
+
+
+									<p:outputPanel rendered="true">
+										<div class="text_width_box25">
+											<span class="user_text">Merchant City</span>
+										</div>
+										<div class="text_width_box25_right">
+											<h:selectOneMenu id="city"
+												
+												value="#{merchentCreationBean.branchdto.city}"
+												converter="gec" class="drodown_box" required="true"
+												requiredMessage="Merchant City choose from merchant city name drop down"
+												tabindex="3">
+
+												<f:selectItem itemLabel="Select" itemValue="#{null}" />
+												<f:selectItems value="#{merchentCreationBean.cityList}"
+													var="it" itemLabel="#{it.name}" itemValue="#{it}" />
+											<p:ajax event="change" process="@this"
+									listener="#{merchentCreationBean.UpdateLocation}" update="mlocation1" />
+													
+											</h:selectOneMenu>
+											 <span class="star">*</span>
+										</div>
+									</p:outputPanel>
+
+
+
+
+									<div class="text_width_box25"></div>
+									<div class="text_width_box25_right_errorbox">
+										<p:message id="mcity" for="city" />
+									</div>
+									
+										<p:outputPanel rendered="true" id="mlocation1">
+										<div class="text_width_box25">
+											<span class="user_text">Merchant Location</span>
+										</div>
+										<div class="text_width_box25_right">
+											
+											
+											<h:selectOneMenu id="location"
+												
+												value="#{merchentCreationBean.branchdto.location}"
+												converter="gec" class="drodown_box" required="true"
+												requiredMessage="Merchant location choose from merchant location  drop down"
+												tabindex="4">
+
+												<f:selectItem itemLabel="Select" itemValue="#{null}" />
+												<f:selectItems value="#{merchentCreationBean.locationList}"
+													var="it" itemLabel="#{it.name}" itemValue="#{it}" />
+													<p:ajax event="change" process="@this"
+									listener="#{merchentCreationBean.UpdateMap}" update="mappnl latpnl longpanl" />
+											</h:selectOneMenu>
+											
+											<!-- <h:inputText id="locate"
+												value="#{merchentCreationBean.branchdto.location}"
+												class="text_box"
+												
+												maxlength="50" tabindex="4" required="true"
+												requiredMessage="#{msg['validate.location']}" /> -->
+											 <span class="star">*</span>
+											 <!-- <p:watermark for="locate" value="1 to 50 characters"/> -->
+										</div>
+									</p:outputPanel>
+									
+										<div class="text_width_box25"></div>
+									<div class="text_width_box25_right_errorbox">
+										<p:message id="mlocation" for="location" />
+									</div>
+									
+									
+									<p:outputPanel rendered="true">
+										<div class="text_width_box25">
+											<span class="user_text">Merchant Pincode</span>
+										</div>
+										<div class="text_width_box25_right">
+											<h:inputText id="pincode"
+												value="#{merchentCreationBean.branchdto.pincode}"
+												onkeypress="return keyRestricted(event)" class="text_box"
+												
+												maxlength="6" tabindex="6" required="true"
+												requiredMessage="#{msg['validate.pincode']}"  validatorMessage="#{msg['validate.pincode']}">
+												 <f:validateLength minimum="5" maximum="75" />
+												</h:inputText>
+												
+											 <span class="star">*</span>
+											 <p:watermark for="pincode" value="1 to 6 digits"/>
+										</div>
+									</p:outputPanel>
+									<div class="text_width_box25"></div>
+									<div class="text_width_box25_right_errorbox">
+										<p:message id="mpincode" for="pincode" />
+									</div>
+									
+									
+									
+									
+									
+									
+									
+									<p:outputPanel rendered="true" id="stime">
+										<div class="text_width_box25">
+											<span class="user_text">Start time</span>
+										</div>
+										<div class="text_width_box125_right">
+											<p:calendar   value="#{merchentCreationBean.starttime}"
+												 tabindex="6" pattern="hh:mm a" timeOnly="true"
+												  />
+										</div>
+									</p:outputPanel>
+									
+									<p:outputPanel rendered="true">
+										<div class="text_width_box25">
+											<span class="user_text">End Time</span>
+										</div>
+										<div class="text_width_box125_right">
+											<p:calendar value="#{merchentCreationBean.endtime}" id="etime"
+												 tabindex="7" pattern="hh:mm a" timeOnly="true"
+												 />
+										</div>
+									</p:outputPanel>
+									
+									<p:outputPanel id="latpnl" rendered="true">
+										<div class="text_width_box25">
+											<span class="user_text">Latitude</span>
+										</div>
+										<div class="text_width_box25_right">
+											<h:inputText id="lat" maxlength="20"
+												value="#{merchentCreationBean.branchdto.lattitue}"
+												onkeypress="return keyRestricted(event)" class="text_box"
+												
+												tabindex="8">
+											</h:inputText>
+											<p:watermark for="lat" value="Latitude"/>
+
+											<!-- <p:calendar value="#{merchentBranchCreationBean.starttime}" navigator="true" tabindex="7"
+				          	pattern="hh:mm a" readonlyInput="true" 
+					        showOn="button"/> -->
+										</div>
+									</p:outputPanel>
+										<p:outputPanel rendered="true" id="longpanl">
+										<div class="text_width_box25">
+											<span class="user_text">Longitude</span>
+										</div>
+										<div class="text_width_box25_right">
+											<h:inputText id="langi"
+												value="#{merchentCreationBean.branchdto.longitude}" maxlength="20"
+												onkeypress="return keyRestricted(event)" class="text_box"
+												
+												tabindex="9">
+											</h:inputText>
+											<p:watermark for="langi" value="Longitude"/>
+										</div>
+									</p:outputPanel>
+									
+									
+									
+									
+									<p:outputPanel rendered="true">
+										<div class="text_width_box25">
+											<span class="user_text">Status</span>
+										</div>
+										<div class="text_width_box25_right">
+											<h:selectOneMenu id="status"
+												
+												value="#{merchentCreationBean.branchdto.status}"
+												class="text_box" required="true"
+												requiredMessage="Merchant Status choose from merchant status drop down"
+												tabindex="10">
+												<f:selectItem itemLabel="ACTIVE" itemValue="ACTIVE" />
+												<f:selectItem itemLabel="BLOCKED" itemValue="BLOCKED" />
+
+											</h:selectOneMenu>
+										 <span class="star">*</span>
+
+											<!-- <p:calendar value="#{merchentBranchCreationBean.starttime}" navigator="true" tabindex="7"
+				          	pattern="hh:mm a" readonlyInput="true" 
+					        showOn="button"/> -->
+										</div>
+									</p:outputPanel>
+
+									<div class="text_width_box25"></div>
+									<div class="text_width_box25_right_errorbox">
+										<p:message id="mstatus" for="status" />
+									</div>
+							
+								
+					</div>
+								<div class="map_text_table_box50">
+							
+                               <p:outputPanel id="mappnl">
+
+									<p:gmap id="gmap" zoom="15" model="#{merchentCreationBean.emptyModel}" center="#{merchentCreationBean.branchdto.lattitue},#{merchentCreationBean.branchdto.longitude}"  type="ROADMAP" style="width:537px;height:500px" widgetVar="map" >
+       <!--  <p:ajax event="stateChange" listener="#{eventView.onStateChange}" update="messages" /> -->
+        <p:ajax event="markerDrag" process="@this branchname badd city location pincode stime etime"  listener="#{merchentCreationBean.onMarkerDrag}" update=":dlgfrm:dlgpnl" /> 
+    </p:gmap>
+  <!-- dlgfrm:longpanl dlgfrm:latpnl -->
+						</p:outputPanel>			
+									
+									
+									
+									
+									
+									<!-- <div class="text_width_box25"></div>
+									<div class="text_width_box25_right_errorbox">
+										<p:message id="mlocate" for="locate" />
+									</div>
+ -->
+
+								
+									
+									
+									
+									
+									
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="save_box">
+
+							<div class="cancel_button">
+                                   
+										
+											<p:commandLink ajax="true" rendered="false" value="Choose latitude and longitude from Gmaps?" action="#{merchentCreationBean.addMaps}" update=":dlgfrm:dlgpnl" immediate="true"/>
+									
+								<p:commandButton
+									update=":form1:BasicInfo:datatble,:form1:gwl1,mcity,maddress,mstatus,mbranch,mlocation,mpincode"
+									value="Submit" oncomplete="handleResponse(xhr, status, args)"
+									action="#{merchentCreationBean.submitBranch}" tabindex="12">
+								</p:commandButton>
+								<p:spacer width="5px" />
+								<p:commandButton value="Cancel" tabindex="13"
+									oncomplete="PF('MerchentBranch').hide()" />
+							</div>
+
+						</div>
+					</div>
+
+					<!-- <div class="ft-dialog-footer">
+					<div class="ft-dialog-footer-btn">
+					         
+					</div>
+				</div>
+ -->
+				</p:outputPanel>
+			</h:form>
+		</p:dialog>
+		<p:dialog id="branchdel" rendered="true" header="Confirm Delete" draggable="false"
+			modal="true" closable="true" width="350" widgetVar="BranchDelete"
+			showEffect="slide" hideEffect="slide" closeOnEscape="true"
+			resizable="false">
+			<h:form>
+              
+
+				<h:outputText value="Do you want to delete this Merchant Branch?" />
+
+
+
+				<p:spacer width="5px" />
+				<p:commandButton value="Submit"
+					action="#{merchentCreationBean.deleteBranch}"
+					update=":form1:BasicInfo:datatble" oncomplete="PF('BranchDelete').hide()"/>
+
+
+				<p:commandButton value="Cancel"
+					oncomplete="PF('BranchDelete').hide()" />
+
+
+			</h:form>
+		</p:dialog>
+
+
+	</ui:define>
+</ui:composition>

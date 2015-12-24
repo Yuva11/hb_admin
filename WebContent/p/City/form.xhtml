@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+	template="/p/layout.xhtml">
+	<ui:define name="action_header">
+		<script>
+			function showSettingDlg(xhr, status, args) {
+				if (args.validate)
+					PRODUCTSETTDLG.show();
+				else
+					$("#PDTMSG").show();
+			}
+		</script>
+<script type="text/javascript">
+			function keyRestrict(evt) {
+				var theEvent = evt || window.event;
+				var key = theEvent.keyCode || theEvent.which;
+
+				var keychar = String.fromCharCode(key);
+				var keycheck = /[0-9]|\./;
+
+				if (!(key == 8 || key == 27 || key == 46 || key == 9)) // backspace delete  escape arrows
+				{
+					if (keycheck.test(keychar)) {
+						theEvent.returnValue = false;//for IE
+						if (theEvent.preventDefault)
+							theEvent.preventDefault();//Firefox
+
+					}
+				}
+			}
+		</script>
+
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form  id="form1" prependId="false" enctype="multipart/form-data">
+			<p:growl id="PDTMSG" rendered="false"/>
+			 
+          <div id="main_container">
+    
+    <div class="error_box" >
+	 <p:messages globalOnly="true"/>
+   </div>
+    
+     <div id="container">
+    
+    
+     <div class="contant_table_box1">
+     <div class="contant_text_table_box50">
+   <!-- 
+			<div class="text_width_box25">
+				<span class="user_text">City Name</span>
+			</div>
+			<div class="text_width_box25_right">
+				<h:inputText id="city" value="#{cityCreationBean.citydto.name}" tabindex="1" maxlength="75" onkeypress="return keyRestricted(event)" required="true" requiredMessage="#{msg['validate.citymaster']}"
+					class="text_box" disabled="#{cityCreationBean.action eq 'VIEW'}" validatorMessage="#{msg['validate.citymaster']}">
+					<f:validateLength minimum="1" maximum="75" />
+                                     
+					</h:inputText><span class="star"><p:outputPanel rendered="#{cityCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+				<p:watermark for="city" value="City Name should be 1 to 75 characters"/>
+				<p:tooltip for="city" value="City Name should be 1 to 75 characters"/>	
+					
+			</div> -->
+			<div class="text_width_box25">
+				<span class="user_text">City Name</span>
+			</div>
+			<div class="text_width_box25_right">
+				<p:autoComplete id="city" value="#{cityCreationBean.citydto.name}" completeMethod="#{cityCreationBean.completeTheme}"
+                      required="true" requiredMessage="#{msg['validate.citymaster']}"  
+                      var="theme" itemLabel="#{theme.name}" itemValue="#{theme.name}" converter="gec" forceSelection="true" />
+				<p:watermark for="city" value="Auto complete City Name"/>
+				<p:tooltip for="city" value="Auto complete City Name"/>
+			</div>
+			
+			<div class="text_width_box25">
+			</div>
+			<div class="text_width_box25_right_errorbox" style="padding-top:20px;">
+			  <p:message for="city"/>
+			</div>
+					
+		</div>
+		
+		 
+
+     </div>
+     
+              <div class="save_box">
+			 
+			 <div class="cancel_button">
+				
+					<h:commandLink rendered="#{cityCreationBean.action ne 'VIEW'}"  value="Submit"  validateClient="true" tabindex="3"
+						action="#{cityCreationBean.submit}" ></h:commandLink>
+		
+                 
+					
+					<h:commandLink  value="Cancel" tabindex="4"
+						action="#{cityCreationBean.showList}" immediate="true"></h:commandLink>
+				</div>
+			
+					</div>
+     
+     
+     </div>
+</div>
+
+
+		</h:form>
+
+
+		
+	
+
+	</ui:define>
+</ui:composition>

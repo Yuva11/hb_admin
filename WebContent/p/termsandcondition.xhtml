@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/p/layout.xhtml">
+	<ui:define name="action_header">
+		<script>
+			function showSettingDlg(xhr, status, args) {
+				if (args.validate)
+					PRODUCTSETTDLG.show();
+				else
+					$("#PDTMSG").show();
+			}
+		</script>
+
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form id="terms" prependId="false">
+			<p:growl id="PDTMSG" /> 
+		
+			<div id="main_container">
+				<div class="head_bottom_listbg">
+					<div id="container">
+						<div class="head_list_box">
+							<h3>Masters</h3>
+						</div>
+						<div class="head_list_box1">
+							<div class="left_arrow_smal"></div>
+							<h3>
+								<span>Terms &amp; Conditions</span>
+							</h3>
+						</div> 
+					</div>
+					
+				</div>
+				<div class="container1"  style="padding-top:80px; "> 
+					<div class="cantent_mains_boxes"  >
+						<div class="content_border_box" style="margin-bottom:133px; !important">  
+						<p:outputPanel id="THUMBNAILIMAGETEXTID" rendered="true">
+							 	<div class="contant_text_table_box50">
+								 	<div class="text_width_box25">
+						<span class="user_text1"><h:outputText value="Terms &amp; Conditions"/></span>
+					</div>
+								 		 <br/>
+								 		 
+								 		<div class="text_width_box25_right">
+								 		<p:editor id="TermText" widgetVar="xxx" value="#{tandCBean.terms.value}" width="600"
+							  				required="true" requiredMessage="Terms &amp; Conditions should not be empty" validatorMessage="Terms &amp; Conditions must be of more than 100 characters">
+								 			  <f:validateLength  minimum="100" />
+								 		 </p:editor>
+									</div>
+								
+									
+									<div class="text_width_box25">
+						<span class="user_text1"><h:outputText value="Privacy Policy"/></span>
+					</div>
+								
+							
+							<div class="text_width_box25_right">
+									<p:editor id="detailText" widgetVar="xxx" value="#{tandCBean.terms1.value}" width="600"
+							  				required="true" requiredMessage="Privacy policy should not be empty" validatorMessage="Privacy policy must be of more than 100 characters">
+								 			  <f:validateLength  minimum="100" />
+								 		 </p:editor> 
+								 		 </div>
+									
+								
+									<div class="save_box"> 
+										 <div class="cancel_button"> 
+											<h:commandLink  value="Save"  action="#{tandCBean.submit}"  ></h:commandLink>  
+										</div> 
+									</div>
+									
+							 	</div>
+							 	<!-- <div class="contant_text_table_box50">
+								 	
+										 <h:outputText escape="false" value="#{tandCBean.terms.value}"/>   
+									<h:outputText escape="false" value="#{tandCBean.terms1.value}"/>   
+							 	</div> -->
+						</p:outputPanel> 
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

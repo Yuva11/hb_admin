@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="link_button_box " >
+
+
+			
+
+		</div>
+
+	<div id="contant_table_box1" style="clear:both !important;">
+
+		<!-- actionListener="" update="" oncomplete="PF('DOCUMENTDIALOG').show()" -->
+
+	 <p:dataList  value="#{customerCreationBean.selectedcustomerdto.favouriteCusines}" var="it" type="unordered">
+        <f:facet name="header">
+            Cusines
+        </f:facet>
+        #{it.name} 
+    </p:dataList>
+
+		<p:outputPanel id="datpnl124" rendered="false">
+			<p:dataTable id="datatble124"
+				value="#{customerCreationBean.selectedcustomerdto.favouriteCusines}" rowKey="it.id"
+				var="it" paginator="true" paginatorPosition="bottom" rows="21"
+				rowIndexVar="idx"
+				currentPageReportTemplate="{currentPage} / {totalPages}"
+				paginatorTemplate=" {PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="21,50,100,500,1000" styleClass="reference">
+
+				<p:column headerText="#">
+					<h:outputText value="#{idx+1}" />
+				</p:column>
+     
+               <!--  <p:column headerText="Merchant Name">
+					<h:outputText value="#{it.merchant.name}" /> 
+				</p:column> -->
+     
+     
+				<p:column headerText="Cusine Name">
+					<h:outputText value="#{it.name}" /> 
+				</p:column>
+
+				<p:column headerText="Created Date">
+					<h:outputText value="#{it.createdDate}" />
+				</p:column>
+
+			    
+
+				<p:column headerText="Action"
+					rendered="false">
+
+					<p:spacer width="10px" />
+					<p:commandLink id="DOCEDIT" process="@this" rendered="false"
+						action="#{merchentCreationBean.addBranch}"
+						oncomplete="PF('MerchentBranch').show()" update=":dlgfrm">
+						<!--  <f:setPropertyActionListener target="#{merchentCreationBean.selectedbranchdto}" value="#{it}" /> -->
+						<img src="#{request.contextPath}/images/edit-small-icon.png" />
+						<f:setPropertyActionListener
+							target="#{merchentCreationBean.selectedbranch}" value="#{it}" />
+							<!-- <f:setPropertyActionListener
+							target="#{merchentCreationBean.selectedId}" value="#{it.id}" /> -->
+
+						<f:setPropertyActionListener
+							target="#{merchentCreationBean.branchAction}" value="EDIT" />
+					</p:commandLink>
+					<p:spacer width="10px" />
+					<p:commandLink id="DOCDELETE" process="@this" rendered="false"
+						oncomplete="PF('BranchDelete').show()">
+						<f:setPropertyActionListener
+							target="#{merchentCreationBean.selectedbranch}" value="#{it}" />
+						<img src="#{request.contextPath}/images/view-small-icon.png" />
+					</p:commandLink>
+
+
+				</p:column>
+
+				<!-- <p:column headerText="Sel." selectionMode="single"/> -->
+			</p:dataTable>
+		</p:outputPanel>
+
+	</div>
+
+
+
+
+
+
+</ui:composition>

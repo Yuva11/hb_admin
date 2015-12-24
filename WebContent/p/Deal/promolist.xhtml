@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+	template="/p/layout.xhtml">
+	<ui:define name="action_header">
+		<script>
+			function showSettingDlg(xhr, status, args) {
+				if (args.validate)
+					PRODUCTSETTDLG.show();
+				else
+					$("#PDTMSG").show();
+			}
+		</script>
+
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form  onkeypress="if (event.keyCode == 13) { document.getElementById('enterKey').click(); return false; }"  id="form1" prependId="false">
+			<p:growl id="PDTMSG" />
+			
+    		 <div id="main_container">
+     			<div class="head_bottom_listbg">
+					<div id="container">
+						<div class="head_list_box"><h3>Coupons</h3></div>
+						<div class="head_list_box1">
+							<div class="left_arrow_smal"></div>
+							<h3><span>Coupon Approval</span></h3>
+						</div>
+						<div class="menu_list_button_box">
+							<p:outputPanel rendered="true">
+								<div class="button_list"> 
+									 <h:commandLink id="btnview"  action="#{dealBean.publishpromo}" rendered="#{userCreationBean.userFeatures['Approve Coupon']}"><i class="fa fa-check-square"></i>
+									   <f:setPropertyActionListener target="#{dealBean.action}" value="PUBLISH_VIEW"/>
+									</h:commandLink>
+									<p:tooltip for="btnview" value="Coupon Approve" showEffect="fade" hideEffect="fade"/>   
+								</div>
+							</p:outputPanel>
+						</div>
+					</div>
+				</div>
+     			<div class="contant_main">
+    				 <div class="contant_box">
+			     		 <div class="dropdons_box">
+
+							<div class="serch_box">
+                            <h:inputText class="text_box" id="txtsrch" value="#{dealBean.searchKey}" tabindex="1"/>
+                            <p:watermark for="txtsrch" value="Search by Merchant / Coupon"/>
+                            <div class="search1">
+                            <h:commandLink   id="enterKey"   action="#{dealBean.promoapprovesearch}" tabindex="2">
+                            <i class="fa fa-search"></i>
+                            </h:commandLink>
+                           </div>
+                         </div>
+                         </div>
+ 						<div  class="contant_table_box">
+
+
+								<p:dataTable value="#{dealBean.dealDtoList}" var="it" selection="#{dealBean.selectedDeal}" rowKey="#{it.id}" 
+									paginator="true" rows="10" paginatorPosition="bottom"
+									paginatorAlwaysVisible="false" rowIndexVar="idx"
+									paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="20,50,100,500,1000">
+					
+									<p:column headerText="SI.No" style="width:55px;text-align:center">
+										<h:outputText value="#{idx+1}" />
+									</p:column>
+									<p:column headerText="Merchant ">
+										<!-- <p style="font-weight: bold !important;"> -->
+											<h:outputText value="#{it.merchantbranch.merchant.name}" />
+										<!-- </p> -->
+										<!-- <p style="text-align:right !important;"> -->
+									
+										<!-- </p> -->
+									</p:column>
+									<p:column headerText="Branch Name">
+											<h:outputText value="#{it.merchantbranch.branchName}" />
+									</p:column>
+									<p:column headerText="Coupon ">
+										<!-- <p style="font-weight: bold !important;"> -->
+											<h:outputText value="#{it.name}" />
+										<!-- </p> -->
+										<!-- <p style="text-align:right !important;"> -->
+											
+										<!-- </p> -->
+									</p:column>  
+					              <!--   <p:column headerText="Coupon Price" style="width:75px;text-align:right">
+					                <h:outputText value="#{it.contentType eq 'BUYOUT'?it.dealPrice:it.originalPrice}"> <f:convertNumber pattern="#0.00" /> </h:outputText>
+					                </p:column> -->
+									<p:column headerText="Validity Start Date">
+									
+										<h:outputText value="#{it.startDate}"  converter="HC" /> 
+										<p style="text-align:right !important;">
+										 
+										</p>
+									</p:column>
+									<p:column headerText="Validity End Date">
+										<h:outputText value="#{it.endDate}"  converter="HC" /> 
+										<p style="text-align:right !important;">
+										
+										</p>
+									</p:column>
+									<p:column headerText="Status"> 
+										<h:outputText value="#{it.status}"  /> 
+									</p:column> 
+									<p:column headerText="Select" selectionMode="single" style="width:60px;text-align:center"/>
+								</p:dataTable> 
+
+							</div>
+ 
+ 					</div> 
+    			</div> 
+     		</div> 
+		</h:form>
+  </ui:define>
+</ui:composition>
+	

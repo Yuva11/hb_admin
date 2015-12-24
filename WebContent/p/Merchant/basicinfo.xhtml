@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+	
+				
+			
+				<div class="contant_text_table_box50">
+								
+							
+					<div class="text_width_box025">
+						<span class="tab_user_text">Merchant Brand Name</span>
+					</div>
+					<div class="text_width_box025_right">
+						<!-- <h:inputText value="#{merchentCreationBean.merchantdto.name}"
+							class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}"  maxlength="45" onkeypress="return keyRestrict(event)" tabindex="1"/>* -->
+							
+							<h:inputText id="name" disabled="#{merchentCreationBean.action eq 'VIEW'}"  value="#{merchentCreationBean.merchantdto.name}" class="text_box" required="true"  requiredMessage="#{msg['validate.brandname']}"
+         validatorMessage="#{msg['validate.brandname']}" tabindex="1" >
+           <f:validateLength minimum="4" maximum="75" />
+         <f:validateRegex pattern="#{val['pattern.brandname']}"></f:validateRegex>
+         
+           </h:inputText>
+           <p:watermark for="name" value="4 to 75 characters"
+          id="deal-detail-watermark" />
+            <h:outputText styleclass="text_box" rendered="false" value="#{merchentCreationBean.merchantdto.name}"/>
+          <span class="star"> <p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+          
+                  </div>
+                  <div class="text_width_box25">
+                  </div>
+					<div class="text_width_box25_right_error">
+					   <p:message for="name"/>
+					</div>
+					
+					
+					<p:outputPanel rendered="true">
+						<div class="text_width_box025">
+							<span class="tab_user_text">Merchant Speciality </span>
+						</div>
+						<div class="text_width_box025_right">
+							<h:selectOneMenu id="spec" disabled="#{merchentCreationBean.action eq 'VIEW'}" value="#{merchentCreationBean.merchantdto.speciality}" converter="gec" class="drodown_box" tabindex="4" required="true"  requiredMessage="#{msg['validate.speciality']}">        
+					              
+					         <f:selectItem itemLabel="Select" itemValue="#{null}" />  
+					        	  <f:selectItems value="#{merchentCreationBean.specialityList}" var="it" itemLabel="#{it.name}" itemValue="#{it}" />       
+
+					          </h:selectOneMenu><span class="star"> <p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+					           <h:outputText styleclass="text_box1" rendered="false" value="#{merchentCreationBean.merchantdto.speciality.name}"/>
+					         
+					          
+
+						</div>
+						 </p:outputPanel>
+						<div class="text_width_box25">
+						</div>
+						<div class="text_width_box25_right_error">
+						   <p:message for="spec"/>
+						</div>
+						
+					
+						  <p:outputPanel rendered="true">
+						<div class="text_width_box25">
+							<span class="user_text">Party Deal Allowed</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:selectOneMenu id="deal"  disabled="#{merchentCreationBean.action eq 'VIEW'}"  value="#{merchentCreationBean.merchantdto.partyDealAllowed}"  class="drodown_box" tabindex="6" required="true" requiredMessage="#{msg['validate.deal']}">        
+					              <f:selectItem itemLabel="Yes" itemValue="#{true}"/>
+					        	  <f:selectItem itemLabel="No" itemValue="#{false}"/>
+
+					          </h:selectOneMenu> <h:outputText styleclass="text_box1" rendered="false" value="#{merchentCreationBean.merchantdto.partyDealAllowed}"/><span class="star"><p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+
+					          
+						</div>
+						 </p:outputPanel>
+					
+					     <div class="text_width_box25">
+						</div>
+						<div class="text_width_box25_right_error">
+						   <p:message for="deal"/>
+						</div>
+					
+					
+					    <p:outputPanel rendered="true">
+						<div class="text_width_box25">
+							<span class="user_text">Email id</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText  id="email" value="#{merchentCreationBean.merchantdto.user.userName}" required="true" requiredMessage="#{msg['validate.email']}"
+								class="text_box" disabled="#{merchentCreationBean.action ne 'ADD'}" maxlength="255" tabindex="9" validatorMessage="#{msg['validate.email']}">
+								
+                             <f:validateRegex pattern="#{val['pattern.email']}"></f:validateRegex>
+
+						    </h:inputText> <h:outputText styleclass="text_box1" rendered="false" value="#{merchentCreationBean.merchantdto.user.userName}"/><span class="star"><p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+						    <p:watermark for="email" value="Email Address"  />
+
+						</div>
+						 </p:outputPanel>
+					     <div class="text_width_box25">
+						 </div>
+					     <div class="text_width_box25_right_error">
+					     <p:message for="email"/>
+					     </div>
+					       <p:outputPanel rendered="#{merchentCreationBean.action eq 'ADD'}">
+								<div class="text_width_box25">
+									<span class="user_text">Confirm Password</span>
+								</div>
+								<div class="text_width_box25_right">
+									<h:inputSecret id="confirmPassword"  redisplay="true" class="password_box" maxlength="15" tabindex="11" required="true" requiredMessage="#{msg['validate.password']}"
+										binding="#{confirmPassword}" value="#{merchentCreationBean.merchantdto.user.confirmPassword}"  validatorMessage="#{msg['validate.password']}"
+										disabled="#{userCreationBean.action eq 'VIEW'}" >
+										  
+										<!-- <f:validateLength minimum="4" maximum="15" /> -->
+                                         <f:validateRegex pattern="#{val['pattern.password']}"></f:validateRegex> 
+										</h:inputSecret> <h:outputText styleclass="text_box" rendered="#{merchentCreationBean.action eq 'VIEW'}" value="#{merchentCreationBean.merchantdto.user.confirmPassword}"/><span class="star"><p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+										<p:tooltip  for="confirmPassword" value="Password must contain atleast a digit,one upper and one lower case character"  showEffect="clip" hideEffect="explode"/>
+								</div>
+					    </p:outputPanel>
+					     <div class="text_width_box25">
+						 </div>
+						 <div class="text_width_box25_right_error"><p:message for="confirmPassword" errorClass="error" infoClass="info"/></div>
+					   	
+						  
+						  
+					   </div>
+				<div class="contant_text_table_box50">
+					    
+					    
+					   <p:outputPanel rendered="true">
+						<div class="text_width_box25">
+							<span class="user_text">Merchant Category</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:selectOneMenu id="category"  disabled="#{merchentCreationBean.action eq 'VIEW'}" value="#{merchentCreationBean.merchantdto.category}" converter="gec" class="drodown_box" required="true"  requiredMessage="#{msg['validate.category']}" tabindex="3">        
+                                     <f:selectItem itemLabel="Select" itemValue="#{null}"/> 
+					        	   <f:selectItems value="#{merchentCreationBean.categoryList}" var="it" itemLabel="#{it.name}" itemValue="#{it}" />
+					        	            
+					          </h:selectOneMenu> <h:outputText styleclass="text_box" rendered="false" value="#{merchentCreationBean.merchantdto.category.name}"/><span class="star"><p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+						</div>
+						 </p:outputPanel>
+					    <div class="text_width_box25">
+						</div>
+					    <div class="text_width_box25_right_error">
+							<p:message for="category"/>
+						</div>
+					    
+					     <p:outputPanel rendered="true">
+						<div class="text_width_box25">
+							<span class="user_text">Merchant Employee Count</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.merchantdto.employeeCount}" disabled="#{merchentCreationBean.action eq 'VIEW'}"
+								class="text_box"  maxlength="5" tabindex="5" onkeypress="return keyRestricted(event)"/>
+								  <h:outputText styleclass="text_box" rendered="false" value="#{merchentCreationBean.merchantdto.employeeCount}"/>
+						</div>
+						 </p:outputPanel>
+					    <p:outputPanel rendered="true">
+						<div class="text_width_box25">
+							<span class="user_text">Status</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:selectOneMenu   value="#{merchentCreationBean.merchantdto.status}" class="drodown_box" tabindex="8" disabled="#{merchentCreationBean.action eq 'VIEW'}">        
+					              <f:selectItem itemLabel="Active" itemValue="ACTIVE"/>
+					        	  <f:selectItem itemLabel="Blocked" itemValue="BLOCKED"/>
+					          </h:selectOneMenu>
+					          <h:outputText styleclass="text_box" rendered="false" value="#{merchentCreationBean.merchantdto.status}"/>
+					         <span class="star"> <p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+						</div>
+						 </p:outputPanel>
+					    
+					    
+					     <p:outputPanel rendered="#{merchentCreationBean.action eq 'ADD'}">
+								<div class="text_width_box25">
+									<span class="user_text">Password</span>
+								</div>
+								<div class="text_width_box25_right">
+									<h:inputSecret id="password" redisplay="true" class="password_box" maxlength="15" tabindex="10" required="true"  requiredMessage="#{msg['validate.password']}"
+										value="#{merchentCreationBean.merchantdto.user.passwordHash}"  validatorMessage="#{msg['validate.password']}"
+										disabled="#{userCreationBean.action eq 'VIEW'}" >
+										 <!-- <f:validator validatorId="passwordValidator" /> 
+		                                 <f:attribute name="confirmPassword" value="#{confirmPassword}" /> -->
+		                                 
+										
+                                        <f:validateRegex pattern="#{val['pattern.password']}"></f:validateRegex>
+										</h:inputSecret>
+										<p:tooltip for="password" value="Password must contain atleast a digit,one upper and one lower case character" showEffect="clip" hideEffect="explode"/>
+										 <span class="star"> <p:outputPanel rendered="#{merchentCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+								</div>
+					    </p:outputPanel>
+					     <div class="text_width_box25">
+						 </div>
+					     <div class="text_width_box25_right_error">
+					     <p:message for="password" errorClass="error" infoClass="info"/>
+					     </div>
+                        
+					    
+					    
+					    
+					
+					 <p:outputPanel rendered="false">
+						<div class="text_width_box25">
+							<span class="user_text">Merchant Address*</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputTextarea value="#{merchentCreationBean.merchantdto.merchantAddress}"  rows="2" cols="25" tabindex="4" 
+								  disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="150"/>
+						</div>
+						</p:outputPanel>
+					
+					    <p:outputPanel rendered="false">
+                        <div class="text_width_box25">
+							<span class="user_text">Merchant Location</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.merchantdto.merchantLocation}"
+								class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="45"/>
+						</div>
+                        </p:outputPanel>
+                        
+                        <p:outputPanel rendered="false">
+						 <div class="text_width_box25">
+							<span class="user_text">Merchant Pin Code*</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.merchantdto.pincode}"
+								class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="6" onkeypress="return keyRestricted(event)"/>
+						</div>
+						</p:outputPanel>
+						<p:outputPanel rendered="false">
+						 <div class="text_width_box25">
+							<span class="user_text">Mobile Number</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:inputText value="#{merchentCreationBean.merchantdto.mobileNumber}"
+								class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}" maxlength="10" onkeypress="return keyRestricted(event)"/>
+						</div>
+						</p:outputPanel>
+						<p:outputPanel rendered="false">
+						<div class="text_width_box25">
+							<span class="user_text">Merchant City*</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:selectOneMenu  value="#{merchentCreationBean.merchantdto.citydto}" converter="gec">        
+					              <f:selectItem itemLabel="Select" itemValue="#{null}"/>
+					        	  <f:selectItems value="#{merchentCreationBean.cityList}" var="it" itemLabel="#{it.name}" itemValue="#{it}" />             
+					          </h:selectOneMenu>
+						</div>
+						</p:outputPanel>
+						
+					
+						
+						
+						
+						
+						
+						
+                      </div>
+                 
+					
+				
+				
+	
+	
+	
+	</ui:composition>

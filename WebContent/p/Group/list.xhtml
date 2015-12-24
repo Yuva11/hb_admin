@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/p/layout.xhtml">
+	<ui:define name="action_header">
+		<script>
+			function showSettingDlg(xhr, status, args) {
+				if (args.validate)
+					PRODUCTSETTDLG.show();
+				else
+					$("#PDTMSG").show();
+			}
+		</script> 
+	</ui:define>
+	<ui:define name="content"> 
+		<h:form id="form1" prependId="false">
+			<p:growl id="PDTMSG" /> 
+			<div id="main_container">
+				<div class="head_bottom_listbg">
+					<div id="container"> 
+						<div class="head_list_box">
+							<h3>Groups</h3>
+						</div>
+						<div class="head_list_box1">
+							<div class="left_arrow_smal"></div>
+							<h3>
+								<span>List of groups</span>
+							</h3>
+						</div>
+ 
+						<div class="menu_list_button_box">
+							<div class="button_list"> 
+								<h:commandLink id="btnadd" action="#{groupEntityBean.showAdd}"
+									rendered="#{userCreationBean.userFeatures['Add Group']}">
+									<i class="fa fa-plus"></i>
+									<f:setPropertyActionListener target="#{groupEntityBean.action}" value="ADD" />
+									<f:setPropertyActionListener target="#{groupEntityBean.actionLbl}" value="ADD" />
+									<f:setPropertyActionListener target="#{groupEntityBean.brandAction}" value="ADD"/>
+								</h:commandLink>
+								<p:tooltip for="btnadd" value="Add" showEffect="fade" hideEffect="fade" />
+								
+								
+								<h:commandLink id="btnedit" action="#{groupEntityBean.showAdd}"
+									rendered="#{userCreationBean.userFeatures['Edit Group']}">
+									<i class="fa fa-pencil"></i>
+									<f:setPropertyActionListener target="#{groupEntityBean.action}" value="EDIT" />
+									<f:setPropertyActionListener target="#{groupEntityBean.actionLbl}" value="EDIT" />
+									<f:setPropertyActionListener target="#{groupEntityBean.brandAction}" value="ADD"/>
+								</h:commandLink>
+								<p:tooltip for="btnedit" value="Edit" showEffect="fade" hideEffect="fade" />
+									
+									
+								<h:commandLink id="btnview" action="#{groupEntityBean.showAdd}"
+									 rendered="#{userCreationBean.userFeatures['View Group']}">
+									<i class="fa fa-th-large"></i>
+									<f:setPropertyActionListener target="#{groupEntityBean.action}" value="VIEW" />
+									<f:setPropertyActionListener target="#{groupEntityBean.actionLbl}" value="VIEW" />
+								</h:commandLink>
+								<p:tooltip for="btnview" value="View" showEffect="fade"
+									hideEffect="fade" /> 
+								<h:commandLink action="#{merchentCreationBean.confirmation}"
+									id="btndel" rendered="false">
+									<i class="fa fa-trash-o"></i>
+								</h:commandLink>
+								<p:tooltip for="btndel" value="Delete" showEffect="fade" hideEffect="fade" />
+
+								<h:commandLink action="#{merchentCreationBean.resetpassword}" id="btnreset"
+									rendered="false">
+									<i class="fa fa-key"></i>
+								</h:commandLink>
+								<p:tooltip for="btnreset" value="Reset Password" showEffect="fade" hideEffect="fade" />
+ 
+							</div>
+						</div> 
+					</div>
+				</div> 
+				<div class="contant_main"> 
+					<div class="contant_box"> 
+						<div class="dropdons_box"> 
+							
+						</div>
+						<div class="contant_table_box">
+							<p:dataTable value="#{groupEntityBean.entityList}" rowKey="#{it.id}" var="it" widgetVar="roletable"
+								paginator="true" paginatorPosition="bottom" rows="21" rowIndexVar="idx"
+								currentPageReportTemplate="{currentPage} / {totalPages}"
+								selection="#{groupEntityBean.groupEntity}"
+								paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="20,50,100,500,1000" styleClass="reference">
+
+								<p:column headerText="#">
+									<h:outputText value="#{idx+1}" />
+								</p:column>
+
+								<p:column headerText="Group Name">
+									<h:outputText value="#{it.entityName}" />
+								</p:column>
+  
+								<p:column headerText="E-Mail">
+									<h:outputText value="#{it.eMail}" />
+								</p:column>
+
+								<p:column headerText="Contact Person">
+									<h:outputText value="#{it.contactPerson}" />
+								</p:column>
+
+								<p:column headerText="Mobile Number">
+									<h:outputText value="#{it.mobileNumber}" />
+								</p:column>
+
+								<p:column headerText="Office Telephone Number">
+									<h:outputText value="#{it.officeTelephoneNumber}" />
+								</p:column>
+ 
+								<p:column headerText="Select" selectionMode="single" />
+							</p:dataTable>
+
+
+
+						</div>
+
+
+
+
+
+
+
+
+
+					</div>
+
+				</div>
+
+
+			</div>
+
+
+		</h:form>
+
+
+		<p:dialog header="Merchant Delete Confirmation" draggable="false"
+			modal="true" closable="true" width="390" widgetVar="ConformDelete"
+			showEffect="slide" hideEffect="slide" closeOnEscape="true"
+			resizable="false">
+			<h:form>
+
+
+				<h:outputText value="Do you want to delete this Merchant?" />
+
+
+
+				<p:spacer width="5px" />
+				<p:commandButton ajax="false" value="Yes"
+					action="#{merchentCreationBean.deleteMerchent}" />
+
+
+				<p:commandButton value="No" oncomplete="PF('ConformDelete').hide()" />
+
+
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog id="preset" header="Password Reset" draggable="false"
+			modal="true" closable="true" width="430" widgetVar="passwordreset"
+			showEffect="slide" hideEffect="slide" closeOnEscape="true"
+			resizable="false">
+			<h:form>
+				<script type="text/javascript">
+				function handleResponse(xhr, status, args) {
+					if (args.validation) {
+						PF('passwordreset').hide();
+					} else
+						jQuery('#preset').effect("shake", {
+							times : 3
+						}, 50);
+				}
+			</script>
+
+				<p:outputPanel rendered="true" id="dlgpnl">
+
+					<h:outputText value="Do you want to reset new password?" />
+					<br />
+					<br />
+					<div class="text_width_box25">
+						<span class="user_text">Enter New Password</span>
+					</div>
+					<div class="text_width_box25_right">
+						<h:inputSecret maxlength="15"
+							value="#{merchentCreationBean.password}" class="password_box" />
+						<span class="star">*</span>
+
+
+
+
+					</div>
+				</p:outputPanel>
+
+				<p:spacer width="5px" />
+				<br />
+				<br />
+				<p:commandButton value="Yes"
+					action="#{merchentCreationBean.submitpassword}"
+					oncomplete="handleResponse(xhr, status, args)"
+					update=":form1:PDTMSG" />
+
+
+				<p:commandButton value="No" oncomplete="PF('passwordreset').hide()" />
+
+
+			</h:form>
+		</p:dialog>
+
+
+
+	</ui:define>
+</ui:composition>

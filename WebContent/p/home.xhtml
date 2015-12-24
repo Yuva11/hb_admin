@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Merchant-Dashbord</title>
+	
+	<link href="#{request.contextPath}/css/style.css" rel="stylesheet" type="text/css" />
+	<link href="#{request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="#{request.contextPath}/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+	
+</head>
+
+<body>
+	<div role="navigation" class="navbar navbar-inverse navbar-fixed-top ">
+		<div class="container">
+			<nav class="navbar " role="navigation">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span> 
+							<span class="icon-bar"></span> 
+							<span class="icon-bar"></span> 
+							<span class="icon-bar"></span>
+						</button>
+						<h5>Need Help? Please Ring : <span class="glyphicon glyphicon-earphone"></span> 044 - 65661050 </h5>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#"><span class="glyphicon glyphicon-user"></span>My Profile</a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help</a></li>
+							<li> <a href="#{request.contextPath}/logout"><span class="glyphicon glyphicon-off"></span> Logout</a> </li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+	<div id="main-nav" class=" bs-docs-nav fixed header1" role="banner">
+		<div class="container">
+			<div class="logo">
+				<a href="#"><img src="#{request.contextPath}/images/logo.png" border="0" /></a>
+			</div>
+			<div class="navi_box">
+				<div class="navi">
+					<ul>
+						<li><span class="deal_icon"></span>
+							<br />Deals
+							<ul>
+								<li>Create</li>
+								<li>Edit</li>
+								<li>Bulk Upload</li>
+							</ul>
+						</li>
+						<li class="active">
+							<span class="order_icon"></span>
+							<br />Orders
+						</li>
+						<li>
+							<span class="report_icon"></span>
+							<br />Reports
+						</li>
+					</ul>
+				</div>
+				<div class="restaurant_logo">
+					<img src="#{request.contextPath}/images/restaurant-logo.png" border="0" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container table_box">
+		<div class="table-responsive">
+			<table class="table table-bordered ">
+				<thead>
+					<tr>
+						<th># 12 Aug 2014 7.00 PM</th>
+						<th>Customer Ratings</th>
+						<th>Customer Views</th>
+						<th>Deal Status</th>
+						<th>Opening Qty</th>
+						<th>Orders Received</th>
+						<th>Available Deal Qty</th>
+						<th>Orders Served</th>
+						<th>Orders Pending</th>
+						<th>Total Amount</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><span class="deal_image"><img src="#{request.contextPath}/images/deal-image.png" /></span></td>
+						<td><span class="rating_image"><img src="#{request.contextPath}/images/rating_image.png" /></span></td>
+						<td>950</td>
+						<td class="available">Available</td>
+						<td>20</td>
+						<td>15</td>
+						<td>5</td>
+						<td>12</td>
+						<td>3</td>
+						<td>10,875</td>
+					</tr>
+					<tr>
+						<td><span class="deal_image"><img src="#{request.contextPath}/images/deal-image.png" /></span></td>
+						<td><span class="rating_image"><img src="#{request.contextPath}/images/rating_image.png" /></span></td>
+						<td>Table cell</td>
+						<td class="sold_out">Sold Out</td>
+						<td>20</td>
+						<td>15</td>
+						<td>0</td>
+						<td>18</td>
+						<td>2</td>
+						<td>10,625</td>
+					</tr>
+					<tr>
+						<td class="grand_total">Grand Total</td>
+						<td></td>
+						<td>2,705</td>
+						<td></td>
+						<td>45</td>
+						<td>40</td>
+						<td>5</td>
+						<td>30</td>
+						<td>5</td>
+						<td>20,500</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="link_button_box " >
+
+
+			
+
+		</div>
+
+	<div id="contant_table_box1" style="clear:both !important;">
+
+		<!-- actionListener="" update="" oncomplete="PF('DOCUMENTDIALOG').show()" -->
+
+	 <p:dataList  value="#{customerCreationBean.notificationList}" var="it">
+        <f:facet name="header">
+            Notification Settings
+        </f:facet>
+        #{it.preferenceType} <p:spacer width="#{it.preferenceType eq 'BREAKFAST' ? 85: it.preferenceType eq 'DINNER' ?115:120}" height="15" /> 	<h:outputText value="#{it.timing}" converter="TDC"/>  <p:spacer width="#{it.preferenceType eq 'BREAKFAST' ? 115: it.preferenceType eq 'DINNER' ?115:115}" height="10" />  #{it.typeStatus eq 'true'?'Enable':'Disable'} 
+    </p:dataList>
+ 
+
+		<p:outputPanel id="datpnl" rendered="false">
+			<p:dataTable id="datatble"
+				value="#{customerCreationBean.notificationList}" rowKey="it.id"
+				var="it" paginator="true" paginatorPosition="bottom" rows="21"
+				rowIndexVar="idx"
+				currentPageReportTemplate="{currentPage} / {totalPages}"
+				paginatorTemplate=" {PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="21,50,100,500,1000" styleClass="reference">
+
+				<p:column headerText="#">
+					<h:outputText value="#{idx+1}" />
+				</p:column>
+     
+				<p:column headerText="Notification Type">
+					<h:outputText value="#{it.preferenceType}" /> 
+				</p:column>
+           
+                <p:column headerText="Timings">
+					<h:outputText value="#{it.timing}" /> 
+				</p:column>
+           
+				<p:column headerText="Status">
+					<h:outputText value="#{it.typeStatus}" />
+				</p:column>
+
+				
+
+			
+
+				<p:column headerText="Action"
+					rendered="false">
+
+					<p:spacer width="10px" />
+					<p:commandLink id="DOCEDIT" process="@this" rendered="false"
+						action="#{merchentCreationBean.addBranch}"
+						oncomplete="PF('MerchentBranch').show()" update=":dlgfrm">
+						<!--  <f:setPropertyActionListener target="#{merchentCreationBean.selectedbranchdto}" value="#{it}" /> -->
+						<img src="#{request.contextPath}/images/edit-small-icon.png" />
+						<f:setPropertyActionListener
+							target="#{merchentCreationBean.selectedbranch}" value="#{it}" />
+							<!-- <f:setPropertyActionListener
+							target="#{merchentCreationBean.selectedId}" value="#{it.id}" /> -->
+
+						<f:setPropertyActionListener
+							target="#{merchentCreationBean.branchAction}" value="EDIT" />
+					</p:commandLink>
+					<p:spacer width="10px" />
+					<p:commandLink id="DOCDELETE" process="@this" rendered="false"
+						oncomplete="PF('BranchDelete').show()">
+						<f:setPropertyActionListener
+							target="#{merchentCreationBean.selectedbranch}" value="#{it}" />
+						<img src="#{request.contextPath}/images/view-small-icon.png" />
+					</p:commandLink>
+
+
+				</p:column>
+
+				<!-- <p:column headerText="Sel." selectionMode="single"/> -->
+			</p:dataTable>
+		</p:outputPanel>
+
+	</div>
+
+
+
+
+
+
+</ui:composition>

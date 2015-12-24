@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+	template="/p/layout.xhtml">
+	<ui:define name="action_header">
+		<script>
+			function showSettingDlg(xhr, status, args) {
+				if (args.validate)
+					PRODUCTSETTDLG.show();
+				else
+					$("#PDTMSG").show();
+			}
+		</script>
+</ui:define>
+	<ui:define name="content">
+<h:form  id="form1">
+			<div class="error_box" >
+	 <p:growl globalOnly="true"/>
+   </div>
+    
+     <div id="main_container">
+     <div id="container">
+    
+    
+     <div class="contant_table_box1">
+     <div class="contant_text_table_box50">
+     
+     <div class="text_width_box25">
+									<span class="user_text">Breakfast time</span>
+								</div>
+								<div class="text_width_box126_right_time">
+											<p:calendar id="btime"  value="#{notificationBean.breakfasttimings}" 
+												 tabindex="7" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Please select breakfast time"
+												 ></p:calendar><span class="star"></span>
+												  <!-- <img src="#{request.contextPath}/images/time.png"/> -->
+												
+										</div>
+	                             <div class="text_width_box25">
+									
+								</div>
+								<div class="text_width_box25_right_errorbox">
+					            <p:message for="btime"/>
+				 	            </div>
+			
+			 <div class="text_width_box25">
+									<span class="user_text">Lunch time</span>
+								</div>
+								<div class="text_width_box126_right_time">
+											<p:calendar id="ltime" value="#{notificationBean.lunchtimings}" required="true" requiredMessage="Please select lunch time"
+												 tabindex="7" pattern="HH:mm" timeOnly="true"
+												  />
+								</div>
+								
+								<div class="text_width_box25">
+									
+								</div>
+								<div class="text_width_box25_right_errorbox">
+					            <p:message for="ltime"/>
+				 	            </div>
+			
+			
+			
+			
+			
+			
+								 <div class="text_width_box25">
+									<span class="user_text">Dinner time</span>
+								</div>
+								<div class="text_width_box126_right_time">
+											<p:calendar id="dinnertime"  value="#{notificationBean.dinnertimings}" required="true" requiredMessage="Please select dinner time"
+												 tabindex="7" pattern="HH:mm" timeOnly="true"
+												  />
+								</div>
+								
+								<div class="text_width_box25">
+									
+								</div>
+								<div class="text_width_box25_right_errorbox">
+					            <p:message for="dinnertime"/>
+				 	            </div>
+				 	            
+				 	            	<div class="text_width_box25">
+									<span class="user_text">Minimum radius in km</span>
+								</div>
+								<div class="text_width_box126_right_time">
+								<h:inputText value="#{notificationBean.minradious}" id="radius"
+								class="text_box_calender1"  maxlength="75" tabindex="2" required="true" requiredMessage="#{msg['validate.radius']}"/>
+					        </div> 
+					        
+					        <div class="text_width_box25">
+									
+								</div>
+								<div class="text_width_box25_right_errorbox">
+					            <p:message for="radius"/>
+				 	            </div>
+								
+					       
+    </div>
+    	<p:outputPanel rendered="false">
+    	<div class="contant_text_table_box50">
+    <div class="text_width_box25">
+									<span class="user_text">Lunch time</span>
+								</div>
+								<div class="text_width_box126_right">
+											<p:calendar id="ltime1" value="#{notificationBean.lunchtimings}" required="true" requiredMessage="Please select lunch time"
+												 tabindex="7" pattern="hh:mm" timeOnly="true"
+												  />*
+								</div>
+								
+								<div class="text_width_box25">
+									
+								</div>
+								<div class="text_width_box25_right_errorbox">
+					            <p:message for="ltime"/>
+				 	            </div>
+    	
+								<div class="text_width_box25">
+									<span class="user_text">Minimum radius in km</span>
+								</div>
+								<div class="text_width_box25_rightner_calendar">
+								<h:inputText value="#{notificationBean.minradious}" id="radius1"
+								class="text_box"  maxlength="75" tabindex="2" required="true" requiredMessage="#{msg['validate.radius']}"/>*
+					        </div> 
+					        
+					        <div class="text_width_box25">
+									
+								</div>
+								<div class="text_width_box25_right_errorbox">
+					            <p:message for="radius1"/>
+				 	            </div>
+			   </div>
+       </p:outputPanel>
+     </div>
+     
+               
+                 <div class="save_box">
+			 
+			 <div class="cancel_button">
+				
+					<h:commandLink  value="Update"  validateClient="true"  
+						action="#{notificationBean.submit}" ></h:commandLink>
+		
+                 
+					
+				
+				</div>
+			
+					</div>
+               
+               
+               
+               
+               
+               
+              
+     
+     
+     </div>
+</div>
+
+		</h:form>
+
+
+		<p:dialog header="Confirm Delete" draggable="false" modal="true"
+					closable="true" width="350" widgetVar="ConformDelete"
+					showEffect="slide" hideEffect="slide" closeOnEscape="true"
+					resizable="false">
+	        <h:form>
+	              	
+			<div class="ft-spacer-1"/>
+			<div class="ft-spacer-1" />
+			<center>
+				 <h:outputText value="Do you want to delete this Role?"/>
+			</center>
+			<div class="ft-spacer-1" />
+			<div class="ft-spacer-1" />
+			
+				<div class="ft-dialog-footer">
+					<div class="ft-dialog-footer-btn">
+					          <p:commandButton ajax="false" styleClass="bt-yes" value="Yes" action="#{roleCreationBean.deleteRole}">
+					          </p:commandButton>
+					          <p:spacer width="5px" />
+						       <p:commandButton value="No" styleClass="bt-no" oncomplete="PF('ConformDelete').hide()"/>
+					</div>
+				</div>
+
+			       </h:form>
+  		      </p:dialog>
+		
+	
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/p/layout.xhtml">
+	<ui:define name="action_header"> 
+	</ui:define>
+	<ui:define name="content">
+
+		
+	<div id="main_container">
+     			<div class="head_bottom_listbg">
+					<div id="container">
+						<div class="head_list_box"><h3>Reports</h3></div>
+						<div class="head_list_box1">
+							<div class="left_arrow_smal"></div>
+							<h3><span>Sales</span></h3>
+						</div>
+						 
+					</div>
+				</div>
+     			<div class="contant_main">
+    				 <div class="contant_box"> 
+							<h:form id="form1" prependId="false" enctype="multipart/form-data">
+			<p:growl id="PDTMSG" rendered="false" /> 
+			  <div  style="padding-top:74px;">
+						
+					<div class="contant_text_table_box50" >
+					 		<div class="text_width_box025">
+								<span class="tab_user_text">Groups</span>
+							</div>
+							<div class="text_width_box025_right">
+								 <h:selectOneMenu styleClass="text_box" id="ChooseGroup" value="#{reportBean.selectedEntity}"   converter="gec"> 
+									<f:selectItem itemValue="#{null}" itemLabel="-Select-" />
+									<f:selectItems var="at" itemLabel="#{at.entityName}" itemValue="#{at}"  value="#{reportBean.entityList}"/>
+									<p:ajax update="ChooseBrand ChooseBranch" listener="#{reportBean.onChangeGroup}" />
+								</h:selectOneMenu>
+							</div>
+							<div class="text_width_box025">
+								<span class="tab_user_text">Brands</span>
+							</div>
+							<div class="text_width_box025_right">
+								 <h:selectOneMenu styleClass="text_box" id="ChooseBrand" value="#{reportBean.salesReport.merchant}" converter="gec"> 
+									<f:selectItem itemValue="#{null}" itemLabel="-Select-" />
+									<f:selectItems var="at" itemLabel="#{at.name}" itemValue="#{at}"  value="#{reportBean.selectedBrands}"/>
+									<p:ajax update="ChooseBranch" listener="#{reportBean.onChangeBrand}" />
+								</h:selectOneMenu>
+							</div>
+							<div class="text_width_box025">
+								<span class="tab_user_text">Outlets</span>
+							</div>
+							<div class="text_width_box025_right">
+								  <h:selectOneMenu styleClass="text_box" id="ChooseBranch" value="#{reportBean.salesReport.merchantBranch}" converter="gec"> 
+									<f:selectItem itemValue="#{null}" itemLabel="-Select-" />
+									<f:selectItems var="at" itemLabel="#{at.branchName}" itemValue="#{at.id}"  value="#{reportBean.selectedOutlets}"/>
+								</h:selectOneMenu>
+							</div>
+							</div>
+								<div class="contant_text_table_box50">
+							<div class="text_width_box025">
+								<span class="tab_user_text">Start Date</span>
+							</div>
+							<div class="text_width_box025_right">
+								<p:calendar id="startDate" value="#{reportBean.salesReport.startDate}"
+									pattern="dd-MM-yyyy HH:mm" showOn="button" required="true" requiredMessage="Please Choose Start Date"
+									validatorMessage="Please Choose Start Date" />
+							</div>
+							<div class="text_width_box025">
+								<span class="tab_user_text">End Date</span>
+							</div>
+							<div class="text_width_box025_right">
+								<p:calendar id="endDate" value="#{reportBean.salesReport.endDate}" maxdate="#{reportBean.maxDate}"
+									pattern="dd-MM-yyyy HH:mm" showOn="button" required="true" requiredMessage="Please Choose End Date"
+									validatorMessage="Please Choose End Date" />
+							</div>
+						 </div> 
+  </div>
+					<center style="margin-bottom:10px;padding-top:10px; ">
+	 					<h:commandButton image="/images/download.png"  value="Download"  id="Download2"  alt="Download Excel" rendered="true">
+						   	<p:fileDownload value="#{reportBean.downloadSalesReport}"/>
+						</h:commandButton> 
+					</center> 
+		</h:form>
+ 					</div> 
+    			</div> 
+     		</div> 
+
+
+
+
+	</ui:define>
+</ui:composition>
+ 

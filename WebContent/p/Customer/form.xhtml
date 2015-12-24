@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/p/layout.xhtml">
+	<ui:define name="action_header">
+		<script>
+			function showSettingDlg(xhr, status, args) {
+				if (args.validate)
+					PRODUCTSETTDLG.show();
+				else
+					$("#PDTMSG").show();
+			}
+		</script>
+		
+
+
+		<script type="text/javascript">
+			function keyRestrict(evt) {
+				var theEvent = evt || window.event;
+				var key = theEvent.keyCode || theEvent.which;
+
+				var keychar = String.fromCharCode(key);
+				var keycheck = /[0-9]|\./;
+
+				if (!(key == 8 || key == 27 || key == 46 || key == 9)) // backspace delete  escape arrows
+				{
+					if (keycheck.test(keychar)) {
+						theEvent.returnValue = false;//for IE
+						if (theEvent.preventDefault)
+							theEvent.preventDefault();//Firefox
+
+					}
+				}
+			}
+		</script>
+
+
+
+
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form id="form1" prependId="false">
+
+
+
+			<div id="main_container">
+
+
+				<div id="container">
+
+					<div class="contant_table_box">
+
+						<div class="error_box">
+							<!-- <p:messages rendered="#{merchentCreationBean.flag}" /> -->
+						<span class="star">	<p:messages globalOnly="true"/></span>
+						</div>
+						<div id="container">
+							<!-- <div class="admin_account_bg">
+				<h2>Merchant Creation</h2>
+			</div> -->
+                          <div class="contant_table_box1">
+     <div class="contant_text_table_box50">
+   
+			<div class="text_width_box25">
+						<span class="user_text">Customer Name</span>
+					</div>
+					<div class="text_width_box25_right">
+						<h:outputText id="customer" styleClass="text_box_empty" value="#{customerCreationBean.selectedcustomerdto.firstName} #{customerCreationBean.selectedcustomerdto.lastName}" tabindex="1"   
+							 disabled="#{customerCreationBean.action eq 'VIEW'}" >
+						</h:outputText>
+							
+							
+					</div>
+					<div class="text_width_box25">
+					</div>
+					<div class="text_width_box25_right_errorbox">
+					  <p:message for="customer"/>
+					</div>
+					
+		</div>
+		</div>
+		
+
+							<p:tabView id="BasicInfo"
+								activeIndex="#{merchentCreationBean.activeIndex}" cache="true">
+								<p:tab title="Profile" id="Personal">
+								 <ui:include src="profile.xhtml" />  
+								</p:tab>
+
+								<p:tab title="Notification Settings" id="Contact" rendered="true">
+								 	<ui:include src="Settings.xhtml" />
+								</p:tab>
+
+								<p:tab title="Order(s)" id="bank">
+								  <ui:include src="Orders.xhtml" /> 
+								</p:tab>
+								
+									<p:tab title="Preference" id="preference">
+								  <ui:include src="Preference.xhtml" /> 
+								</p:tab>
+								<p:tab title="Favourite Restaurants" id="restaurants">
+								  <ui:include src="restaurants.xhtml" /> 
+								</p:tab>
+								<p:tab title="Device Info" id="device" rendered="false">
+								  <ui:include src="device.xhtml" /> 
+								</p:tab>
+								
+							</p:tabView>
+
+
+							<div class="save_box">
+
+								<div class="cancel_button">
+
+									<h:commandLink value="Submit" tabindex="12" rendered="false" validateClient="true"
+										action="#{merchentCreationBean.submit}"></h:commandLink>
+
+                                    <h:commandLink value="SubmitBranch" validateClient="true" rendered="false"
+										action="#{merchentCreationBean.submitMerchantBranch}"></h:commandLink>
+                                    
+
+									<h:commandLink value="Cancel" tabindex="13"
+										action="#{customerCreationBean.showList}" immediate="true"></h:commandLink>
+								</div>
+
+							</div>
+
+
+
+
+
+						</div>
+
+
+
+					</div>
+
+
+
+				</div>
+
+
+
+
+
+			</div>
+
+
+		</h:form>
+
+
+
+
+		
+
+
+	</ui:define>
+</ui:composition>

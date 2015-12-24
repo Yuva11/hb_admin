@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="link_button_box " >
+
+
+			<p:commandButton value="Add" id="addbranch"
+				rendered="#{merchentCreationBean.action ne 'VIEW'}"
+				update=":branch" process="@this"
+				action="#{merchentCreationBean.addBranch}"
+				oncomplete="PF('MerchentBranch').show()">
+				<!--  <f:setPropertyActionListener 
+							target="#{merchentCreationBean.branchactionLabl}" value="ADD12" /> -->
+
+				<f:setPropertyActionListener
+					target="#{merchentCreationBean.branchAction}" value="ADD" />
+					
+			</p:commandButton>
+        <p:tooltip for="addbranch" value="Add Branch"/>
+		</div>
+
+	 <div id="contant_table_box1" style="clear:both !important;"> 
+
+		<!-- actionListener="" update="" oncomplete="PF('DOCUMENTDIALOG').show()" -->
+
+	
+
+		<p:outputPanel id="datpnl">
+			<p:dataTable id="datatble"
+				value="#{merchentCreationBean.branchList}" rowKey="it.id"
+				var="it" paginator="true" paginatorPosition="bottom" rows="21"
+				rowIndexVar="idx"
+				currentPageReportTemplate="{currentPage} / {totalPages}"
+				paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="20,50,100,500,1000" styleClass="reference">
+
+				<p:column headerText="#">
+					<h:outputText value="#{idx+1}" />
+				</p:column>
+     
+				<p:column headerText="Merchant Branch Name">
+					<h:outputText value="#{it.branchName}" /> 
+				</p:column>
+
+				<p:column headerText="City">
+					<h:outputText value="#{it.city.name}" />
+				</p:column>
+
+				<p:column headerText="Location">
+					<h:outputText value="#{it.location.name}" />
+				</p:column>
+
+                <p:column headerText="Start time">
+				<h:outputText value="#{it.startTime}" converter="PC" />
+				</p:column>
+                
+                <p:column headerText="End time">
+				<h:outputText value="#{it.endTime}" converter="PC" />
+				</p:column>
+                
+                <p:column headerText="Latitude">
+				<h:outputText value="#{it.lattitue}" />
+				</p:column> 
+                <p:column headerText="Longitude">
+				<h:outputText value="#{it.longitude}" />
+				</p:column> 
+
+				<p:column headerText="Status">
+					<h:outputText value="#{it.status}" />
+				</p:column>
+
+				<p:column headerText="Action"
+					rendered="#{merchentCreationBean.action ne 'VIEW'}">
+
+					<p:spacer width="10px" />
+					<p:commandLink id="DOCEDIT" process="@this" rendered="true"
+						action="#{merchentCreationBean.addBranch}"
+						oncomplete="PF('MerchentBranch').show()" update=":branch">
+						<!--  <f:setPropertyActionListener target="#{merchentCreationBean.selectedbranchdto}" value="#{it}" /> -->
+						<img src="#{request.contextPath}/images/edit-small-icon.png" />
+						<f:setPropertyActionListener
+							target="#{merchentCreationBean.selectedbranch}" value="#{it}" />
+							<!-- <f:setPropertyActionListener
+							target="#{merchentCreationBean.selectedId}" value="#{it.id}" /> -->
+
+						<f:setPropertyActionListener
+							target="#{merchentCreationBean.branchAction}" value="EDIT" />
+					</p:commandLink>
+					<p:tooltip for="DOCEDIT" value="EDIT BRANCH"/>
+					<p:spacer width="10px" />
+					<p:commandLink id="DOCDELETE" process="@this" rendered="false"
+						oncomplete="PF('BranchDelete').show()">
+						<f:setPropertyActionListener
+							target="#{merchentCreationBean.selectedbranch}" value="#{it}" />
+						<img src="#{request.contextPath}/images/view-small-icon.png" />
+					</p:commandLink>
+
+
+				</p:column>
+
+				<!-- <p:column headerText="Sel." selectionMode="single"/> -->
+			</p:dataTable>
+		</p:outputPanel>
+
+	</div>
+
+
+
+
+
+
+</ui:composition>

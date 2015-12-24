@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+	template="/p/layout.xhtml">
+	<ui:define name="action_header">
+		<script>
+			function showSettingDlg(xhr, status, args) {
+				if (args.validate)
+					PRODUCTSETTDLG.show();
+				else
+					$("#PDTMSG").show();
+			}
+		</script>
+		
+		
+		
+		
+
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form  id="form1">
+		
+		
+		<script type="text/javascript">
+	 function keyRestricted(evt) {
+		    var theEvent = evt || window.event;
+		    var key = theEvent.keyCode || theEvent.which;
+
+		  var keychar = String.fromCharCode(key);
+		  var keycheck = /[0-9]|\./;
+
+		    if (!(key == 8  ||  key == 27  || key == 46 ||  key == 9) ) // backspace delete  escape arrows
+		   {
+		      if ( !keycheck.test(keychar) ){       
+		          theEvent.returnValue = false;//for IE
+		      if (theEvent.preventDefault) theEvent.preventDefault();//Firefox
+
+		      }   
+		    }  
+		  }
+	
+	</script>
+			<p:growl id="PDTMSG" rendered="false"/>
+			
+    <!--   <div id="main_container">
+     
+     
+     <div id="container">
+<div  class="contant_table_box">
+
+
+	
+
+		<div id="container"> -->
+     
+     
+     
+     
+     
+          <div id="main_container">
+    
+    
+    <div class="error_box" >
+	 <p:messages globalOnly="true"/>
+   </div>
+     <div id="container">
+    
+    
+     <div class="contant_table_box1">
+     <div class="contant_text_table_box50">
+    
+								
+						 <div class="text_width_box25">
+									<span class="user_text">User Name</span>
+								</div>
+								<div class="text_width_box25_right">
+									<h:inputText id="pname" value="#{userCreationBean.userdto.name}"  tabindex="1"
+										class="text_box" required="true"  requiredMessage="#{msg['validate.userrname']}" maxlength="20"
+										disabled="#{userCreationBean.action eq 'VIEW'}" >
+										
+                                        
+										</h:inputText><span class="star"><p:outputPanel rendered="#{userCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+										 <p:watermark for="pname" value="User Personal Name" />
+								</div>		
+								
+								
+								<div class="text_width_box25">
+									
+								</div>
+								<div class="text_width_box25_right_errorbox">
+									<p:message for="pname"/>
+								</div>
+								  <div class="text_width_box25">
+									<span class="user_text">Email Address(Login Name)</span>
+								</div>
+								<div class="text_width_box25_right">
+									<h:inputText id="uname" value="#{userCreationBean.userdto.userName}" maxlength="255" tabindex="3"
+										class="text_box" required="true" validatorMessage="#{msg['validate.useremail']}" requiredMessage="#{msg['validate.useremail']}"
+										disabled="#{userCreationBean.action eq 'VIEW'}" >
+										
+                                        <f:validateRegex pattern="#{val['pattern.email']}"></f:validateRegex>
+										</h:inputText><span class="star"><p:outputPanel rendered="#{userCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+										 <p:watermark for="uname" value="Email Address" />
+								</div>
+								
+									<div class="text_width_box25">
+									
+								</div>
+								<div class="text_width_box25_right_errorbox">
+									<p:message for="uname"/>
+								</div>
+								
+									<p:outputPanel rendered="#{userCreationBean.action eq 'ADD'}">
+								<div class="text_width_box25">
+									<span class="user_text">Confirm Password</span>
+								</div>
+								<div class="text_width_box25_right">
+									<h:inputSecret id="cpassf" redisplay="true" class="password_box" required="true" requiredMessage="#{msg['validate.password']}"
+										value="#{userCreationBean.userdto.confirmPassword}" tabindex="5" validatorMessage="#{msg['validate.password']}"
+										disabled="#{userCreationBean.action eq 'VIEW'}" >
+										<!-- <f:validateLength minimum="4" maximum="15" /> -->
+                                          <f:validateRegex pattern="#{val['pattern.password']}"></f:validateRegex> 
+										</h:inputSecret><span class="star"><p:outputPanel rendered="#{userCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+										
+										<p:watermark for="cpassf" value="Password must contain atleast a digit,one upper and one lower case character"/>
+										<p:tooltip for="cpassf" value="Password must contain atleast a digit,one upper and one lower case character"/>
+								</div>
+								</p:outputPanel>
+                                 <div class="text_width_box25">
+									
+								</div>
+								<div class="text_width_box25_right_errorbox">
+									<p:message for="cpassf"/>
+								</div>
+								
+								
+								
+								
+								
+								
+								
+						
+								
+								
+								
+								<p:outputPanel rendered="false">
+									<div class="text_width_box25">
+										<span class="user_text">Email Address</span>
+									</div>
+									<div class="text_width_box25_right">
+										<h:inputText value="#{userCreationBean.userdto.userName}"
+											class="text_box" />
+									</div>
+								</p:outputPanel>
+								
+						</div>		
+								
+						  <div class="contant_text_table_box50">		
+								<p:outputPanel rendered="true">
+									<div class="text_width_box25">
+										<span class="user_text">Contact Number</span>
+									</div>
+									<div class="text_width_box25_right">
+										<h:inputText id="contactno" value="#{userCreationBean.userdto.contactNumber}"
+											class="text_box" maxlength="10" tabindex="2"
+											disabled="#{userCreationBean.action eq 'VIEW'}"
+											onkeypress="return keyRestricted(event)" />
+									</div>
+									<p:watermark for="contactno" value="Contact No"/>
+								</p:outputPanel>
+
+                            <p:outputPanel rendered="#{userCreationBean.action eq 'ADD'}">
+                               <div class="text_width_box25">
+									<span class="user_text">Password</span>
+								</div>
+								<div class="text_width_box25_right">
+									<h:inputSecret id="passwo" class="password_box" redisplay="true" tabindex="4"
+										value="#{userCreationBean.userdto.passwordHash}" required="true" requiredMessage="#{msg['validate.password']}"
+										disabled="#{userCreationBean.action eq 'VIEW'}" validatorMessage="#{msg['validate.password']}">
+											<f:validateLength minimum="4" maximum="15" />
+                                             <f:validateRegex pattern="#{val['pattern.password']}"></f:validateRegex> 
+										</h:inputSecret><span class="star"><p:outputPanel rendered="#{userCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+										
+										<p:watermark for="passwo" value="Password must contain atleast a digit,one upper and one lower case character"/>
+										<p:tooltip for="passwo" value="Password must contain atleast a digit,one upper and one lower case character"/>
+								</div>
+                                
+                                <div class="text_width_box25">
+									
+								</div>
+								<div class="text_width_box25_right_errorbox">
+									<p:message for="passwo"/>
+								</div>
+                              </p:outputPanel>
+								
+
+						
+                                
+                                <div class="text_width_box25">
+									<span class="user_text">Role</span>
+								</div>
+								<div class="text_width_box25_right">
+									<h:selectOneMenu id="roles" value="#{userCreationBean.userdto.role}"
+										class="drodown_box" tabindex="6"
+										disabled="#{userCreationBean.action eq 'VIEW'}"
+										converter="gec">
+										
+										<f:selectItems value="#{userCreationBean.roleDtoList}"
+											var="it" itemLabel="#{it.rolename}" itemValue="#{it}" />
+									</h:selectOneMenu><span class="star"><p:outputPanel rendered="#{userCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+									
+									
+								</div>
+								
+    
+	 	
+						  <p:outputPanel rendered="true">
+						<div class="text_width_box25">
+							<span class="user_text">Status</span>
+						</div>
+						<div class="text_width_box25_right">
+							<h:selectOneMenu id="status"  disabled="#{userCreationBean.action eq 'VIEW'}"  value="#{userCreationBean.userdto.status}"  class="drodown_box" tabindex="6">        
+					              <f:selectItem itemLabel="Active" itemValue="ACTIVE"/>
+					        	  <f:selectItem itemLabel="Blocked" itemValue="BLOCKED"/>
+
+					          </h:selectOneMenu> <span class="star"><p:outputPanel rendered="#{userCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+
+					          
+						</div>
+						 </p:outputPanel>
+					
+					     <div class="text_width_box25">
+						</div>
+						<div class="text_width_box25_right_error">
+						   <p:message for="status"/>
+						</div>
+							
+					    
+					       
+    </div>
+
+     </div>
+     
+              <div class="save_box">
+			 
+			 <div class="cancel_button">
+				
+					<h:commandLink  value="Submit" rendered="#{userCreationBean.action ne 'VIEW'}" validateClient="true" tabindex="6"
+						action="#{userCreationBean.submit}" ></h:commandLink>
+		
+                 
+					
+					<h:commandLink  value="Cancel" tabindex="7"
+						action="#{userCreationBean.showList}" immediate="true"></h:commandLink>
+				</div>
+			
+					</div>
+     
+     
+     </div>
+</div>
+
+
+		</h:form>
+
+<!-- <p:dialog header="Logout Confirmation" draggable="false" modal="true"
+			closable="false" width="390" widgetVar="LogoutConfirm"
+			showEffect="slide" hideEffect="slide" closeOnEscape="true"
+			resizable="false">
+			<h:form id="DLGG">
+				
+				<h:outputText value="Do you want to Logout ?"  />
+			
+				
+				
+				<p:spacer width="5px" />
+				<input type="button" value="Logout" onClick="javascript:location.href = '#{request.contextPath}/j_spring_security_logout';" />
+				<p:commandButton value="No" oncomplete="PF('LogoutConfirm').hide()" />
+			</h:form>
+		</p:dialog> -->
+		
+	
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/p/layout.xhtml">
+	<ui:define name="action_header"> 
+	 
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form id="terms" prependId="false">
+			<p:growl id="globalmessages" globalOnly="true" showDetail="false" />
+		
+			<div id="main_container" style="padding-top:72px;">
+				<div class="head_bottom_listbg">
+					<div id="container">
+						<div class="head_list_box">
+							<h3>Content</h3>
+						</div>
+						<div class="head_list_box1">
+							<div class="left_arrow_smal"></div>
+							<h3>
+								<span>Ad Settings</span>
+							</h3>
+						</div> 
+					</div>
+					
+				</div>
+				<div class="container1"  style="padding-top:80px; "> 
+					<div class="cantent_mains_boxes"  >
+						<div class="content_border_box" style="margin-bottom:133px; !important">  
+						
+							 	<div class="contant_text_table_box50">
+							 	<div class="text_width_box25">
+									<span class="user_text">Font Style            :</span>
+								</div>
+								<div class="text_width_box25_right">
+									<h:selectOneMenu styleClass="text_box" value="#{adSettingsBean.font.value}" tabindex="1" required="true">
+										<f:selectItem itemLabel="DEFAULT" itemValue="DEFAULT" />
+										<f:selectItem  itemLabel="MONOSPACE" itemValue="MONOSPACE" />
+										<f:selectItem itemLabel="PRISTINA" itemValue="PRISTINA" />
+										<f:selectItem itemLabel="SANS_SERIF" itemValue="SANS_SERIF" />
+										<f:selectItem itemLabel="SERIF" itemValue="SERIF" />
+									</h:selectOneMenu> 
+								</div> 
+								<div class="text_width_box25">
+									<span class="user_text">Font Color  :</span>
+								</div>
+								<div class="text_width_box25_right" >
+									<p:colorPicker id="color-picker" tabindex="3" value="#{adSettingsBean.color.value}" required="true"   requiredMessage="#{msg['validate.color']}" >
+									</p:colorPicker>  
+								</div>  
+								<p:spacer width="75%" height="0px;" />
+								<div class="text_width_box25">
+									
+								</div>
+								<div class="text_width_box25_right_errorbox">
+									<p:message for="color-picker"/>
+								</div>
+								<div class="text_width_box25">
+									<span class="user_text">Size in pixels :</span>
+								</div>
+								<div class="text_width_box25_right">
+									<h:inputText id="size" value="#{adSettingsBean.fontsize.value}" onkeydown=" return checkNum(event);" tabindex="5"
+										class="text_box" required="true"  minlength="1"
+									maxlength="2" requiredMessage="#{msg['validate.fontsize']}"
+									validatorMessage="#{msg['validate.fontsize']}"> 
+										</h:inputText>    
+								</div> 
+								<div class="text_width_box25">
+									
+								</div>
+								<div class="text_width_box25_right_errorbox">
+									<p:message for="size"/>
+								</div>
+								<p:spacer width="70%" height="0px;" />
+								
+								<p:spacer width="100%" height="0px;" />
+								<div class="text_width_box25">
+									
+								</div>
+								<div class="text_width_box25_right_errorbox">
+									<p:message for="bg-color-picker"/>
+								</div>
+									<div >
+										<div class="save_box"> 
+											 <div class="cancel_button"> 
+												<h:commandLink  value="Save"  action="#{adSettingsBean.submit}"></h:commandLink>
+												<h:commandLink  value="Cancel"  action="#{adSettingsBean.cancel}" immediate="true"></h:commandLink>  
+											</div> 
+											
+											 
+										</div>
+									</div>
+							 	</div>
+							 	
+						<div class="contant_text_table_box50">
+							 		<div class="text_width_box25">
+										<span class="user_text">FB Wall Post Message :</span>
+									</div>
+									
+									<div class="text_width_box25_right">
+										<h:inputText id="fbmessage" value="#{adSettingsBean.fb_wall_post_message.value}"  tabindex="2"
+											class="text_box" required="true" 
+											requiredMessage="#{msg['validate.fbmessage']}"> 
+										</h:inputText>    
+								   </div>
+	
+								  <div class="text_width_box25_right_errorbox">
+									<p:message for="fbmessage"/>
+								</div>
+								
+								  <div class="text_width_box25">
+										<span class="user_text">LinkedIn Message :</span>
+								 </div>
+								 
+								 
+								 <div class="text_width_box25_right">
+										<h:inputText id="linkedinmessage" value="#{adSettingsBean.linkedin_message.value}"  tabindex="4"
+											class="text_box" required="true" 
+											requiredMessage="#{msg['validate.linkedinmessage']}"> 
+										</h:inputText>    
+								 </div>
+								 <div class="text_width_box25_right_errorbox">
+									<p:message for="linkedinmessage"/>
+								</div>
+								 <div class="text_width_box25">
+									<span class="user_text">Background :</span>
+								</div>
+								<div class="text_width_box25_right">
+									<p:colorPicker id="bg-color-picker" value="#{adSettingsBean.background.value}" required="true"   requiredMessage="#{msg['validate.background']}" > 
+									</p:colorPicker> 
+								</div>  
+							 	</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+			
+		
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+	
+				
+				<div class="contant_table_box1">
+				<div class="contant_text_table_box50">
+								
+							
+					<div class="text_width_box025">
+						<span class="tab_user_text">Email Address</span>
+					</div>
+					<div class="text_width_box025_right">
+						<!-- <h:inputText value="#{merchentCreationBean.merchantdto.name}"
+							class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}"  maxlength="45" onkeypress="return keyRestrict(event)" tabindex="1"/>* -->
+							
+							<h:inputText id="name" disabled="#{customerCreationBean.action eq 'VIEW'}" value="#{customerCreationBean.selectedcustomerdto.email}" class="text_box" 
+          tabindex="1" >
+             </h:inputText>
+           
+           
+          <span class="star"> <p:outputPanel rendered="#{customerCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+          
+                  </div>
+                  <div class="text_width_box25">
+                  </div>
+					<div class="text_width_box25_right_error">
+					   <p:message for="name"/>
+					</div>
+					
+					
+					<div class="text_width_box025">
+						<span class="tab_user_text">Mobile Number</span>
+					</div>
+					<div class="text_width_box025_right">
+						<!-- <h:inputText value="#{merchentCreationBean.merchantdto.name}"
+							class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}"  maxlength="45" onkeypress="return keyRestrict(event)" tabindex="1"/>* -->
+							
+							<h:inputText id="mnumber" disabled="#{customerCreationBean.action eq 'VIEW'}" value="#{customerCreationBean.selectedcustomerdto.mobileNumber}" class="text_box" 
+          tabindex="1" >
+             </h:inputText>
+           
+           
+          <span class="star"> <p:outputPanel rendered="#{customerCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+          
+                  </div>
+                  <div class="text_width_box25">
+                  </div>
+					<div class="text_width_box25_right_error">
+					   <p:message for="mnumber"/>
+					</div>
+					
+					<div class="text_width_box025">
+						<span class="tab_user_text">Date Of Birth</span>
+					</div>
+					<div class="text_width_box025_right">
+						<!-- <h:inputText value="#{merchentCreationBean.merchantdto.name}"
+							class="text_box" disabled="#{merchentCreationBean.action eq 'VIEW'}"  maxlength="45" onkeypress="return keyRestrict(event)" tabindex="1"/>* -->
+							
+							<h:inputText id="dob" converter="PTC" disabled="#{customerCreationBean.action eq 'VIEW'}" value="#{customerCreationBean.selectedcustomerdto.dob}" class="text_box" 
+          tabindex="1" >
+           
+             </h:inputText></div>
+           
+					
+					
+					
+					
+					
+				</div>
+				<div class="contant_text_table_box50">
+					    
+					    
+					  <p:outputPanel rendered="true">
+						<div class="text_width_box025">
+							<span class="tab_user_text">Social Network</span>
+						</div>
+						<div class="text_width_box025_right">
+						<h:inputText id="media" disabled="#{customerCreationBean.action eq 'VIEW'}" value="#{customerCreationBean.selectedcustomerdto.user.provider}" class="text_box" 
+          tabindex="1" >
+             </h:inputText>
+							<span class="star"> <p:outputPanel rendered="#{customerCreationBean.action ne 'VIEW'}">*</p:outputPanel></span> 
+
+						</div>
+						 </p:outputPanel>
+						<div class="text_width_box25">
+						</div>
+						<div class="text_width_box25_right_error">
+						   <p:message for="media"/>
+						</div>
+					    
+					     <p:outputPanel rendered="true">
+						<div class="text_width_box025">
+							<span class="tab_user_text">Gender</span>
+						</div>
+						<div class="text_width_box025_right">
+						<h:inputText id="gender" disabled="#{customerCreationBean.action eq 'VIEW'}" value="Male" class="text_box" 
+          tabindex="1" >
+             </h:inputText>
+							<span class="star"> <p:outputPanel rendered="#{customerCreationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+					           <h:outputText styleclass="text_box1" rendered="false" value="#{merchentCreationBean.merchantdto.speciality.name}"/>
+					         
+					          
+
+						</div>
+						 </p:outputPanel>
+						<div class="text_width_box25">
+						</div>
+						<div class="text_width_box25_right_error">
+						   <p:message for="gender"/>
+						</div>
+					    
+					    
+					    
+					 </div>
+                    </div>
+					
+				
+				
+	
+	
+	
+	</ui:composition>

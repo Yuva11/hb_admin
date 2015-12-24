@@ -1,0 +1,457 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form id="dlgfrm">
+		<p:messages id="messages" showDetail="false" autoUpdate="true"
+			closable="true" />
+		<script type="text/javascript">
+			var currentMarker = null;
+			function handlePointClick(event) {
+				if (currentMarker === null) {
+					document.getElementById('lat').value = event.latLng.lat();
+					document.getElementById('langi').value = event.latLng.lng();
+					alert("hai");
+					currentMarker = new google.maps.Marker({
+						position : new google.maps.LatLng(event.latLng.lat(),
+								event.latLng.lng())
+					});
+					PF('map').addOverlay(currentMarker);
+				}
+			}
+			function keyRestrict(evt) {
+				var theEvent = evt || window.event;
+				var key = theEvent.keyCode || theEvent.which;
+				var keychar = String.fromCharCode(key);
+				var keycheck = /[0-9]|\./;
+				if (!(key == 8 || key == 27 || key == 46 || key == 9)) // backspace delete  escape arrows
+				{
+					if (keycheck.test(keychar)) {
+						theEvent.returnValue = false;//for IE
+						if (theEvent.preventDefault)
+							theEvent.preventDefault();//Firefox
+					}
+				}
+			}
+		</script>
+		<p:outputPanel id="dlgpnl">
+			<div class="contant_text_table_box50">
+				<div class="text_width_box25">
+					<span class="user_text">Brand Name : </span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="outletBrandName"
+						value="#{groupEntityBean.brandEntity.name}" disabled="true"
+						class="text_box" maxlength="50" tabindex="1" required="true"
+						requiredMessage="#{msg['validate.branch']}" />
+				</div>
+				<!-- Outlet Name -->
+				<div class="text_width_box25">
+					<span class="user_text">Outlet Name</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="outletName"
+						value="#{groupEntityBean.outlet.branchName}" class="text_box"
+						maxlength="50" tabindex="1" required="true"
+						requiredMessage="#{msg['validate.branch']}" />
+					<span class="star">*</span>
+					<p:watermark for="outletName" value="1 to 50 characters" />
+				</div>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="outletName_msg" for="outletName" />
+				</div>
+				<!-- Outlet Name -->
+				<div class="text_width_box25">
+					<span class="user_text">E-Mail</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="eMail"
+						disabled="#{groupEntityBean.action eq 'VIEW'}"
+						value="#{groupEntityBean.outlet.eMail}" class="text_box"
+						required="true" requiredMessage="#{msg['1155']}"
+						validatorMessage="#{msg['validate.useremail']}" tabindex="2">
+						<f:validateLength minimum="4" maximum="75" />
+						<f:validateRegex pattern="#{val['pattern.email']}"></f:validateRegex>
+					</h:inputText>
+					<span class="star">*</span>
+					<p:watermark for="eMail" value="Ex. group@hungrybells.in"
+						id="eMail-watermark" />
+				</div>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="eMail_msg" for="eMail" />
+				</div>
+				<!-- Alternate E-mail 1 -->
+				<div class="text_width_box25">
+					<h:outputText class="user_text"
+						value="Alternate E-Mail:1"/>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="eMail1"
+						disabled="#{groupEntityBean.action eq 'VIEW'}"
+						value="#{groupEntityBean.outlet.altEmailOne}" class="text_box"
+						required="false" requiredMessage="#{msg['1155']}"
+						validatorMessage="#{msg['validate.useremail']}" tabindex="2">
+						<f:validateLength minimum="4" maximum="75" />
+						<f:validateRegex pattern="#{val['pattern.email']}"></f:validateRegex>
+					</h:inputText>
+				</div>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="eMail_msg1" for="eMail1" />
+				</div>
+				<!-- Alternate E-mail 2 -->
+				<div class="text_width_box25">
+					<h:outputText class="user_text"
+						value="Alternate E-Mail:2"/>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="eMail2"
+						disabled="#{groupEntityBean.action eq 'VIEW'}"
+						value="#{groupEntityBean.outlet.altEmailTwo}" class="text_box"
+						required="false" requiredMessage="#{msg['1155']}"
+						validatorMessage="#{msg['validate.useremail']}" tabindex="2">
+						<f:validateLength minimum="4" maximum="75" />
+						<f:validateRegex pattern="#{val['pattern.email']}"></f:validateRegex>
+					</h:inputText>
+				</div>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="eMail_msg2" for="eMail2" />
+				</div>
+				<!-- Alternate E-mail 3 -->
+				<div class="text_width_box25">
+					<h:outputText class="user_text"
+						value="Alternate E-Mail:3"/>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="eMail3"
+						disabled="#{groupEntityBean.action eq 'VIEW'}"
+						value="#{groupEntityBean.outlet.altEmailThree}" class="text_box"
+						required="false" requiredMessage="#{msg['1155']}"
+						validatorMessage="#{msg['validate.useremail']}" tabindex="2">
+						<f:validateLength minimum="4" maximum="75" />
+						<f:validateRegex pattern="#{val['pattern.email']}"></f:validateRegex>
+					</h:inputText>
+				</div>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="eMail_msg3" for="eMail3" />
+				</div>
+				<!-- Mobile No: -->
+				<div class="text_width_box25">
+					<span class="user_text">Mobile No</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="mobileNumber"
+						disabled="#{groupEntityBean.action eq 'VIEW'}"
+						value="#{groupEntityBean.outlet.mobileNumber}" class="text_box"
+						required="true" minlength="10" maxlength="10"
+						onkeydown=" return checkNum(event);" onkeyup="phoneCheck(this);"
+						requiredMessage="#{msg['1152']}" validatorMessage="#{msg['1162']}"
+						tabindex="3">
+						<f:validateLength minimum="10" maximum="10" />
+						<f:validateRegex pattern="#{val['mobilenumber']}"></f:validateRegex>
+					</h:inputText>
+					<span class="star">*</span>
+					<p:watermark for="mobileNumber"
+						value="Mobile Number must be 10 digit" id="mobileNumber-watermark" />
+				</div>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="mobileNumber_msg" for="mobileNumber" />
+				</div>
+				<!--Alternate Contact Number 1-->
+				<div class="text_width_box25">
+					<h:outputText class="user_text"
+						value="Alternate Mobile No:1"/>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="mobileNumber1"
+						disabled="#{groupEntityBean.action eq 'VIEW'}"
+						value="#{groupEntityBean.outlet.altMobileNumberOne}"
+						class="text_box" required="false" minlength="10" maxlength="10"
+						onkeydown=" return checkNum(event);" onkeyup="phoneCheck(this);"
+						requiredMessage="#{msg['1152']}" validatorMessage="#{msg['1162']}"
+						tabindex="3">
+						<f:validateLength minimum="10" maximum="10" />
+						<f:validateRegex pattern="#{val['mobilenumber']}"></f:validateRegex>
+					</h:inputText>
+					<p:watermark for="mobileNumber"
+						value="Mobile Number must be 10 digit"
+						id="mobileNumber-watermark1" />
+				</div>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="mobileNumber_msg1" for="mobileNumber" />
+				</div>
+				<!--Alternate Contact Number 2-->
+				<div class="text_width_box25">
+					<h:outputText class="user_text"
+	       						value="Alternate Mobile No:2"/>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="mobileNumber2"
+						disabled="#{groupEntityBean.action eq 'VIEW'}"
+						value="#{groupEntityBean.outlet.altMobileNumberTwo}"
+						class="text_box" required="false" minlength="10" maxlength="10"
+						onkeydown=" return checkNum(event);" onkeyup="phoneCheck(this);"
+						requiredMessage="#{msg['1152']}" validatorMessage="#{msg['1162']}"
+						tabindex="3">
+						<f:validateLength minimum="10" maximum="10" />
+						<f:validateRegex pattern="#{val['mobilenumber']}"></f:validateRegex>
+					</h:inputText>
+					<p:watermark for="mobileNumber"
+						value="Mobile Number must be 10 digit"
+						id="mobileNumber-watermark2" />
+				</div>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="mobileNumber_msg2" for="mobileNumber" />
+				</div>
+				<!--Alternate Contact Number 3-->
+				<div class="text_width_box25">
+					<h:outputText class="user_text"
+						value="Alternate Mobile No:3"/>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="mobileNumber3"
+						disabled="#{groupEntityBean.action eq 'VIEW'}"
+						value="#{groupEntityBean.outlet.altMobileNumberThree}"
+						class="text_box" required="false" minlength="10" maxlength="10"
+						onkeydown=" return checkNum(event);" onkeyup="phoneCheck(this);"
+						requiredMessage="#{msg['1152']}" validatorMessage="#{msg['1162']}"
+						tabindex="3">
+						<f:validateLength minimum="10" maximum="10" />
+						<f:validateRegex pattern="#{val['mobilenumber']}"></f:validateRegex>
+					</h:inputText>
+					<p:watermark for="mobileNumber"
+						value="Mobile Number must be 10 digit"
+						id="mobileNumber-watermark3" />
+				</div>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="mobileNumber_msg3" for="mobileNumber" />
+				</div>
+				<!-- CITY -->
+				<div class="text_width_box25">
+					<span class="user_text">City</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:selectOneMenu id="city" value="#{groupEntityBean.outlet.city}"
+						converter="gec" class="drodown_box" required="true"
+						requiredMessage="Please choose City" tabindex="4">
+						<f:selectItem itemLabel="Select" itemValue="#{null}" />
+						<f:selectItems value="#{groupEntityBean.cityList}" var="it"
+							itemLabel="#{it.name}" itemValue="#{it}" />
+						<p:ajax event="change" process="@this"
+							listener="#{groupEntityBean.UpdateLocation}" update="mlocation1" />
+					</h:selectOneMenu>
+					<span class="star">*</span>
+				</div>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="mcity" for="city" />
+				</div>
+				<!-- CITY -->
+				<!-- Location -->
+				<p:outputPanel rendered="true" id="mlocation1">
+					<div class="text_width_box25">
+						<span class="user_text">Location</span>
+					</div>
+					<div class="text_width_box25_right">
+						<h:selectOneMenu id="location"
+							value="#{groupEntityBean.outlet.location}" converter="gec"
+							class="drodown_box" required="true"
+							requiredMessage="Please choose location" tabindex="5">
+							<f:selectItem itemLabel="Select" itemValue="#{null}" />
+							<f:selectItems value="#{groupEntityBean.locationList}" var="it"
+								itemLabel="#{it.name}" itemValue="#{it}" />
+							<p:ajax event="change" process="@this"
+								listener="#{groupEntityBean.UpdateMap}"
+								update="mappnl latpnl longpanl" />
+						</h:selectOneMenu>
+						<span class="star">*</span>
+					</div>
+					<div class="text_width_box25"></div>
+					<div class="text_width_box25_right_errorbox">
+						<p:message id="mlocation" for="location" />
+					</div>
+				</p:outputPanel>
+				<!-- Location -->
+				<div class="text_width_box25">
+					<span class="user_text">Outlet Address</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputTextarea id="badd"
+						value="#{groupEntityBean.outlet.address}" required="true"
+						requiredMessage="Address should entered 1 and 150 characters"
+						tabindex="6" class="text_box" maxlength="150">
+						<f:validateLength minimum="4" maximum="150" />
+						<p:ajax event="change" process="@this"
+							listener="#{groupEntityBean.UpdateLocationAddress}"
+							update="mappnl latpnl longpanl" />
+					</h:inputTextarea>
+					<p:watermark for="badd" value="4 to 150 characters" />
+					<span class="star">*</span>
+				</div>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="maddress" for="badd" />
+				</div>
+				<div class="text_width_box25">
+					<span class="user_text">Merchant Pincode</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="pincode" value="#{groupEntityBean.outlet.pincode}"
+						onkeypress="return keyRestricted(event)" class="text_box"
+						maxlength="6" tabindex="7" required="true"
+						requiredMessage="#{msg['validate.pincode']}"
+						validatorMessage="#{msg['validate.pincode']}">
+						<f:validateLength minimum="5" maximum="75" />
+					</h:inputText>
+					<span class="star">*</span>
+					<p:watermark for="pincode" value="1 to 6 digits" />
+				</div>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="mpincode" for="pincode" />
+				</div>
+					<!-- TIME -->
+				<p:outputPanel rendered="true" id="stime">
+					<div class="text_width_box25">
+						<span class="user_text">Start time</span>
+					</div>
+					<div class="text_width_box125_right"
+						style="margin-left: 0px; margin-bottom: 14px;">
+						<p:calendar value="#{groupEntityBean.startTime}" tabindex="8"
+							pattern="HH:mm" timeOnly="true" />
+					</div>
+				</p:outputPanel>
+				<!-- TIME -->
+				<p:outputPanel rendered="true">
+					<div class="text_width_box25">
+						<span class="user_text">End Time</span>
+					</div>
+					<div class="text_width_box125_right"
+						style="margin-left: 0px; margin-bottom: 14px;">
+						<p:calendar value="#{groupEntityBean.endTime}" id="etime"
+							tabindex="9" pattern="HH:mm" timeOnly="true" />
+					</div>
+				</p:outputPanel>
+				<!-- TIME --> 
+				<p:outputPanel id="latpnl" rendered="true">
+					<div class="text_width_box25">
+						<span class="user_text">Latitude</span>
+					</div>
+					<div class="text_width_box25_right">
+						<h:inputText id="lat" maxlength="20"
+							value="#{groupEntityBean.outlet.lattitue}"
+							onkeypress="return keyRestricted(event)" class="text_box"
+							tabindex="10">
+						</h:inputText>
+						<p:watermark for="lat" value="Latitude" />
+					</div>
+				</p:outputPanel>
+				<p:outputPanel rendered="true" id="longpanl">
+					<div class="text_width_box25">
+						<span class="user_text">Longitude</span>
+					</div>
+					<div class="text_width_box25_right">
+						<h:inputText id="langi"
+							value="#{groupEntityBean.outlet.longitude}" maxlength="20"
+							onkeypress="return keyRestricted(event)" class="text_box"
+							tabindex="11">
+						</h:inputText>
+						<p:watermark for="langi" value="Longitude" />
+					</div>
+				</p:outputPanel>
+				<p:outputPanel rendered="true">
+					<div class="text_width_box25">
+						<span class="user_text">Status</span>
+					</div>
+					<div class="text_width_box25_right">
+						<h:selectOneMenu id="status"
+							value="#{groupEntityBean.outlet.status}" class="drodown_box"
+							required="true" requiredMessage="Please select status"
+							tabindex="12">
+							<f:selectItem itemLabel="ACTIVE" itemValue="ACTIVE" />
+							<f:selectItem itemLabel="BLOCKED" itemValue="BLOCKED" />
+						</h:selectOneMenu>
+						<span class="star">*</span>
+					</div>
+				</p:outputPanel>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="mstatus" for="status" />
+				</div>
+			</div>
+			<div class="map_text_table_box50">
+				<p:outputPanel id="mappnl">
+					<p:gmap id="gmap" zoom="15" model="#{groupEntityBean.emptyModel}"
+						center="#{groupEntityBean.outlet.lattitue},#{groupEntityBean.outlet.longitude}"
+						type="ROADMAP" style="width:537px;height:500px" widgetVar="map">
+						<p:ajax event="markerDrag"
+							process="@this outletName lat langi badd city location pincode stime etime"
+							listener="#{groupEntityBean.onMarkerDrag}" update="dlgpnl" />
+					</p:gmap>
+				</p:outputPanel>
+			</div>
+			<div style="padding-top: 20px;">
+				<p:commandButton
+					update="mcity,maddress,mstatus,mlocation,mpincode BrandListPanel :BasicInfo:dlgfrm"
+					value="Submit" action="#{groupEntityBean.submitBranch}"
+					tabindex="12">
+				</p:commandButton>
+				<p:commandButton value="Cancel" tabindex="14" immediate="true"
+					action="#{groupEntityBean.showList}" />
+			</div>
+		</p:outputPanel>
+		<div class="contant_table_box">
+			<p:outputPanel id="BrandListPanel">
+				<p:dataTable rendered="#{not empty groupEntityBean.outletList}"
+					value="#{groupEntityBean.outletList}" var="it"
+					widgetVar="roletable" paginator="true" paginatorPosition="bottom"
+					rows="21" rowIndexVar="idx"
+					currentPageReportTemplate="{currentPage} / {totalPages}"
+					paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="20,50,100,500,1000" styleClass="reference">
+					<p:column headerText="#">
+						<h:outputText value="#{idx+1}" />
+					</p:column>
+					<p:column headerText="Outlet Name">
+						<h:outputText value="#{it.branchName}" />
+					</p:column>
+					<p:column headerText="Location">
+						<p:outputPanel id="locationPanel"
+							rendered="#{not empty it.location}">
+							<h:outputText value="#{it.location.name}" />
+						</p:outputPanel>
+					</p:column>
+					<p:column headerText="Address">
+						<h:outputText value="#{it.address}" />
+					</p:column>
+					<p:column headerText="Status">
+						<h:outputText value="#{it.status}" />
+					</p:column>
+					<p:column headerText="Action">
+						<p:commandLink action="#{groupEntityBean.showEditBranch}"
+							update=":BasicInfo:dlgfrm" process="@this" id="EditOutlet"
+							immediate="true">
+							<img src="#{request.contextPath}/images/edit-small-icon.png"
+								title="Edit" alt="Edit" border="0" />
+							<f:setPropertyActionListener
+								target="#{groupEntityBean.branchAction}" value="EDIT" />
+							<f:setPropertyActionListener target="#{groupEntityBean.outlet}"
+								value="#{it}" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+		</div>
+	</h:form>
+</ui:composition>

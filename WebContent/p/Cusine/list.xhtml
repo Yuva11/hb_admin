@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+	template="/p/layout.xhtml">
+	<ui:define name="action_header">
+		<script>
+			function showSettingDlg(xhr, status, args) {
+				if (args.validate)
+					PRODUCTSETTDLG.show();
+				else
+					$("#PDTMSG").show();
+			}
+		</script>
+
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form  id="form1" prependId="false">
+			<p:growl id="PDTMSG" />
+			
+     <div id="main_container">
+     <div class="head_bottom_listbg">
+<div id="container">
+
+
+<div class="head_list_box"><h3>Masters</h3></div>
+<div class="head_list_box1">
+<div class="left_arrow_smal"></div>
+<h3><span>Cuisines</span></h3></div>
+
+
+
+<div class="menu_list_button_box">
+<p:outputPanel rendered="true">
+<div class="button_list">
+<!-- <a href="#"><i class="fa fa-plus"></i></a> -->
+<h:commandLink id="btnadd" rendered="#{((userCreationBean.url ne userCreationBean.userName) and (userCreationBean.userFeatures['Add cuisines']))}" action="#{cuisineBean.showForm}"><i class="fa fa-plus"></i>
+<f:setPropertyActionListener target="#{cuisineBean.action}" value="ADD"/>
+</h:commandLink>
+<p:tooltip for="btnadd" value="Add" showEffect="fade" hideEffect="fade"/>
+
+<h:commandLink id="btnedit" rendered="#{((userCreationBean.url ne userCreationBean.userName) and (userCreationBean.userFeatures['Edit cuisines']))}" action="#{cuisineBean.showForm}"><i class="fa fa-pencil"></i>
+   <f:setPropertyActionListener target="#{cuisineBean.action}" value="EDIT"/>
+</h:commandLink>
+<p:tooltip for="btnedit"  value="Edit" showEffect="fade" hideEffect="fade"/>
+<h:commandLink id="btnview" rendered="#{((userCreationBean.url ne userCreationBean.userName) and (userCreationBean.userFeatures['View cuisines']))}" action="#{cuisineBean.showForm}"><i class="fa fa-th-large"></i>
+   <f:setPropertyActionListener target="#{cuisineBean.action}" value="VIEW"/>
+</h:commandLink>
+<p:tooltip for="btnview" value="View" showEffect="fade" hideEffect="fade"/>
+<!-- <a href="#"><i class="fa fa-pencil"></i></a>  -->
+<!-- <a href="#"><i class="fa fa-th-large"></i></a> -->
+<!-- <a href="#"><i class="fa fa-trash-o"></i></a> -->
+<h:commandLink rendered="#{((userCreationBean.url ne userCreationBean.userName) and (userCreationBean.userFeatures['Delete cuisines']))}" action="#{cuisineBean.confirmation}" id="btndel"><i class="fa fa-trash-o"></i>
+</h:commandLink>
+<p:tooltip for="btndel" value="Delete" showEffect="fade" hideEffect="fade" /> 
+
+</div>
+</p:outputPanel>
+</div>
+
+
+</div>
+</div>
+     
+     
+     
+     
+    <div class="contant_main">
+    
+     <div class="contant_box">
+     
+      <div class="dropdons_box">
+
+<!-- <div class="serch_box">
+<input type="text" class="search" placeholder="Search"/>
+<div class="search1">
+<a href="#"><i class="fa fa-search"></i></a>
+</div>
+</div> -->
+ </div>
+ 
+ 
+ 
+ 
+ 
+ <div  class="contant_table_box">
+
+
+						<p:dataTable value="#{cuisineBean.cusineList}" rowKey="#{it.id}" var="it" paginator="true" paginatorPosition="bottom" rows="20"  rowIndexVar="idx"
+								currentPageReportTemplate="{currentPage} / {totalPages}" selection="#{cuisineBean.selectedcusinedto}"
+								paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="20,50,100,500,1000"  styleClass="reference">
+							
+								<p:column headerText="#">
+								 <h:outputText value="#{idx+1}"/>
+								</p:column>
+								 <p:column headerText="Cusine Name">
+									<h:outputText value="#{it.name}"/>
+							    </p:column>
+							    <p:column headerText="Created By">
+									<h:outputText value="#{it.user.name}"/>
+							    </p:column>
+								
+								<p:column headerText="Created Date">
+									<h:outputText value="#{it.createdDate}" converter="TC"/>
+							    </p:column> 
+								<p:column headerText="Modified Date">
+									<h:outputText value="#{it.lastUpdate}" converter="TC"/>
+							    </p:column> 
+								<p:column headerText="Select" selectionMode="single"/>
+							</p:dataTable>
+
+<!-- <table class="reference">
+  <thead>
+    <tr>
+    <th>#</th>
+      <th>Restaurant Name<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Customer Code<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>State<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Mobile No.<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Email Id<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Status<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Created Date<span class="sort"><a href="#"><i class="fa fa-unsorted"></i></a></span></th>
+      <th>Sel.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <td>1</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+      <td>2</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+      <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>3</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>4</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    					
+    <tr>
+    <td>5</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>6</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>7</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>8</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+    
+    <tr>
+    <td>9</td>
+      <td>Sangeetha</td>
+      <td>2542</td>
+     <td>Chennai</td>
+      <td>8608913737</td>
+      <td>sankar.k@gmail.com</td>
+      <td>active</td>
+      <td>23-08-2014</td>
+      <td><input type="radio" name="radio"  value="radio"/></td>
+    </tr>
+  </tbody>
+</table> -->
+
+</div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+     
+     </div>
+    
+    </div>
+     
+     
+     </div>
+
+
+		</h:form>
+
+<!-- <p:dialog header="Logout Confirmation" draggable="false" modal="true"
+			closable="false" width="390" widgetVar="LogoutConfirm"
+			showEffect="slide" hideEffect="slide" closeOnEscape="true"
+			resizable="false">
+			<h:form id="DLGG">
+				
+				<h:outputText value="Do you want to Logout ?"  />
+			
+				
+				
+				<p:spacer width="5px" />
+				<input type="button" value="Logout" onClick="javascript:location.href = '#{request.contextPath}/j_spring_security_logout';" />
+				<p:commandButton value="No" oncomplete="PF('LogoutConfirm').hide()" />
+			</h:form>
+		</p:dialog> -->
+		<p:dialog rendered="true" header="Cuisine Delete Confirmation" draggable="false" modal="true"
+					closable="true" width="390" widgetVar="ConformDelete"
+					showEffect="slide" hideEffect="slide" closeOnEscape="true"
+					resizable="false">
+	        <h:form>
+	       
+				 <h:outputText value="Do you want to delete the Cusine?"/>
+		<p:spacer width="5px" />
+			
+			
+				
+					          <p:commandButton ajax="false"  value="Yes" action="#{cuisineBean.deleteFoodCategory}">
+					          </p:commandButton>
+					    
+						       <p:commandButton value="No"  oncomplete="PF('ConformDelete').hide()"/>
+				
+			       </h:form>
+  		      </p:dialog>
+		
+	
+
+	</ui:define>
+</ui:composition>

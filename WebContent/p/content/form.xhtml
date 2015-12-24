@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/p/layout.xhtml">
+	<ui:define name="action_header">
+		<script>
+			function showSettingDlg(xhr, status, args) {
+				if (args.validate)
+					PRODUCTSETTDLG.show();
+				else
+					$("#PDTMSG").show();
+			}
+		</script>
+
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form id="form1" prependId="false">
+
+			<p:growl id="PDTMSG" />
+			<ui:param name="t" value="#{contentBean.deal}" />
+			<div id="main_container">
+				<div class="head_bottom_listbg">
+					<div id="container">
+						<div class="head_list_box">
+							<h3>Content</h3>
+						</div>
+						<div class="head_list_box1">
+							<div class="left_arrow_smal"></div>
+							<h3>
+								<span>Ad Approve</span>
+							</h3>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="contant_table_box">
+					<div class="container1" style="padding-top: 80px;">
+						<div class="cantent_mains_boxes">
+							<div class="content_border_box">
+								<div class="new_text_box_main">
+									<div class="label_box">
+										<label class="text">Ad Name</label>
+									</div>
+									<div class="input_box_incress">
+										<p:inputText styleClass="input_text_box" id="AD_Name"
+											value="#{t.name}" tabindex="1" disabled="true">
+										</p:inputText>
+									</div>
+									<div class="label_box">
+										<label class="text">Content Type</label>
+									</div>
+									<div class="input_box">
+										<h:selectOneMenu styleClass="input_text_box"
+											value="#{t.contentType}" tabindex="2" disabled="true">
+											<f:selectItem itemLabel="PROMOTIONAL" itemValue="PROMOTIONAL" />
+											<f:selectItem itemLabel="NON_PROMOTIONAL"
+												itemValue="NON_PROMOTIONAL" />
+										</h:selectOneMenu>
+									</div>
+									<div class="label_box">
+										<label class="text">Content Template</label>
+									</div>
+									<div class="input_box">
+										<h:selectOneMenu styleClass="input_text_box"
+											value="#{t.contentTemplate}" tabindex="3" disabled="true">
+											<f:selectItem itemLabel="Text Only" itemValue="TEXT_ONLY" />
+											<f:selectItem itemLabel="Image Only" itemValue="IMAGE_ONLY" />
+											<f:selectItem itemLabel="Image &amp; Text"
+												itemValue="IMAGE_AND_TEXT" />
+											<f:selectItem itemLabel="Video &amp; Text"
+												itemValue="VIDEO_AND_TEXT" />
+										</h:selectOneMenu>
+									</div>
+									<div class="label_box">
+										<label class="text">Tile Size</label>
+									</div>
+									<div class="input_box">
+										<h:selectOneMenu styleClass="input_text_box"
+											value="#{t.tileSize}" tabindex="4" disabled="true">
+											<f:selectItem itemLabel="SMALL TILE" itemValue="1" />
+											<f:selectItem itemLabel="LARGE TILE" itemValue="2" />
+										</h:selectOneMenu>
+									</div>
+									<p:outputPanel rendered="#{t.contentTemplate ne 'IMAGE_ONLY'}">
+										<div class="label_box">
+											<label class="text">Thumbnail Text</label>
+										</div>
+										<div class="input_box_incress">
+											<p:inputText styleClass="input_text_box" id="thumbnailText"
+												tabindex="5" value="#{t.thumbnailText}" disabled="true" />
+										</div>
+										<p:outputPanel
+											rendered="#{t.contentTemplate ne 'TEXT_ONLY' and t.contentTemplate ne 'IMAGE_AND_TEXT' }">
+											<div class="label_box">
+												<label class="text">Detail Text</label>
+											</div>
+											<div class="input_box_incress">
+												<p:inputText styleClass="input_text_box" id="detailText"
+													value="#{t.detailText}" tabindex="6" disabled="true">
+												</p:inputText>
+											</div>
+										</p:outputPanel>
+									</p:outputPanel>
+									<div class="label_box">
+										<label class="text">Validity Start Date</label>
+									</div>
+									<div class="input_box_incress">
+										<p:calendar id="startDate" value="#{contentBean.startDate}"
+											pattern="dd-MM-yyyy HH:mm" showOn="button" tabindex="7"
+											disabled="true" />
+									</div>
+									<div class="label_box">
+										<label class="text">Validity End Date </label>
+									</div>
+									<div class="input_box_incress">
+										<p:calendar id="endDate" value="#{contentBean.endDate}"
+											pattern="dd-MM-yyyy HH:mm" showOn="button" tabindex="8"
+											disabled="true" />
+									</div>
+								</div>
+
+								<div class="text_box_thumbBox">
+
+									<p:outputPanel id="THUMBPLAYIMAGE"
+										rendered="#{t.contentTemplate eq 'VIDEO_AND_TEXT'}">
+										<div>
+											<img src="#{request.contextPath}/images/play.png"
+												class="play_image1" />
+										</div>
+									</p:outputPanel>
+
+									<div class="thumb_box">
+
+										<div
+											style="width: 87%; margin: 20px; background-color: white; height: 74%">
+											<p:outputPanel id="THUMBNAILIMAGE"
+												rendered="#{t.contentTemplate ne 'TEXT_ONLY'}">
+
+
+												<p:outputPanel rendered="#{contentBean.thum}">
+													<img src="#{request.contextPath}/images/placeholder.png"
+														width="100%" height="111px;" />
+												</p:outputPanel>
+												<p:outputPanel rendered="#{!contentBean.thum}">
+													<img src="data:image/jpeg;base64,#{contentBean.appimage1}"
+														width="100%;" height="111px;" />
+												</p:outputPanel>
+
+											</p:outputPanel>
+											<p:outputPanel id="THUMBNAILIMAGETEXTID"
+												rendered="#{t.contentTemplate ne 'IMAGE_ONLY'}">
+												<p style="text-align: center !important; padding-top: 20%">
+													<h:outputText style="color:#000;" id="ThumbnailTextPreview"
+														value="#{t.thumbnailText}"
+														rendered="#{t.contentTemplate eq 'TEXT_ONLY'}" />
+												</p>
+												<p:outputPanel id="ThumbTe"
+													rendered="#{t.contentTemplate eq 'IMAGE_AND_TEXT' or t.contentTemplate eq 'VIDEO_AND_TEXT'}">
+													<div class="thumb_box_filter">
+														<p style="padding-left: 7px;">
+															<h:outputText id="PREview" styleClass="thumbtext"
+																value="#{t.thumbnailText}"
+																rendered="#{t.contentTemplate eq 'IMAGE_AND_TEXT' or t.contentTemplate eq 'VIDEO_AND_TEXT' }" />
+														</p>
+													</div>
+												</p:outputPanel>
+											</p:outputPanel>
+										</div>
+									</div>
+
+
+								</div>
+								<div class="text_box_detailBox"> 
+									<p:outputPanel id="PLAYIMAGE" rendered="#{t.contentTemplate eq 'VIDEO_AND_TEXT'}">
+										<div>
+											<img src="#{request.contextPath}/images/play.png" class="play_image" />
+										</div>
+									</p:outputPanel>
+
+									<p:outputPanel id="TextTextPanel" rendered="#{t.contentTemplate eq 'TEXT_ONLY' or t.contentTemplate eq 'IMAGE_AND_TEXT'}">
+										 <p:editor id="detailText12" widgetVar="xxx" value="#{t.detailText}" width="400" disabled="true"> 
+										 </p:editor>
+									 </p:outputPanel>
+
+									<p:outputPanel rendered="#{t.contentTemplate ne 'TEXT_ONLY' and t.contentTemplate ne 'IMAGE_AND_TEXT'}">
+										<div class="detail_box">
+
+											<div
+												style="width: 88%; margin: 23px; background-color: white; height: 82%">
+
+												<p:outputPanel id="TEMPIMAGE_MAIN" rendered="#{t.contentTemplate ne 'TEXT_ONLY'}">
+
+													<p:outputPanel rendered="#{contentBean.detail}">
+														<img src="#{request.contextPath}/images/placeholder.png"
+															width="100%" height="205px" />
+													</p:outputPanel>
+													<p:outputPanel rendered="#{!contentBean.detail}">
+
+														<img src="data:image/jpeg;base64,#{contentBean.appimage}"
+															width="100%" height="205px" />
+													</p:outputPanel>
+												</p:outputPanel>
+
+												<p:outputPanel id="DETAILEDIMAGETEXTID" rendered="#{t.contentTemplate ne 'IMAGE_ONLY'}">
+													<p style="text-align: center !important; padding-top: 40% !important; padding: 5px;">
+														<h:outputText id="DetailTextPreview" style="color:#000;"
+															value="#{t.detailText}"
+															rendered="#{t.contentTemplate eq 'TEXT_ONLY'}" />
+													</p>
+													<p:outputPanel id="DetailTe"
+														rendered="#{t.contentTemplate eq 'IMAGE_AND_TEXT' or t.contentTemplate eq 'VIDEO_AND_TEXT'}">
+
+														<div class="detail_box_filter">
+															<p style="padding-left: 7px;">
+																<h:outputText id="DetailText" styleClass="thumbtext"
+																	value="#{t.detailText}"
+																	rendered="#{t.contentTemplate eq 'IMAGE_AND_TEXT' or t.contentTemplate eq 'VIDEO_AND_TEXT'}" />
+															</p>
+														</div>
+													</p:outputPanel>
+
+												</p:outputPanel>
+											</div>
+										</div>
+									</p:outputPanel>
+
+								</div>
+							</div>
+							<div class="save_box">
+								<div class="cancel_button">
+									<h:commandLink value="Approve" action="#{contentBean.publish}"
+										immediate="true"></h:commandLink>
+									<h:commandLink value="Cancel" action="#{contentBean.showList}"
+										immediate="true"></h:commandLink>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

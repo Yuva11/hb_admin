@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/p/layout.xhtml">
+	<ui:define name="action_header">
+
+
+
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form id="form1" prependId="false" enctype="multipart/form-data">
+
+
+
+
+			<p:outputPanel id="locationPnl">
+				<p:growl id="PDTMSG" rendered="false" />
+
+				<!--   <div id="main_container">
+     
+     
+     <div id="container">
+<div  class="contant_table_box">
+
+
+	
+
+		<div id="container"> -->
+
+
+
+
+
+				<div id="main_container">
+
+					<div class="error_box">
+						<p:messages globalOnly="true" />
+					</div>
+
+					<div id="container">
+
+
+						<div class="contant_table_box1">
+							<div class="contant_text_table_box50">
+
+								<div class="text_width_box25">
+									<span class="user_text">City Name</span>
+								</div>
+								<div class="text_width_box25_right">
+									<h:selectOneMenu id="city"
+										value="#{locationBean.locationdto.city}" required="true"
+										requiredMessage="City should be manadatory" converter="gec"
+										class="drodown_box">
+
+										<f:selectItem itemLabel="Select" itemValue="#{null}" />
+										<f:selectItems value="#{locationBean.cityList}" var="it"
+											itemLabel="#{it.name}" itemValue="#{it}" />
+
+										<p:ajax event="change" process="@this"
+											listener="#{locationBean.UpdateLocation}"
+											update=":form1:locationPnl" />
+
+									</h:selectOneMenu>
+									<span class="star"><p:outputPanel
+											rendered="#{locationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+
+								</div>
+
+								<div class="text_width_box25"></div>
+								<div class="text_width_box25_right_errorbox">
+									<p:message for="city" />
+								</div>
+
+								<div class="text_width_box25">
+									<span class="user_text">Location Name</span>
+								</div>
+								<div class="text_width_box25_right">
+									<h:inputText id="location"
+										value="#{locationBean.locationdto.name}" tabindex="1"
+										maxlength="75" required="true"
+										requiredMessage="#{msg['validate.locationmaster']}"
+										class="text_box" disabled="#{locationBean.action eq 'VIEW'}"
+										validatorMessage="#{msg['validate.locationmaster']}">
+										<f:validateLength minimum="1" maximum="75" />
+                                   <p:ajax update="lat,longi,gmap" process="@this" listener="#{locationBean.UpdateLocationBySearch}" event="keyup"></p:ajax>
+									</h:inputText>
+									<span class="star"><p:outputPanel
+											rendered="#{locationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+									<p:watermark for="location"
+										value="Location name should be 1 to 75 characters" />
+									<p:tooltip for="location"
+										value="Location name should be 1 to 75 characters" />
+
+								</div>
+								<div class="text_width_box25"></div>
+								<div class="text_width_box25_right_errorbox">
+									<p:message for="location" />
+								</div>
+
+
+								<div class="text_width_box25">
+									<span class="user_text">Latitude</span>
+								</div>
+								<div class="text_width_box25_right">
+									<h:inputText id="lat"
+										value="#{locationBean.locationdto.latitude}" tabindex="2"
+										onkeypress="return keyRestricted(event)" class="text_box"
+										disabled="#{locationBean.action eq 'VIEW'}" maxlength="20">
+
+
+									</h:inputText>
+									<span class="star"><p:outputPanel
+											rendered="#{locationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+									<p:watermark for="lat"
+										value="Latitude should be 1 to 20 digits" />
+									<p:tooltip for="lat" value="Latitude should be 1 to 20 digits" />
+
+								</div>
+
+								<div class="text_width_box25">
+									<span class="user_text">Longitude</span>
+								</div>
+								<div class="text_width_box25_right">
+									<h:inputText id="longi"
+										value="#{locationBean.locationdto.longitude}" tabindex="3"
+										onkeypress="return keyRestricted(event)" class="text_box"
+										disabled="#{locationBean.action eq 'VIEW'}" maxlength="20">
+
+
+									</h:inputText>
+									<span class="star"><p:outputPanel
+											rendered="#{locationBean.action ne 'VIEW'}">*</p:outputPanel></span>
+
+									<p:watermark for="longi"
+										value="Longitude should be 1 to 20 digits" />
+									<p:tooltip for="longi"
+										value="Longitude should be 1 to 20 digits" />
+
+								</div>
+
+
+
+
+
+							</div>
+
+							<div class="map_text_table_box50">
+								<p:gmap id="gmap" zoom="15" model="#{locationBean.emptyModel}"
+									center="#{locationBean.locationdto.latitude},#{locationBean.locationdto.longitude}"
+									type="ROADMAP" style="width:607px;height:300px" widgetVar="map">
+									<!--  <p:ajax event="stateChange" listener="#{eventView.onStateChange}" update="messages" /> -->
+									<!--  <p:ajax event="pointSelect" listener="#{locationBean.onPointSelect}" update="lat,longi,gmap" /> -->
+
+									<p:ajax event="markerDrag" process="form1"
+										listener="#{locationBean.onMarkerDrag}"
+										update=":form1:locationPnl" />
+									<!-- :form1:locationPnl -->
+								</p:gmap>
+
+								<p:outputPanel rendered="false">
+									<div class="text_width_box25">
+										<span class="user_text">Description</span>
+									</div>
+									<div class="text_width_box25_right">
+										<h:inputText value="#{roleCreationBean.roledto.description}"
+											tabindex="2" class="text_box"
+											disabled="#{roleCreationBean.action eq 'VIEW'}" />
+
+										<p:fileUpload rendered="false" mode="simple"
+											value="#{roleCreationBean.uploadfile}" />
+									</div>
+								</p:outputPanel>
+								<p:outputPanel rendered="false">
+									<div class="text_width_box25">
+										<span class="user_text">Features</span>
+									</div>
+									<div class="text_width_box25_right">
+										<!-- <p:tree value="#{roleCreationBean.root}" var="node"
+												id="checkboxTree1" disabled="#{roleCreationBean.action eq 'VIEW'}"
+												selectionMode="checkbox"
+												selection="#{roleCreationBean.selectedNodes}">
+												<p:treeNode>
+													<h:outputText value="#{node}" />
+												</p:treeNode>
+											</p:tree> -->
+									</div>
+								</p:outputPanel>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							</div>
+
+						</div>
+
+						<div class="save_box">
+
+							<div class="cancel_button">
+
+								<h:commandLink rendered="#{locationBean.action ne 'VIEW'}"
+									value="Submit" validateClient="true" tabindex="3"
+									action="#{locationBean.submit}"></h:commandLink>
+
+
+
+								<h:commandLink value="Cancel" tabindex="4"
+									action="#{locationBean.showList}" immediate="true"></h:commandLink>
+							</div>
+
+						</div>
+
+
+					</div>
+				</div>
+			</p:outputPanel>
+
+		</h:form>
+
+
+
+
+
+	</ui:define>
+</ui:composition>

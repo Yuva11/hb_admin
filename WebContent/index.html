@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<script>
+     function validation()
+       {
+           if(document.f1.admin.value==0)
+                {
+                    alert("Please enter the username name...");
+                    document.f1.admin.focus();
+                    return false;
+                }
+                if(document.f1.pass.value==0)
+                {
+                    alert("Please enter the  password ...");
+                    document.f1.pass.focus();
+                    return false;
+                }
+             
+             
+                
+             }
+</script>
+	<title>Hungry Bells</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta charset="utf-8" />
+
+	
+	<link type="text/css" rel="stylesheet" href="css/style1.css" media="screen" />
+
+<script>
+	$(document).ready(function(){
+
+	$("#submit1").hover(
+	function() {
+	$(this).animate({"opacity": "0"}, "slow");
+	},
+	function() {
+	$(this).animate({"opacity": "1"}, "slow");
+	});
+ 	});
+
+</script>
+	
+</head>
+<body>
+
+<div style="height: 35px;width: 100%;background-color: darkred;"><div  style="margin-left: 900px;"><div id="name" style="position: relative;
+top: -2pc;
+margin-left: 39px;
+font-size: 12px;
+color: white;">Home  |   Help</div></div></div>
+ <div style="margin-left: 200px;"><img src="images/login_logo.png" height="120px" width="150px"/></div>
+	
+	<div id="wrapper">
+	
+		<div id="wrappertop"></div>
+  	<div id="wrappermiddle">
+
+			<h2 style="color: darkred">Login Here</h2>
+
+			<div id="username_input">
+
+				<div id="username_inputleft"></div>
+
+				<div id="username_inputmiddle">
+				<form action="home.jsp" name="f1" onsubmit="return validation()"> 
+					<input type="text" name="admin" id="url" placeholder="Enter Admin Name"  onclick="this.value = ''">
+					<img id="url_user" src="./images/mailicon.png" alt="">
+			
+				</div>
+
+				<div id="username_inputright"></div>
+
+			</div>
+
+			<div id="password_input">
+
+				<div id="password_inputleft"></div>
+
+				<div id="password_inputmiddle">
+		
+					<input type="password" name="pass" id="url" placeholder="Enter Admin Password" onclick="this.value = ''">
+					<img id="url_password" src="./images/passicon.png" alt="">
+			
+				</div>
+
+				<div id="password_inputright"></div>
+
+			</div>
+
+			<div id="submit">
+			
+				<input type="image" id="submit1" value="Sign In" style=" background-color: darkred;
+    color: white;">
+				<input type="image"  id="submit2" value="Sign In">
+				</form>
+			</div>
+
+
+			<div id="links_left">
+
+			<a href="password_forgot.jsp" style="
+    color: darkred;">Forgot your Password?</a>
+
+			</div>
+
+			<div id="links_right"><a href="#">Not a Member Yet?</a></div>
+
+		</div>
+
+		<div id="wrapperbottom"></div>
+		
+		
+	</div>
+<div style="height: 45px;width: 100%;background-color: rgba(135, 131, 135, 1);margin-top: 200px;">
+<div id="powered">
+		<p> <a href=""></a></p>
+		</div></div>
+
+</body>
+</html>

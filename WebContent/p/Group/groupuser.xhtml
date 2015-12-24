@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:form id="groupUserForm" >
+	 
+		<p:outputPanel id="groupUserOpPanel">
+ 
+			<div class="contant_text_table_box50">
+			
+				<!-- Outlet Name -->
+				<div class="text_width_box25">
+					<span class="user_text">User Name</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="groupuserName"
+						value="#{groupEntityBean.groupUser.userName}"
+						class="text_box" maxlength="50" tabindex="1" required="true"
+						requiredMessage="#{msg['validate.branch']}" />
+
+					<span class="star">*</span>
+					<p:watermark for="groupuserName" value="1 to 50 characters" />
+				</div>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="groupuserName_msg" for="groupuserName" />
+				</div>
+							
+				<!-- Outlet Name -->
+							 
+				<div class="text_width_box25">
+					<span class="user_text">E-Mail Id</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputText id="groupUseremailId" value="#{groupEntityBean.groupUser.emailId}" required="true"
+						requiredMessage="Address should entered 1 and 150 characters"
+						tabindex="2" class="text_box" maxlength="150">
+						<f:validateRegex pattern="#{val['pattern.email']}"></f:validateRegex>
+					</h:inputText>
+					<p:watermark for="groupUseremailId" value="4 to 150 characters" />
+					<span class="star">*</span>
+				</div>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="groupUseremailId_Msg" for="groupUseremailId" />
+				</div>
+<p:outputPanel rendered="#{groupEntityBean.userAction eq 'ADD'}">
+ 				<!-- PASSWORD -->
+				<div class="text_width_box25">
+					<span class="user_text">Password</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputSecret id="grouppassword" value="#{groupEntityBean.groupUser.password}"
+						class="password_box" maxlength="50" tabindex="3" required="true"
+						requiredMessage="#{msg['validate.password']}" validatorMessage="#{msg['validate.password']}" >
+						 <f:validateRegex pattern="#{val['pattern.password']}"></f:validateRegex> 
+						</h:inputSecret>
+
+					<span class="star">*</span> 
+				</div>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="grouppassword_msg" for="grouppassword" />
+				</div>
+							
+				<!-- PASSWORD -->
+				 
+				 <!-- Confirm Password -->
+				<div class="text_width_box25">
+					<span class="user_text">Confirm Password </span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:inputSecret id="groupconfirmPassword" 
+						value="#{groupEntityBean.groupUser.confirmPassword}"
+						class="password_box" maxlength="50" tabindex="4" required="true"
+						requiredMessage="#{msg['validate.password']}" validatorMessage="#{msg['validate.password']}" >
+						<f:validateRegex pattern="#{val['pattern.password']}"></f:validateRegex> 
+					</h:inputSecret>
+					<span class="star">*</span> 
+				</div>
+				<div class="text_width_box25"></div>
+				<div class="text_width_box25_right_errorbox">
+					<p:message id="groupconfirmPassword_msg" for="groupconfirmPassword" />
+				</div>
+		</p:outputPanel>					
+				<!-- Confirm PASSWORD -->
+			
+			<p:outputPanel rendered="true">
+				<div class="text_width_box25">
+					<span class="user_text">Status</span>
+				</div>
+				<div class="text_width_box25_right">
+					<h:selectOneMenu id="groupUserstatus"  value="#{groupEntityBean.groupUser.status}" class="text_box" 
+						required="true" requiredMessage="Please select status" tabindex="5">
+						<f:selectItem itemLabel="ACTIVE" itemValue="ACTIVE" />
+						<f:selectItem itemLabel="BLOCKED" itemValue="BLOCKED" />
+					</h:selectOneMenu>
+				 <span class="star">*</span> 
+				</div>
+			</p:outputPanel>
+
+			<div class="text_width_box25"></div>
+			<div class="text_width_box25_right_errorbox">
+				<p:message id="groupUserstatusmSG" for="groupUserstatus" />
+			</div>
+				
+			</div>
+			<div class="brand_content_box_right">
+				<p:outputPanel id="GroupUserBrandListPanel" rendered="#{not empty groupEntityBean.brandEntityList}">
+				
+					<div class="text_width_box25">
+						<span class="user_text">Brand Access</span>
+					</div>
+				
+					<div class="text_width_box25_right">
+					<p:selectManyCheckbox id="grid" value="#{groupEntityBean.selectedBrands}" rendered="#{groupEntityBean.userAction eq 'ADD'}" layout="grid" columns="1" converter="gec">
+					 	<f:selectItems value="#{groupEntityBean.brandEntityList}" var="it" itemLabel="#{it.name}" itemValue="#{it}"  />
+					 </p:selectManyCheckbox>
+					 <p:selectManyCheckbox id="grid1" value="#{groupEntityBean.selectedBrandsForUserPanel}" rendered="#{groupEntityBean.userAction eq 'EDIT'}" layout="grid" columns="1" converter="gec">
+					 	<f:selectItems value="#{groupEntityBean.allBrandsForUserPanel}" var="it" itemLabel="#{it.name}" itemValue="#{it}"  />
+					 </p:selectManyCheckbox>
+				</div>
+				</p:outputPanel>
+				<div class="text_width_box25">
+						
+				<p:spacer width="75px;" height="100px;"></p:spacer>
+					</div>
+
+				<div class="text_width_box25_right">
+					<p:commandButton value="Submit" action="#{groupEntityBean.submitUser}" update="groupUserForm" tabindex="12">
+					</p:commandButton>
+					<p:commandButton value="Cancel" tabindex="14" immediate="true" action="#{groupEntityBean.showList}" />
+				</div>
+			</div>
+		</p:outputPanel>
+		<!-- userList -->
+			<div class="contant_table_box">
+			<p:outputPanel id="GroupUserListPanel" rendered="#{not empty groupEntityBean.userList}">
+			<p:dataTable value="#{groupEntityBean.userList}"  var="it" widgetVar="roletable"
+				paginator="true" paginatorPosition="bottom" rows="21" rowIndexVar="idx"
+				currentPageReportTemplate="{currentPage} / {totalPages}" 
+				paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="20,50,100,500" styleClass="reference">
+
+				<p:column headerText="#">
+					<h:outputText value="#{idx+1}" />
+				</p:column>
+				<p:column headerText="User Name">
+					<h:outputText value="#{it.userName}" />
+				</p:column>
+				<p:column headerText="E-Mail Id">
+					<h:outputText value="#{it.emailId}" />
+				</p:column>
+				<p:column headerText="Status">
+					<h:outputText value="#{it.status}" />
+				</p:column>
+				<p:column headerText="Action">
+					<p:spacer width="8px;" />
+					<p:commandLink action="#{groupEntityBean.showEditUser}" 
+						update=":BasicInfo:groupUserForm" process="@this" id="EditBranch"  immediate="true" >
+						<img src="#{request.contextPath}/images/edit-small-icon.png" title="Edit" alt="Edit" border="0" />
+						<f:setPropertyActionListener target="#{groupEntityBean.userAction}" value="EDIT"/>
+						<f:setPropertyActionListener target="#{groupEntityBean.groupUser}" value="#{it}"/> 
+						<f:setPropertyActionListener target="#{groupEntityBean.selectedBrands}" value="#{it.merchant}" />
+					</p:commandLink> 
+				</p:column>
+  
+			</p:dataTable>
+			</p:outputPanel>
+
+
+		</div>
+	</h:form>
+</ui:composition>
+			
