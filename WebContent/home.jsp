@@ -66,7 +66,7 @@
 		try {
 			String result = test.postDataRadRunn(
 							gson.toJson(hm),
-							"http://localhost:8090/HBAppService/adminLoginPanel.do",
+							"http://service.hungrybells.in:9090/HBAppService/adminLoginPanel.do",
 							"");
 			AdminLoginVO adminloginVo = null;
 			ObjectMapper mapper = new ObjectMapper();
