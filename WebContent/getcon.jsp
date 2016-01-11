@@ -8,6 +8,6 @@ Connection con=null;
 %>
 <%
 Class.forName("com.mysql.jdbc.Driver");
-con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hb_10018r1_1510","root","");
+con=DriverManager.getConnection("jdbc:mysql://localhost:3306/proddump","root","");
 
 %>

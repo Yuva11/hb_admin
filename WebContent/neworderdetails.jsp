@@ -128,16 +128,18 @@ function AutoRefresh( t ) {
 				<br /> <input type="submit" value="Search"
 					style="margin-left: 208px;" > <br /> <br />
 			</form>
-			<br /> <label class="store"
-				style="width: 90%; font-size: 14px; font-family: inherit; background-color: silver; "><b><p style="float: left;">Today
-				Order details of delivery.</p><a href="selectdateandshow.jsp" style="cue-before: darkred"><p style="color: darkblue;float: left;margin-left: 50px"> Report show by date</p></a>
+			<br /><b><p style="float: left;"></p><a href="selectdateandshow.jsp" style="cue-before: darkred"><p style="color: darkblue;float: left;margin-left: 50px"> Report show by date</p></a>
 				<a href="showcoupancode.jsp" style="cue-before: darkred;"><p style="color: darkblue;float: left;margin-left: 25px">Show Coupon Code</p></a>
 				<a href="adddeliveryagect.jsp" style="cue-before: darkred"><p style="color: darkblue;float: left;margin-left: 25px">Add Token No.</p></a>
 	            <a href="reconciled.jsp" style="cue-before: darkred"><p style="color: darkblue;float: left;margin-left: 25px">Reconciled/Settled</p></a>
 		        <a href="sendsmstocustomer.jsp" style="cue-before: darkred"><p style="color: darkblue;float: left;margin-left: 25px">Send SMS to Customer</p></a>
 		        <a href="sendsmstomerchant.jsp" style="cue-before: darkred"><p style="color: darkblue;float: left;margin-left: 25px">Send SMS Of Merchant</p></a>
-			   <a href="OpinioMerchant_register.jsp" style="cue-before: darkred"><p style="color: darkblue;">Opinio Merchant Register</p></a>
-				</b></label> <br /> <br />
+			   <a href="OpinioMerchant_register.jsp" style="cue-before: darkred"><p style="color: darkblue;float: left;margin-left: 25px">Opinio Merchant Register</p></a>
+			   <a href="update_setting.jsp" style="cue-before: darkred"><p style="color: darkblue;float: left;margin-left: 25px">Setting</p></a>
+			   
+			   <a href="repeat_order_discount.jsp" style="cue-before: darkred"><p style="color: darkblue;float: left;margin-left: 25px">repeat_order_discount</p></a>
+			     <a href="order_feedback_report.jsp" style="cue-before: darkred"><p style="color: darkblue;margin-left: 10px">Order_feedback_report</p></a>
+			
 				<div class="container">
 			<table style="float: left; margin-left: 4px;" width="750px"
 				align="center" border="1px" >
