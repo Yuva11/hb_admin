@@ -1090,13 +1090,14 @@ a {
 										<%
 											if (discountMethodValue.toLowerCase().equals("discount_code")) {
 															out.print(couponCodeValue+"<br>");
-											}
-											if (discountMethodValue.toLowerCase().equals("firstorder")) {
-															out.print("FO<br>");
+											}else if (discountMethodValue.toLowerCase().equals("hb_money")) {
+												out.print("HB&nbsp;MONEY");
+											}else if(discountMethodValue.toLowerCase().equals("repeat_order")){
+												out.print("REPEAT ORDER<br>");
+											}else if (discountMethodValue.toLowerCase().equals("firstorder")) {
+												out.print("FO<br>");
 											} 
-											if (discountMethodValue.toLowerCase().equals("hb_money")) {
-															out.print("HB&nbsp;MONEY");
-											}
+											
 										%>
 									</div> <%
 				 	}
