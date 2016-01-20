@@ -201,7 +201,7 @@
 		<div class="right">
 			<h2 class="heading"
 				style="background-color:darkred;padding: 5px;">
-				Update Coupon Code Details for repeat order customer </h2>
+				Update Repeat order discount settings </h2>
 			<div align="right"
 				style="color: white; font-family: serif; padding: 0px;">
   <li class="logout" ><a href='logout.jsp' style="font-size: 13px"><b>Logout</b></a></li>

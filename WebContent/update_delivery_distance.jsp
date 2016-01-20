@@ -96,12 +96,14 @@ function AutoRefresh( t ) {
 				
 					int name1=Integer.parseInt(request.getParameter("name1"));
 					float name2=Float.parseFloat(request.getParameter("name2"));
+					int name3=Integer.parseInt(request.getParameter("name3"));
 	              try
 	              {
-	      		ps3 = con.prepareStatement("update setting set delivery_charges=?,delivery_distance=? where id=?");
+	      		ps3 = con.prepareStatement("update setting set delivery_charges=?,delivery_distance=?,free_delivery_minimum_order_value=? where id=?");
 				ps3.setInt(1,name1);
 				ps3.setFloat(2,name2);
-				ps3.setLong(3,1);
+				ps3.setInt(3,name3);
+				ps3.setLong(4,1);
 					
 				ps3.executeUpdate();
 				con.close();

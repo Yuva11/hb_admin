@@ -212,6 +212,10 @@
 						<tr>		
 			<td>Enter Delivery distance</td> <td><input type="text" name="name2" value="<%=rs3.getString(3) %>"  class="input_text"  
 					style="width: 139px; padding: 4px;margin-bottom: 5px" /></td></tr>
+					
+						<tr>		
+			<td>Minimum  order value for free delivery</td> <td><input type="text" name="name3" value="<%=rs3.getString(4) %>"  class="input_text"  
+					style="width: 139px; padding: 4px;margin-bottom: 5px" /></td></tr>
 					 <br />
 				<br /> 
 				<tr><td></td> <td><input type="submit" value="update" style="margin-left: 11px;" /></td></tr> <br /> <br />
@@ -551,4 +555,3 @@
 
 
 </body>
-</html>

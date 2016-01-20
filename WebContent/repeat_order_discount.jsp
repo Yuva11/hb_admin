@@ -91,7 +91,7 @@
 	<div class="col span_1_of_4" style="width: 100%">
 		<div class="right">
 			<h2 class="heading" style="background-color: darkred; padding: 5px;">
-				Coupon Code Details for repeat order customer:-</h2>
+				Repeat order discount settings</h2>
 			<div align="right"
 				style="color: white; font-family: serif; padding: 0px;">
 				<li class="logout"><a href='logout.jsp'
