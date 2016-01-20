@@ -515,7 +515,7 @@ try {
 				} 
 
 			OpinioPostOrder opinioPostOrder=new OpinioPostOrder();
-			opinioPostOrder.setMerchant_id("3");
+			opinioPostOrder.setMerchant_id(merchantbranch_id);
 			
 			if(delivery_type.equals("PAYU") || delivery_type.equals("FO"))
 			{

@@ -1,3 +1,4 @@
+<%@page import="com.hungrybells.service.Config"%>
 <%@page import="javassist.bytecode.stackmap.BasicBlock.Catch"%>
 <%@page import="java.sql.ResultSet"%>
 <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
@@ -22,11 +23,7 @@
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 <!-- </script>
-
-	
-	
  -->	
- 
  <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 <script src="js/jquery-1.9.1.js"></script>
@@ -222,7 +219,8 @@
 	    
 	    <%  			
 	      		}
-    			
+	      		
+	      	
 				ps3.executeUpdate();
 				con.close();
 				

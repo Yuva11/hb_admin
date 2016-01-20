@@ -112,9 +112,9 @@
     		  
 		System.out.println("SMS Triggering Please Wait......."+merchant_mob);
 
-    		smsUtility.process_sms(merchant_mob1, smsnewtemplateforMerchant,"A16208eead890aefe9b73e725cc4eeebe", null, null);
+		smsUtility.process_sms(merchant_mob1, smsnewtemplateforMerchant,"A16208eead890aefe9b73e725cc4eeebe", null, null);
 
-			smsUtility.process_sms(cust_mob, smsnewtemplateforCutomer,"A16208eead890aefe9b73e725cc4eeebe", null, null);
+		smsUtility.process_sms(cust_mob, smsnewtemplateforCutomer,"A16208eead890aefe9b73e725cc4eeebe", null, null);
 
 	
 			

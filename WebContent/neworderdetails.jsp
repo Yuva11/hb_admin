@@ -220,6 +220,7 @@ function AutoRefresh( t ) {
 					String cust_lattitue1=null;
 					String cust_longitude1=null;
 					String merchant_mob1=null;
+					String finalAount=null;
 					try {
 						ps = con.prepareStatement("SELECT  * FROM neworderdetails order by order_date_time  desc");
 
@@ -236,7 +237,9 @@ function AutoRefresh( t ) {
 								user_id = rs.getLong(13);
 								orderid = rs.getString(15);
 								orderdate = rs.getString(10);
-								amount = rs.getString(8);
+								float orderAmount =Float.parseFloat(rs.getString(8));
+								finalAount =""+Float.parseFloat(rs.getString(17))+orderAmount;
+								amount=finalAount;
 								quantity = rs.getString(7);
 								address = rs.getString(4);
 								deal_id =rs.getString(9);
@@ -373,7 +376,7 @@ function AutoRefresh( t ) {
 					%>
 						<td><%=rs.getString(12)%></td>
 					<td><a
-						href="sendconfirmation.jsp?orderid=<%=orderid%>&orderdate=<%=orderdate%>&amount=<%=amount%>&quantity=<%=quantity%>&status=<%="Confirmed"%>&merchant_name=<%=merchant_name%>&user_name=<%=user_name%>&cust_mob=<%=cust_mob%>&cust_email=<%=cust_email%>&address=<%=address%>&merchant_mob=<%=merchant_mob%>&merchant_email=<%=merchant_email%>&deal_name=<%=deal_name%>&delivery_type=<%=delivery_type%>&longitude=<%=longitude%>&latitude=<%=latitude%>&delivery_address=<%=delivery_address%>&landmark=<%=landmark%>&merchant_mob1=<%=merchant_mob1%>"
+						href="sendconfirmation.jsp?orderid=<%=orderid%>&orderdate=<%=orderdate%>&amount=<%=finalAount%>&quantity=<%=quantity%>&status=<%="Confirmed"%>&merchant_name=<%=merchant_name%>&user_name=<%=user_name%>&cust_mob=<%=cust_mob%>&cust_email=<%=cust_email%>&address=<%=address%>&merchant_mob=<%=merchant_mob%>&merchant_email=<%=merchant_email%>&deal_name=<%=deal_name%>&delivery_type=<%=delivery_type%>&longitude=<%=longitude%>&latitude=<%=latitude%>&delivery_address=<%=delivery_address%>&landmark=<%=landmark%>&merchant_mob1=<%=merchant_mob1%>"
 						style="border-radius: 2px;"> <b>Send Confirmation</b></a></td>
 						
 				<%

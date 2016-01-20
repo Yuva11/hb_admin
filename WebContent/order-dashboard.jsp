@@ -1,4 +1,3 @@
-<!doctype html>
 <%@page import="com.sun.faces.facelets.tag.jstl.core.ForEachHandler"%>
 <%@page import="javax.security.auth.login.FailedLoginException"%>
 <%@page import="java.sql.ResultSet"%>
@@ -93,7 +92,7 @@ number, text {
 }
 
 #testTable {
-	margin-top: 20px;
+	margin-top: 3px;
 }
 
 .center {
@@ -176,6 +175,13 @@ a {
  
  .strike {
  	  text-decoration: line-through;
+ }
+ 
+ .menuLink{
+ 	margin-top:10px;
+ }
+ .menuLink > a >  p {
+ 	margin-left:10px !important;
  }
 </style>
 </head>
@@ -737,9 +743,7 @@ a {
 			latestOrderId = rs.getLong("id");
 			if (pageNo > 1) {
 	%>
-	<span style="float: left"> <a class="link-prev-page" href="#"
-		title="Show previous page"><b><< Previous</b></a>
-	</span>
+	
 	<%
 		}
 	%>
@@ -748,7 +752,65 @@ a {
 				<input type="button" onclick="tableToExcel('testTable', 'W3C Example Table')" value="Export to Excel" class="btn" style=" font-size: 11px; margin-bottom: 4px; margin-left: 417px; padding: 3px 13px;">
 				<a style="margin-left:940px"  href="javascript:Clickheretoprint()"></a>
 				<input type="button" onclick="tableToExcel('testTable', 'W3C Example Table')" value="Export to Excel" class="btn" style=" font-size: 11px; margin-bottom: 4px; margin-left: 417px; padding: 3px 13px;">-->
+				
+	<div class="menuLink">
+		<p style="float: left;">
+			<a href="selectdateandshow.jsp" style="cue-before: darkred"><p
+					style="color: darkblue; float: left; margin-left: 50px">
+					Reports</a>
+		</p>
+		<p style="color: darkblue; float: left; margin-left: 25px">
+			<a href="showcoupancode.jsp" style="cue-before: darkred;">Coupons</a>
+			
+		</p>
+		<!-- <a href="adddeliveryagect.jsp" style="cue-before: darkred"><p style="color: darkblue;float: left;margin-left: 25px">Add Token No.</p></a>  
+					<a href="reconciled.jsp" style="cue-before: darkred"><p style="color: darkblue;float: left;margin-left: 25px">Reconciled/Settled</p></a>
+				-->
+		<p style="color: darkblue; float: left; margin-left: 25px">
 
+			<a href="sendsmstocustomer.jsp" style="cue-before: darkred"><p
+					style="color: darkblue; float: left; margin-left: 25px">SMS -
+					Customer</a>
+		</p>
+		<p style="color: darkblue; float: left; margin-left: 25px">
+			<a href="sendsmstomerchant.jsp" style="cue-before: darkred"><p
+					style="color: darkblue; float: left; margin-left: 25px">SMS -
+					Merchant</a>
+		</p>
+		<p style="color: darkblue; float: left; margin-left: 25px">
+			<a href="OpinioMerchant_register.jsp" style="cue-before: darkred"><p
+					style="color: darkblue; float: left; margin-left: 25px">Opinio
+					Merchant Register</a>
+		</p>
+		
+		<p style="color: darkblue; float: left; margin-left: 25px">
+			<a href="repeat_order_discount.jsp" style="cue-before: darkred"><p
+					style="color: darkblue; float: left; margin-left: 25px">Reward
+				Rules</a> 
+		</p>
+		
+		<p style="color: darkblue; float: left; margin-left: 25px">
+			<a href="order_feedback_report.jsp" style="cue-before: darkred"><p
+					style="color: darkblue; float: left; margin-left: 25px">Customer Feedback</a> 
+		</p>
+		
+		<p style="color: darkblue; float: left; margin-left: 25px">
+			<a href="order_feedback_report.jsp" style="cue-before: darkred"><p
+					style="color: darkblue; float: left; margin-left: 25px"></a> 
+		</p> 
+		
+			<p style="color: darkblue; float: left; margin-left: 25px">
+			<a href="update_setting.jsp" style="cue-before: darkred"><p
+					style="color: darkblue;  margin-left: 25px">Delivery
+					Setting</a>
+		</p>
+
+	</div>			
+				
+
+	<span style="float: left"> <a class="link-prev-page" href="#"
+		title="Show previous page"><b><< Previous</b></a>
+	</span>
 	<span style="float: right"> <a class="link-next-page" href="#"
 		title="Show next page"><b>Next >></b></a>
 	</span>
@@ -871,6 +933,8 @@ a {
 					String orderAmountValue = rs.getString("order_amount");
 					if (orderAmountValue == null)
 						orderAmountValue = "";
+					
+					Double finalAmountValue=Double.parseDouble(orderAmountValue)+Double.parseDouble(discountAmountValue);
 					
 					String paidAmountValue = rs.getString("paid_amount");
 					if (paidAmountValue == null)
@@ -1267,6 +1331,7 @@ a {
 					<input type="hidden" name="amount" value="<%=orderAmountValue%>" /> 
 					<input type="hidden" name="quantity" value="<%=orderQuanityValue%>" />
 					<input type="hidden" name="status" value="<%=orderIdValue%>" /> 
+					<input type="hidden" name="merchantbranch_id" value="<%=kitchenBranchId%>" />
 					<input type="hidden" name="merchant_name" value="<%=kitchenNameValue%>" />
 					<input type="hidden" name="user_name" value="<%=customerNameValue%>" /> 
 					<input type="hidden" name="cust_mob" value="<%=customerMobileValue%>" /> 
@@ -1337,7 +1402,7 @@ a {
 				<%
 					if (!orderStatusValue.equals("canceled")) {
 				%> 
-					<a class="action-link btn btn-success" title="Confirm the order [ Sends SMS & Email ]" href="send-confirmation-new.jsp?orderid=<%=rs.getString("order_id")%>&orderdate=<%=rs.getString("order_date")%>&amount=<%=rs.getString("order_amount")%>&quantity=<%=orderQuanityValue%>&status=<%=rs.getString("order_status")%>&merchant_name=<%=rs.getString("kitchen_name")%>&user_name=<%=rs.getString("customer_name")%>&cust_mob=<%=rs.getString("customer_mobile")%>&cust_email=<%=rs.getString("customer_email")%>&address=<%=rs.getString("delivery_address")%>&merchant_mob=<%=rs.getString("kitchen_mobile1")%>&merchant_mob1=<%=rs.getString("kitchen_mobile1")%>&merchant_email=<%=rs.getString("kitchen_email")%>&deal_name=<%=rs.getString("deal_name")%>&delivery_type=<%=rs.getString("order_type")%>&latitude=<%=rs.getString("latitude")%>&longitude=<%=rs.getString("longitude")%>&delivery_address=<%=rs.getString("delivery_address")%>&landmark=<%=rs.getString("landmark")%>" onclick="confirmClicked(this)">Confirm</a>
+					<a class="action-link btn btn-success" title="Confirm the order [ Sends SMS & Email ]" href="send-confirmation-new.jsp?orderid=<%=rs.getString("order_id")%>&orderdate=<%=rs.getString("order_date")%>&amount=<%=finalAmountValue%>&quantity=<%=orderQuanityValue%>&status=<%=rs.getString("order_status")%>&merchant_name=<%=rs.getString("kitchen_name")%>&user_name=<%=rs.getString("customer_name")%>&cust_mob=<%=rs.getString("customer_mobile")%>&cust_email=<%=rs.getString("customer_email")%>&address=<%=rs.getString("delivery_address")%>&merchant_mob=<%=rs.getString("kitchen_mobile1")%>&merchant_mob1=<%=rs.getString("kitchen_mobile1")%>&merchant_email=<%=rs.getString("kitchen_email")%>&deal_name=<%=rs.getString("deal_name")%>&delivery_type=<%=rs.getString("order_type")%>&latitude=<%=rs.getString("latitude")%>&longitude=<%=rs.getString("longitude")%>&delivery_address=<%=rs.getString("delivery_address")%>&landmark=<%=rs.getString("landmark")%>" onclick="confirmClicked(this)">Confirm</a>
 				<%
 					} else if (orderStatusValue.equals("delivered") || orderStatusValue.equals("settled")) {
 				%>
