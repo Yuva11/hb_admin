@@ -238,7 +238,7 @@ function AutoRefresh( t ) {
 								orderid = rs.getString(15);
 								orderdate = rs.getString(10);
 								float orderAmount =Float.parseFloat(rs.getString(8));
-								finalAount =""+Float.parseFloat(rs.getString(17))+orderAmount;
+								finalAount =Float.parseFloat(rs.getString(17))+orderAmount+"";
 								amount=finalAount;
 								quantity = rs.getString(7);
 								address = rs.getString(4);

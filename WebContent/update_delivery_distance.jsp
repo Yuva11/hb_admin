@@ -112,15 +112,12 @@ function AutoRefresh( t ) {
 				System.out.print(e);
 			}
 
+	              
+	              session.setAttribute("msg", "Settings updated!");
+	              response.sendRedirect("order-dashboard.jsp");
 				%>
 
 
-
-	<script>
-       alert('Delivery Setting Successfully updated');
-         window.location='update_setting.jsp';
-</script>
-		
 
 
 			</table>

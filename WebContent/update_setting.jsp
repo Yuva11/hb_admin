@@ -1,4 +1,4 @@
-<%@page import="com.hungrybells.service.Config"%>
+
 <%@page import="javassist.bytecode.stackmap.BasicBlock.Catch"%>
 <%@page import="java.sql.ResultSet"%>
 <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
@@ -204,14 +204,14 @@
 	    %>
 	    		
 			<tr>		
-			<td>Enter Delivery charges</td> <td><input type="text" name="name1" value="<%=rs3.getString(2) %>" class="input_text"  
+			<td>Delivery Charge (Rs)</td> <td><input type="text" name="name1" placeholder="Rs" value="<%=rs3.getString(2) %>" class="input_text"  
 					style="width: 139px; padding: 4px;margin-bottom: 5px" /></td></tr>
 						<tr>		
-			<td>Enter Delivery distance</td> <td><input type="text" name="name2" value="<%=rs3.getString(3) %>"  class="input_text"  
+			<td>Delivery distance (KM)</td> <td><input type="text" placeholder="KM" name="name2" value="<%=rs3.getString(3) %>"  class="input_text"  
 					style="width: 139px; padding: 4px;margin-bottom: 5px" /></td></tr>
 					
 						<tr>		
-			<td>Minimum  order value for free delivery</td> <td><input type="text" name="name3" value="<%=rs3.getString(4) %>"  class="input_text"  
+			<td>Minimum  order value for free delivery (Rs)</td> <td><input placeholder="Rs" type="text" name="name3" value="<%=rs3.getString(4) %>"  class="input_text"  
 					style="width: 139px; padding: 4px;margin-bottom: 5px" /></td></tr>
 					 <br />
 				<br /> 

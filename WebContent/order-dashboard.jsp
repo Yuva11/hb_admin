@@ -755,7 +755,7 @@ a {
 				
 	<div class="menuLink">
 		<p style="float: left;">
-			<a href="selectdateandshow.jsp" style="cue-before: darkred"><p
+			<a targethref="selectdateandshow.jsp" style="cue-before: darkred"><p
 					style="color: darkblue; float: left; margin-left: 50px">
 					Reports</a>
 		</p>
@@ -765,19 +765,20 @@ a {
 		</p>
 		<!-- <a href="adddeliveryagect.jsp" style="cue-before: darkred"><p style="color: darkblue;float: left;margin-left: 25px">Add Token No.</p></a>  
 					<a href="reconciled.jsp" style="cue-before: darkred"><p style="color: darkblue;float: left;margin-left: 25px">Reconciled/Settled</p></a>
-				-->
-		<p style="color: darkblue; float: left; margin-left: 25px">
-
-			<a href="sendsmstocustomer.jsp" style="cue-before: darkred"><p
-					style="color: darkblue; float: left; margin-left: 25px">SMS -
-					Customer</a>
-		</p>
+		
 		<p style="color: darkblue; float: left; margin-left: 25px">
 			<a href="sendsmstomerchant.jsp" style="cue-before: darkred"><p
 					style="color: darkblue; float: left; margin-left: 25px">SMS -
 					Merchant</a>
-		</p>
+		</p> 
+		-->
 		<p style="color: darkblue; float: left; margin-left: 25px">
+
+			<a href="sendsmstocustomer.jsp" style="cue-before: darkred"><p
+					style="color: darkblue; float: left; margin-left: 25px">SMS -
+					Loyal customers</a>
+		</p>
+ 		<p style="color: darkblue; float: left; margin-left: 25px">
 			<a href="OpinioMerchant_register.jsp" style="cue-before: darkred"><p
 					style="color: darkblue; float: left; margin-left: 25px">Opinio
 					Merchant Register</a>
@@ -799,7 +800,7 @@ a {
 					style="color: darkblue; float: left; margin-left: 25px"></a> 
 		</p> 
 		
-			<p style="color: darkblue; float: left; margin-left: 25px">
+			<p style="color: darkblue; float: right; margin-left: 25px">
 			<a href="update_setting.jsp" style="cue-before: darkred"><p
 					style="color: darkblue;  margin-left: 25px">Delivery
 					Setting</a>
