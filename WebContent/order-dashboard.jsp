@@ -821,7 +821,7 @@ a {
 	<table style="float: left; margin-left: 4px;" 
 		align="center" border="1px" id="testTable">
 		<tr style="font-size: 14px; background-color: darkred; color: white;">
-			<td>#</td>
+			<td>#</td> 
 			<td>Order ID</td>
 			<td style="width:75px">Date|Time</td>
 			<td style="">Pay_Type</td>
