@@ -827,7 +827,7 @@ a {
 			<td style="">Pay_Type</td>
 			<td style="min-width:115px">Amount</td>
 			<td>Customer</td>
-			<td style="min-width:150px">Delivery Address</td>
+			<td style="min-width:150px">Delivery Address</td> 
 			<td>Kitchen</td>
 			<td style="min-width:150px">Dish</td>
 			<td style="min-width:130px">Delivery</td>
