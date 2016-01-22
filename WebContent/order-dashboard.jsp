@@ -177,9 +177,12 @@ a {
  	  text-decoration: line-through;
  }
  
- .menuLink{
- 	margin-top:10px;
- }
+.menuLink {
+    margin-top: 20px;
+    border-bottom: 2px solid;
+    height: 40px;
+    margin-bottom:10px;
+}
  .menuLink > a >  p {
  	margin-left:10px !important;
  }
@@ -738,26 +741,10 @@ a {
 
 	<!-- Order Filter -->
 
-	<%
-		if (rs.next()) {
-			latestOrderId = rs.getLong("id");
-			if (pageNo > 1) {
-	%>
-	
-	<%
-		}
-	%>
-
-	<!-- 	<a style="margin-left:940px"  href="javascript:Clickheretoprint()"></a>
-				<input type="button" onclick="tableToExcel('testTable', 'W3C Example Table')" value="Export to Excel" class="btn" style=" font-size: 11px; margin-bottom: 4px; margin-left: 417px; padding: 3px 13px;">
-				<a style="margin-left:940px"  href="javascript:Clickheretoprint()"></a>
-				<input type="button" onclick="tableToExcel('testTable', 'W3C Example Table')" value="Export to Excel" class="btn" style=" font-size: 11px; margin-bottom: 4px; margin-left: 417px; padding: 3px 13px;">-->
-				
 	<div class="menuLink">
-		<p style="float: left;">
-			<a targethref="selectdateandshow.jsp" style="cue-before: darkred"><p
-					style="color: darkblue; float: left; margin-left: 50px">
-					Reports</a>
+		<p style="color: darkblue; float: left; margin-left: 25px">
+			<a href="neworderdetails.jsp" style="cue-before: darkred;">Go to old Dashboard</a>
+			
 		</p>
 		<p style="color: darkblue; float: left; margin-left: 25px">
 			<a href="showcoupancode.jsp" style="cue-before: darkred;">Coupons</a>
@@ -795,40 +782,56 @@ a {
 					style="color: darkblue; float: left; margin-left: 25px">Customer Feedback</a> 
 		</p>
 		
-		<p style="color: darkblue; float: left; margin-left: 25px">
-			<a href="order_feedback_report.jsp" style="cue-before: darkred"><p
-					style="color: darkblue; float: left; margin-left: 25px"></a> 
-		</p> 
 		
-			<p style="color: darkblue; float: right; margin-left: 25px">
+		<p style="color: darkblue; float: left; margin-left: 25px">
 			<a href="update_setting.jsp" style="cue-before: darkred"><p
-					style="color: darkblue;  margin-left: 25px">Delivery
-					Setting</a>
+					style="color: darkblue; float: left;margin-left: 25px">Delivery Setting</a> 
 		</p>
+		
+		
 
 	</div>			
+
+	<span style="float: right"> <a class="link-next-page" href="#"
+		title="Show next page"><b>Next &gt;&gt;</b></a>
+	</span>
+
+	<%
+		if (rs.next()) {
+			latestOrderId = rs.getLong("id");
+			if (pageNo > 1) {
+	%>
+		
+	<span style="float: left"> <a class="link-prev-page" href="#"
+		title="Show previous page"><b> &lt;&lt; Previous</b></a>
+	</span>
+	<%
+		}
+	%>
+
+	<!-- 	<a style="margin-left:940px"  href="javascript:Clickheretoprint()"></a>
+				<input type="button" onclick="tableToExcel('testTable', 'W3C Example Table')" value="Export to Excel" class="btn" style=" font-size: 11px; margin-bottom: 4px; margin-left: 417px; padding: 3px 13px;">
+				<a style="margin-left:940px"  href="javascript:Clickheretoprint()"></a>
+				<input type="button" onclick="tableToExcel('testTable', 'W3C Example Table')" value="Export to Excel" class="btn" style=" font-size: 11px; margin-bottom: 4px; margin-left: 417px; padding: 3px 13px;">-->
 				
 
-	<span style="float: left"> <a class="link-prev-page" href="#"
-		title="Show previous page"><b><< Previous</b></a>
-	</span>
-	<span style="float: right"> <a class="link-next-page" href="#"
-		title="Show next page"><b>Next >></b></a>
-	</span>
+				
+
+	
 	<table style="float: left; margin-left: 4px;" 
 		align="center" border="1px" id="testTable">
 		<tr style="font-size: 14px; background-color: darkred; color: white;">
 			<td>#</td>
 			<td>Order ID</td>
-			<td style="width:200px">Date | Time</td>
-			<td>Payment Type</td>
-			<td>Amount</td>
+			<td style="width:75px">Date|Time</td>
+			<td style="">Pay_Type</td>
+			<td style="min-width:115px">Amount</td>
 			<td>Customer</td>
-			<td>Delivery Address</td>
+			<td style="min-width:150px">Delivery Address</td>
 			<td>Kitchen</td>
-			<td style="width:250px">Dish</td>
-			<td style="width:200px">Delivery</td>
-			<td colspan="4" style="width: 100px">Action</td>
+			<td style="min-width:150px">Dish</td>
+			<td style="min-width:130px">Delivery</td>
+			<td colspan="4" style="width: 90px">Action</td>
 		</tr>
 		
 		<%
@@ -1104,13 +1107,13 @@ a {
 				 	}
 				 %>
 			</td>
-			<td class="left-align"><span style="float: right"
+			<td class="left-align" ><span style="float: right"
 				title="User Id"><%=userIdValue%></span> <a
 				href="order-dashboard.jsp?userId=<%=userIdValue%>"
 				title="View orders by <%=customerNameValue.toUpperCase()%>"> <b><%=customerNameValue.toUpperCase()%></b>
 					<br>
 			</a> <b> <%= customerMobileValue%> 
-				<a href='tel://+91<%=customerMobileValue%>' title="Call"><img  class="icon-call"	src="images/call.png" alt="Call" /></a> <a target="_new" href='send-sms.jsp?mobile=91<%=customerMobileValue%>' title="SMS">
+				<a href='tel://+91<%=customerMobileValue%>'  title="Call"><img  class="icon-call"	src="images/call.png" alt="Call" /></a> <a target="_new" href='send-sms.jsp?mobile=91<%=customerMobileValue%>' title="SMS">
 					<img src="images/sms.png" alt="SMS" />
 				</a>
 			</b> <br> <a target="_new" href='https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=<%=customerEmailValue%>'
@@ -1155,7 +1158,7 @@ a {
 						</span>
 						<br> 
 						<span id="branchContactDetails<%=orderIdValue%>" style="text-transform: none !important">
-							<b><%=kitchenMobile1Value%></b>&nbsp; 
+							<b style="font-size: 10px;"><%=kitchenMobile1Value%></b>&nbsp; 
 							<a
 								href='tel://+91<%=kitchenMobile1Value%>' title="Call">
 								<img class="icon-call"	 src="images/call.png" alt="Call" /></a>
@@ -1166,7 +1169,7 @@ a {
 							if (!kitchenMobile2Value.equals("0") && !kitchenMobile2Value.equals(kitchenMobile1Value)) {
 							%>
 							<br>
-							<b><%=kitchenMobile2Value%></b>&nbsp; <a
+							<b style="font-size: 10px;"><%=kitchenMobile2Value%></b>&nbsp; <a
 								href='tel://+91<%=kitchenMobile2Value%>' title="Call"><img class="icon-call"	
 								src="images/call.png" alt="Call" /></a>  <a target="_new"
 								href='send-sms.jsp?mobile=91<%=kitchenMobile2Value%>' title="SMS"><img class="icon-sms"	
@@ -1177,7 +1180,7 @@ a {
 									&& !kitchenMobile3Value.equals(kitchenMobile2Value)) {
 							%>
 							<br>
-							<b><%=kitchenMobile3Value%></b>&nbsp; <a href='tel://+91<%=kitchenMobile3Value%>' title="Call"><img class="icon-call"	
+							<b style="font-size: 10px;"><%=kitchenMobile3Value%></b>&nbsp; <a href='tel://+91<%=kitchenMobile3Value%>' title="Call"><img class="icon-call"	
 								src="images/call.png" alt="Call" /></a>  <a target="_new"
 								href='send-sms.jsp?mobile=91<%=kitchenMobile3Value%>' title="SMS"><img class="icon-sms"	
 								src="images/sms.png" alt="SMS" /></a> <br> <a title="Call" href="tel://+91<%=kitchenMobile3Value%>"></a>
@@ -1188,12 +1191,12 @@ a {
 										&& !kitchenMobile4Value.equals(kitchenMobile3Value)) {
 							%>
 								
-								<b><%=kitchenMobile4Value%></b>&nbsp; <a
+								<b><%=kitchenMobile4Value%></b>&nbsp; <a 
 									href='tel://+91<%=kitchenMobile4Value%>' title="Call"><img class="icon-call"	
 									src="images/call.png" alt="Call" /></a> <a target="_new"
-									href='send-sms.jsp?mobile=91<%=kitchenMobile4Value%>' title="SMS"><img class="icon-sms"	
+									href='send-sms.jsp?mobile=91<%=kitchenMobile4Value%>'  title="SMS"><img class="icon-sms"	
 									src="images/sms.png" alt="SMS" /></a> <br> 
-									<a title="Call" href="tel://+91<%=kitchenMobile4Value%>"></a>
+									<a title="Call" href="tel://+91<%=kitchenMobile4Value%>" ></a>
 							<%
 								}
 								%>
@@ -1202,8 +1205,8 @@ a {
 								if (!kitchenEmailValue.equals("")) {
 							%>
 							<br>
-							<a title="Send a mail"
-								href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=<%=kitchenEmailValue%>">
+							<a title="Send a mail" style="font-size:10px"
+ 								href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=<%=kitchenEmailValue%>">
 								<%=kitchenEmailValue%></a>
 							<%
 								}
@@ -1211,7 +1214,7 @@ a {
 							</span>
 							<br> <br> 
 							<span id="branchAddress<%=orderIdValue%>" >
-								<a target="_new" title="Find on map" href='getAddress.jsp?lat=<%=kitchenLatitudeValue%>&lng=<%=kitchenLongitudeValue%>'>
+								<a target="_new" style="font-size:10px" title="Find on map" href='getAddress.jsp?lat=<%=kitchenLatitudeValue%>&lng=<%=kitchenLongitudeValue%>'>
 								<%=kitchenAddressValue%>
 								<%out.print(kitchens.size()); %>
 							</a>
@@ -1448,17 +1451,24 @@ a {
 		if (pageNo > 1) {
 	%>
 	<span style="float: left"> <a class="link-prev-page" href="#"
-		title="Show previous page"><b> < Previous</b> </a>
+		title="Show previous page"><b> &lt;&lt; Previous</b> </a>
 	</span>
 	<%
 		}
 	%>
 
 	<a style="float: right" class="link-next-page" href="#"
-		title="Show next page"><b>Next >></b></a>
+		title="Show next page"><b>Next &gt;&gt;</b></a>
 	<%
 		} else {
 	%>
+	
+	<script>
+		$(document).ready(function(){
+			$('.link-next-page').hide();
+			$('.link-prev-page').hide();
+		});
+	</script>
 	<div style="margin-top: 100px">
 		<%
 			if (orderStatus.equals("received")) {
