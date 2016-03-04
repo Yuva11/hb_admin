@@ -3,7 +3,7 @@ package newservice;
 public class RoadrunnrVO {
 	
 	    private String delivery_id;
-
+	    private String external_order_id;
 	    private String driver_phone;
 
 	    private String driver_name;
@@ -13,8 +13,26 @@ public class RoadrunnrVO {
 	    private String new_trip;
 
 	    private String order_id;
+	    private String tracking_link  ;
+	    
+	    
+	    public String getTracking_link() {
+			return tracking_link;
+		}
 
-	    public String getDelivery_id ()
+		public void setTracking_link(String tracking_link) {
+			this.tracking_link = tracking_link;
+		}
+
+		public String getExternal_order_id() {
+			return external_order_id;
+		}
+
+		public void setExternal_order_id(String external_order_id) {
+			this.external_order_id = external_order_id;
+		}
+
+		public String getDelivery_id ()
 	    {
 	        return delivery_id;
 	    }

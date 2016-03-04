@@ -302,14 +302,9 @@ try {
          } catch (Exception e) {
         	 
         	    System.out.print(e);
-
 		}	
-	
 	}
-	 
-	 
 	 /////////townrush api integration/////////////////////////////////
-	 
 	 if(deliveryagentname.equals("TownRush"))
 	 {
 		 	 try {	
@@ -451,15 +446,8 @@ try {
 	             	     	    ps1.setString(3,""+deliveryagentname);
 	                			ps1.setString(4, orderid);
 	            			    ps1.executeUpdate();
-	                			
 	                		 con.close(); 
-	             
 			                }
-		               
-		                 
-				
-				
-				
 				//login completed
 				
 		/* 		
@@ -713,24 +701,8 @@ try {
          } catch (Exception e) {
         	 
         	    System.out.print(e);
-
 		}	
-	
-	 
-		 
-		 
 	 }
-	 
-	
-
-	
-	
-
-
-				
-				
-				
-		
 		%>
 
 	<script>

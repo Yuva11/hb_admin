@@ -89,9 +89,6 @@ public static String postDataRadRunn(String postValue,String hostURL,String toke
 	return result;
 }
 
-
-
-
 public static Client myGetClientRoad() {
 	Client client = Client.create();
 	client.addFilter(new ClientFilter() {
